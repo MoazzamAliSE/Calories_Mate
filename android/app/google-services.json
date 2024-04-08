@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "792394984488",
+    "firebase_url": "https://mycaloriesmate-f4a4e-default-rtdb.firebaseio.com",
+    "project_id": "mycaloriesmate-f4a4e",
+    "storage_bucket": "mycaloriesmate-f4a4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792394984488:android:964143ec0222989773591d",
+        "android_client_info": {
+          "package_name": "com.example.calories_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792394984488-5vj4bcnbfjae8ugnb5jk7t2m676d7roh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd8pE-CU25mliwyswhZiJtzxPLBJDPgNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792394984488-5vj4bcnbfjae8ugnb5jk7t2m676d7roh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

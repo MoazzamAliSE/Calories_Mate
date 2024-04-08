@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>792394984488-c08j1n8n2equnpsgd4vg4ou4m2fbbp7b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.792394984488-c08j1n8n2equnpsgd4vg4ou4m2fbbp7b</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBq-Cks65oC8BQ3bzqjwxBB3mwd-_j9SCo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>792394984488</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.caloriesMate</string>
+	<key>PROJECT_ID</key>
+	<string>mycaloriesmate-f4a4e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mycaloriesmate-f4a4e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:792394984488:ios:4078ce2ad275192d73591d</string>
+	<key>DATABASE_URL</key>
+	<string>https://mycaloriesmate-f4a4e-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
