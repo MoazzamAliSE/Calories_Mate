@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+// import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:calories_mate/screens/Settings_Pages/new_password.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/water_view.dart';
 import 'package:calories_mate/services/database.dart';
@@ -30,7 +31,6 @@ class _WaterTakenState extends State<WaterTaken> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -109,7 +109,7 @@ class _WaterTakenState extends State<WaterTaken> {
                               height: 3,
                             ),
                             Text(
-                              stat.toStringAsFixed(1) + "%",
+                              "${stat.toStringAsFixed(1)}%",
                               style: TextStyle(
                                   fontSize: 40.0,
                                   fontWeight: FontWeight.w600,
@@ -119,7 +119,7 @@ class _WaterTakenState extends State<WaterTaken> {
                               height: 3,
                             ),
                             Text(
-                              waterconsumed.toString() + " ml",
+                              "$waterconsumed ml",
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w600,
@@ -129,7 +129,7 @@ class _WaterTakenState extends State<WaterTaken> {
                               height: 5,
                             ),
                             Text(
-                              watertarget.toString() + " ml",
+                              "$watertarget ml",
                               style: TextStyle(
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.w600,
@@ -191,7 +191,7 @@ class _WaterTakenState extends State<WaterTaken> {
                                           width: 2,
                                         ),
                                         Text(
-                                          _coffee.toString() + " ml",
+                                          "$_coffee ml",
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -240,7 +240,7 @@ class _WaterTakenState extends State<WaterTaken> {
                                           width: 2,
                                         ),
                                         Text(
-                                          _waterBottle.toString() + " ml",
+                                          "$_waterBottle ml",
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         )
@@ -300,7 +300,7 @@ class _WaterTakenState extends State<WaterTaken> {
                                             width: 2,
                                           ),
                                           Text(
-                                            _waterGlass.toString() + " ml",
+                                            "$_waterGlass ml",
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           )
@@ -341,7 +341,7 @@ class _WaterTakenState extends State<WaterTaken> {
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           const Icon(
-                                            FontAwesomeIcons.glassWhiskey,
+                                            FontAwesomeIcons.wineGlass,
                                             color: Colors.black,
                                             size: 24.0,
                                           ),
@@ -349,7 +349,7 @@ class _WaterTakenState extends State<WaterTaken> {
                                             width: 2,
                                           ),
                                           Text(
-                                            _jug.toString() + " ml",
+                                            "$_jug ml",
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           )
@@ -393,9 +393,9 @@ class _WaterTakenState extends State<WaterTaken> {
                             blurRadius: 8.0),
                       ],
                     ),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Text(
                           "Save",
                           style: TextStyle(
@@ -464,9 +464,9 @@ class _WaterTakenState extends State<WaterTaken> {
                             decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const <Widget>[
+                              children: <Widget>[
                                 Text(
                                   "CANCEL",
                                   style: TextStyle(color: Colors.white),
@@ -499,9 +499,9 @@ class _WaterTakenState extends State<WaterTaken> {
                             decoration: BoxDecoration(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const <Widget>[
+                              children: <Widget>[
                                 Text(
                                   "OK",
                                   style: TextStyle(color: Colors.white),
@@ -563,9 +563,9 @@ class _WaterTakenState extends State<WaterTaken> {
                             decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const <Widget>[
+                              children: <Widget>[
                                 Text(
                                   "CANCEL",
                                   style: TextStyle(color: Colors.white),
@@ -605,9 +605,9 @@ class _WaterTakenState extends State<WaterTaken> {
                             decoration: BoxDecoration(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const <Widget>[
+                              children: <Widget>[
                                 Text(
                                   "OK",
                                   style: TextStyle(color: Colors.white),
@@ -630,16 +630,16 @@ class _WaterTakenState extends State<WaterTaken> {
       position: const RelativeRect.fromLTRB(25.0, 25.0, 0.0,
           0.0), //position where you want to show the menu on screen
       items: [
-        const PopupMenuItem<String>(child: Text('Update Target'), value: '1'),
+        const PopupMenuItem<String>(value: '1', child: Text('Update Target')),
         const PopupMenuDivider(
           height: 1,
         ),
         const PopupMenuItem<String>(
+            value: '2',
             child: Text(
               'Reset Data',
               style: TextStyle(color: Colors.red),
-            ),
-            value: '2'),
+            )),
       ],
       elevation: 8.0,
     ).then<void>((itemSelected) async {

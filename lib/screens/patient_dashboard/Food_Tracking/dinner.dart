@@ -136,11 +136,11 @@ getExpenseItems(AsyncSnapshot<QuerySnapshot> snapshot) {
             padding: const EdgeInsets.all(8.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         "Food",
                         style: TextStyle(
@@ -357,17 +357,18 @@ class BarChartSample1State extends State<BarChartSample1> {
       x: x,
       barRods: [
         BarChartRodData(
-          y: isTouched ? y + 1 : y,
-          colors: isTouched ? [Colors.yellow] : [barColor],
+          // fromY: isTouched ? y + 1 : y,
+          color: isTouched ? Colors.yellow : barColor,
           width: width,
           borderSide: isTouched
               ? const BorderSide(color: Colors.yellow, width: 1)
               : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            y: 100,
-            colors: [barBackgroundColor],
+            toY: 100,
+            color: barBackgroundColor,
           ),
+          toY: isTouched ? y + 1 : y,
         ),
       ],
       showingTooltipIndicators: showTooltips,
@@ -437,50 +438,51 @@ class BarChartSample1State extends State<BarChartSample1> {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
-            tooltipBgColor: Colors.blueGrey,
+
+            // tooltipBgColor: Colors.blueGrey,
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              String weekDay;
-              switch (group.x.toInt()) {
-                case 0:
-                  weekDay = 'Calories';
-                  break;
-                case 1:
-                  weekDay = 'Carbohydrate';
-                  break;
-                case 2:
-                  weekDay = 'Protein';
-                  break;
-                case 3:
-                  weekDay = 'Fat';
-                  break;
-                case 4:
-                  weekDay = 'Sugars';
-                  break;
-                case 5:
-                  weekDay = 'Cholesterol';
-                  break;
-                default:
-                  throw Error();
-              }
-              return BarTooltipItem(
-                weekDay + '\n',
-                const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+          String weekDay;
+          switch (group.x.toInt()) {
+            case 0:
+              weekDay = 'Calories';
+              break;
+            case 1:
+              weekDay = 'Carbohydrate';
+              break;
+            case 2:
+              weekDay = 'Protein';
+              break;
+            case 3:
+              weekDay = 'Fat';
+              break;
+            case 4:
+              weekDay = 'Sugars';
+              break;
+            case 5:
+              weekDay = 'Cholesterol';
+              break;
+            default:
+              throw Error();
+          }
+          return BarTooltipItem(
+            '$weekDay\n',
+            const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            children: <TextSpan>[
+              TextSpan(
+                text: '${rod.toY - 1}%',
+                style: const TextStyle(
+                  color: Colors.yellow,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: (rod.y - 1).toString() + '%',
-                    style: const TextStyle(
-                      color: Colors.yellow,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              );
-            }),
+              ),
+            ],
+          );
+        }),
         touchCallback: (FlTouchEvent event, barTouchResponse) {
           setState(() {
             if (!event.isInterestedForInteractions ||
@@ -495,43 +497,46 @@ class BarChartSample1State extends State<BarChartSample1> {
       ),
       titlesData: FlTitlesData(
         show: true,
-        rightTitles: SideTitles(showTitles: false),
-        topTitles: SideTitles(showTitles: false),
-        bottomTitles: SideTitles(
+        // rightTitles: const SideTitles(showTitles: false),
+        // topTitles: const SideTitles(showTitles: false),
+        bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (context, value) => const TextStyle(
-              color: Colors.blueGrey,
-              fontWeight: FontWeight.bold,
-              fontSize: 14),
-          margin: 16,
-          getTitles: (double value) {
+
+          // getTextStyles: (context, value) => const TextStyle(
+          //     color: Colors.blueGrey,
+          //     fontWeight: FontWeight.bold,
+          //     fontSize: 14),
+          getTitlesWidget: (double value, TitleMeta a) {
             switch (value.toInt()) {
               case 0:
-                return 'CL';
+                return const Text('CL');
               case 1:
-                return 'C';
+                return const Text('C');
               case 2:
-                return 'P';
+                return const Text('P');
               case 3:
-                return 'F';
+                return const Text('F');
               case 4:
-                return 'S';
+                return const Text('S');
               case 5:
-                return 'CH';
+                return const Text('CH');
               default:
-                return 'N';
+                return const Text('N');
             }
           },
-        ),
-        leftTitles: SideTitles(
+        )),
+
+        leftTitles: const AxisTitles(
+            sideTitles: SideTitles(
           showTitles: false,
-        ),
+        )),
       ),
       borderData: FlBorderData(
         show: false,
       ),
       barGroups: showingGroups(),
-      gridData: FlGridData(show: false),
+      gridData: const FlGridData(show: false),
     );
   }
 

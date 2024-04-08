@@ -56,8 +56,8 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(
               height: 6,
             ),
-            Padding(
-              padding: const EdgeInsets.all(1),
+            const Padding(
+              padding: EdgeInsets.all(1),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +65,7 @@ class _SignInPageState extends State<SignInPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(Constants.textSignInTitle,
                           style: TextStyle(
                               color: Colors.white,
@@ -324,7 +324,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget buildRowDivider({required Size size}) {
     return SizedBox(
       width: size.width * 0.8,
-      child: Row(children: const <Widget>[
+      child: const Row(children: <Widget>[
         Expanded(child: Divider(color: Colors.grey)),
         Padding(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -337,7 +337,7 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  _signin(String _email, String _password) async {
+  _signin(String email, String password) async {
     try {
       //Create Get Firebase Auth User
       SharedPreferences prefs = await SharedPreferences.getInstance();

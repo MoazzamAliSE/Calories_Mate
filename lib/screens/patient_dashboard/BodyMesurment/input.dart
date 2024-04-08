@@ -9,11 +9,11 @@ class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
 
   @override
-  _InputPageState createState() => _InputPageState();
+  State<InputPage> createState() => InputPageState();
 }
 
 // ignore: camel_case_types
-class _InputPageState extends State<InputPage> {
+class InputPageState extends State<InputPage> {
   var _height = 180;
   var _weight = 60;
 
@@ -61,9 +61,9 @@ class _InputPageState extends State<InputPage> {
                       borderRadius: BorderRadius.circular(5.0),
                       color: Colors.cyan[200]),
                   padding: const EdgeInsets.all(10.0),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
                         "Note: ",
                         style: TextStyle(
@@ -352,12 +352,12 @@ class _InputPageState extends State<InputPage> {
                               children: <Widget>[
                                 IconButton(
                                   icon: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundColor: Colors.grey[200],
                                     child: const Icon(
                                       FontAwesomeIcons.minus,
                                       color: Colors.black,
                                     ),
-                                    radius: 30.0,
-                                    backgroundColor: Colors.grey[200],
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -370,12 +370,12 @@ class _InputPageState extends State<InputPage> {
                                 ),
                                 IconButton(
                                   icon: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundColor: Colors.grey[200],
                                     child: const Icon(
                                       FontAwesomeIcons.plus,
                                       color: Colors.black,
                                     ),
-                                    radius: 30.0,
-                                    backgroundColor: Colors.grey[200],
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -447,12 +447,12 @@ class _InputPageState extends State<InputPage> {
                               children: <Widget>[
                                 IconButton(
                                   icon: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundColor: Colors.grey[200],
                                     child: const Icon(
                                       FontAwesomeIcons.minus,
                                       color: Colors.black,
                                     ),
-                                    radius: 30.0,
-                                    backgroundColor: Colors.grey[200],
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -465,12 +465,12 @@ class _InputPageState extends State<InputPage> {
                                 ),
                                 IconButton(
                                   icon: CircleAvatar(
+                                    radius: 30.0,
+                                    backgroundColor: Colors.grey[200],
                                     child: const Icon(
                                       FontAwesomeIcons.plus,
                                       color: Colors.black,
                                     ),
-                                    radius: 30.0,
-                                    backgroundColor: Colors.grey[200],
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -521,8 +521,8 @@ class _InputPageState extends State<InputPage> {
                       blurRadius: 8.0),
                 ],
               ),
-              child: Column(
-                children: const <Widget>[
+              child: const Column(
+                children: <Widget>[
                   Text(
                     'Next',
                     style: TextStyle(

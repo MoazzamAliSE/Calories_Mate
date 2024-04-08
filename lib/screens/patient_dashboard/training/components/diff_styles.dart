@@ -71,7 +71,7 @@ class DiffStyles extends StatelessWidget {
                             width: size.width * 0.01,
                           ),
                           Text(
-                            style.time.toString() + ' min',
+                            '${style.time} min',
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -115,12 +115,12 @@ class DiffStyles extends StatelessWidget {
 
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
+        const Padding(
+          padding: EdgeInsets.symmetric(
               horizontal: Constants.appPadding, vertical: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
                 'For Beginners',
                 style: TextStyle(

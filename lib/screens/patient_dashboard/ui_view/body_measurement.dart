@@ -183,8 +183,7 @@ class _BodyMeasurementViewState extends State<BodyMeasurementView> {
                                                   left: 4.0),
                                               child: Text(
                                                 (timeAppeared != "")
-                                                    ? "Last Measured: " +
-                                                        timeAppeared
+                                                    ? "Last Measured: $timeAppeared"
                                                     : "Not measured",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
@@ -251,7 +250,7 @@ class _BodyMeasurementViewState extends State<BodyMeasurementView> {
                                         padding:
                                             const EdgeInsets.only(right: 12),
                                         child: Text(
-                                          height.toString() + " cm",
+                                          "$height cm",
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             fontFamily:

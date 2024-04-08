@@ -85,9 +85,9 @@ class _MealsState extends State<Meals> {
                         borderRadius: BorderRadius.circular(5.0),
                         color: Colors.cyan[200]),
                     padding: const EdgeInsets.all(10.0),
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Text(
                           "Note: ",
                           style: TextStyle(
@@ -884,8 +884,8 @@ class _MealsState extends State<Meals> {
                       blurRadius: 8.0),
                 ],
               ),
-              child: Column(
-                children: const <Widget>[
+              child: const Column(
+                children: <Widget>[
                   Text(
                     'Save',
                     style: TextStyle(

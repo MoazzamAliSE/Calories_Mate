@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:calories_mate/services/locator.dart';
 import 'navigation/navigate.dart';
 import 'utils/constants.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future main() async {
-  await dot_env.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupServices();

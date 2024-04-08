@@ -148,9 +148,7 @@ class _SearchResultState extends State<SearchResult> {
                                 DoctorCard(
                                   filteredDoctorsList[index].uid,
                                   filteredDoctorsList[index].displayName,
-                                  filteredDoctorsList[index].specialization! +
-                                      "-" +
-                                      filteredDoctorsList[index].hospital!,
+                                  "${filteredDoctorsList[index].specialization!}-${filteredDoctorsList[index].hospital!}",
                                   (index % 2 == 0) ? kBlueColor : kYellowColor,
                                   filteredDoctorsList[index].bio,
                                 ),

@@ -148,10 +148,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.only(
                                             left: 4, top: 2, bottom: 5),
                                         child: Text(
-                                          'of daily goal ' +
-                                              (watertarget * 1 / 1000)
-                                                  .toString() +
-                                              'L',
+                                          'of daily goal ${watertarget * 1 / 1000}L',
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             fontFamily:
@@ -207,8 +204,8 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                               child: Text(
                                                 (formattedDate !=
                                                         formatter.format(now))
-                                                    ? 'Last drink ' + lastDate
-                                                    : 'Last drink ' + lastSeen,
+                                                    ? 'Last drink $lastDate'
+                                                    : 'Last drink $lastSeen',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily:

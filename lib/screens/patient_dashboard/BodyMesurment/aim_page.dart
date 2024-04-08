@@ -31,10 +31,10 @@ class AimPage extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AimPageState createState() => _AimPageState();
+  State<AimPage> createState() => AimPageState();
 }
 
-class _AimPageState extends State<AimPage> {
+class AimPageState extends State<AimPage> {
   String _activity = exerciseList[0];
   String _goal = goalList[0];
   late int height, weight, age;
@@ -65,9 +65,9 @@ class _AimPageState extends State<AimPage> {
                 borderRadius: BorderRadius.circular(5.0),
                 color: Colors.cyan[200]),
             padding: const EdgeInsets.all(10.0),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   "Note: ",
                   style:
@@ -351,8 +351,8 @@ class _AimPageState extends State<AimPage> {
               constraints: const BoxConstraints(minWidth: 50, maxWidth: 50),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100), color: Colors.cyan),
-              child: Column(
-                children: const <Widget>[
+              child: const Column(
+                children: <Widget>[
                   Text(
                     'Calculate',
                     style: TextStyle(

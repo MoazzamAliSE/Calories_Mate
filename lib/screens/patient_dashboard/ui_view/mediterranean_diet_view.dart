@@ -613,9 +613,8 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                               padding:
                                                   const EdgeInsets.only(top: 6),
                                               child: Text(
-                                                (alltargetcarbs - alldatacarbo)
-                                                        .toStringAsFixed(0) +
-                                                    'g left',
+                                                '${(alltargetcarbs - alldatacarbo)
+                                                        .toStringAsFixed(0)}g left',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily:
@@ -720,11 +719,10 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                       const EdgeInsets.only(
                                                           top: 6),
                                                   child: Text(
-                                                    (alltargetprotein -
+                                                    '${(alltargetprotein -
                                                                 alldataprotein)
                                                             .toStringAsFixed(
-                                                                0) +
-                                                        'g left',
+                                                                0)}g left',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily:
@@ -833,10 +831,9 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                       const EdgeInsets.only(
                                                           top: 6),
                                                   child: Text(
-                                                    (alltargetfat - alldatafat)
+                                                    '${(alltargetfat - alldatafat)
                                                             .toStringAsFixed(
-                                                                0) +
-                                                        'g left',
+                                                                0)}g left',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily:

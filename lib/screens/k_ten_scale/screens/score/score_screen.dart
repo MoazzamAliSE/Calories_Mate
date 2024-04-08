@@ -10,7 +10,7 @@ class ScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _qnController = Get.put(QuestionController());
+    QuestionController qnController = Get.put(QuestionController());
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -23,15 +23,15 @@ class ScoreScreen extends StatelessWidget {
                 "Score",
                 style: Theme.of(context)
                     .textTheme
-                    .headline3!
+                    .displaySmall!
                     .copyWith(color: kSecondaryColor),
               ),
               const Spacer(),
               Text(
-                "${_qnController.scoretotal}/${_qnController.questions.length * 5}",
+                "${qnController.scoretotal}/${qnController.questions.length * 5}",
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .headlineMedium!
                     .copyWith(color: kSecondaryColor),
               ),
               const Spacer(flex: 3),
@@ -51,7 +51,7 @@ class ScoreScreen extends StatelessWidget {
                     "Navigate to Dashboard",
                     style: Theme.of(context)
                         .textTheme
-                        .button!
+                        .labelLarge!
                         .copyWith(color: Colors.black),
                   ),
                 ),

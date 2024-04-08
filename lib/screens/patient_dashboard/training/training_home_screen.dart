@@ -39,11 +39,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
         ],
       ),
       body: ListView(
-        children: <Widget>[
+        children: const <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
             child: Column(
-              children: const <Widget>[
+              children: <Widget>[
                 VideoSuggestions(),
                 DiffStyles(),
                 Courses(),

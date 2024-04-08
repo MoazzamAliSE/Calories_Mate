@@ -78,9 +78,9 @@ class _VideoSuggestionsState extends State<VideoSuggestions> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(Radius.circular(50))
                             ),
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const <Widget>[
+                              children: <Widget>[
                                 Icon(Icons.play_arrow,size: 30,)
                               ],
                             ),

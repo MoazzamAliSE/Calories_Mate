@@ -27,6 +27,7 @@ class FirebaseService {
     } on FirebaseAuthException {
       rethrow;
     }
+    return null;
   }
 
   Future<UserModel> signInWithEmailAndPassword(

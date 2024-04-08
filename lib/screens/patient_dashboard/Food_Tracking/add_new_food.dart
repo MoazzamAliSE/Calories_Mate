@@ -54,12 +54,12 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
             const SizedBox(
               height: 5,
             ),
-            Padding(
-              padding: const EdgeInsets.all(1),
+            const Padding(
+              padding: EdgeInsets.all(1),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const <Widget>[],
+                children: <Widget>[],
               ),
             ),
             const SizedBox(height: 13),
@@ -173,11 +173,7 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
                             GestureDetector(
                               onTap: () async {
                                 httprequest(
-                                    (servingsController.text.toString()) +
-                                        " " +
-                                        dropdownValue +
-                                        " " +
-                                        (foodnameController.text).toString());
+                                    "${servingsController.text} $dropdownValue ${foodnameController.text}");
                               },
                               child: Container(
                                 height: 50,
@@ -450,8 +446,8 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
   }
 
   Future<void> httprequest(String name) async {
-    dio.options.headers['x-app-id'] = env['APP_ID'];
-    dio.options.headers["x-app-key"] = env['APP_KEY'];
+    dio.options.headers['x-app-id'] = dotenv.env['APP_ID'];
+    dio.options.headers["x-app-key"] = dotenv.env['APP_KEY'];
     try {
       response = await dio.post(
           'https://trackapi.nutritionix.com/v2/natural/nutrients',

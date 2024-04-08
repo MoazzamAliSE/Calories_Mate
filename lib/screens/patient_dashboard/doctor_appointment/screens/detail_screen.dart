@@ -1,11 +1,11 @@
 import 'dart:typed_data';
+
+import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/schedule_card.dart';
+import 'package:calories_mate/utils/load_profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/schedule_card.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/token_maker.dart';
-import 'package:calories_mate/utils/load_profile_pic.dart';
+
 import '../constant.dart';
-import 'audio_calling.dart';
 
 //ignore: must_be_immutable
 class DetailScreen extends StatefulWidget {
@@ -121,88 +121,88 @@ class _DetailScreenState extends State<DetailScreen> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Row(
-                                      children: <Widget>[
-                                        InkWell(
-                                          onTap: () async {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Scaffold(
-                                                          appBar: AppBar(
-                                                            backgroundColor:
-                                                                Colors.cyan,
-                                                            title: const Text(
-                                                                "Audio Calling"),
-                                                          ),
-                                                          body:
-                                                              const JoinChannelAudio(),
-                                                        )));
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  kBlueColor.withOpacity(0.1),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              'assets/icons/phone.svg',
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                kYellowColor.withOpacity(0.1),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: SvgPicture.asset(
-                                            'assets/icons/chat.svg',
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 16,
-                                        ),
-                                        InkWell(
-                                          onTap: () async {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Scaffold(
-                                                          appBar: AppBar(
-                                                            backgroundColor:
-                                                                Colors.cyan,
-                                                            title: const Text(
-                                                                "Video Calling"),
-                                                          ),
-                                                          body:
-                                                              const TokenMaker(),
-                                                        )));
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  kOrangeColor.withOpacity(0.1),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              'assets/icons/video.svg',
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    // Row(
+                                    //   children: <Widget>[
+                                    //     InkWell(
+                                    //       onTap: () async {
+                                    //         Navigator.push(
+                                    //             context,
+                                    //             MaterialPageRoute(
+                                    //                 builder: (context) =>
+                                    //                     Scaffold(
+                                    //                       appBar: AppBar(
+                                    //                         backgroundColor:
+                                    //                             Colors.cyan,
+                                    //                         title: const Text(
+                                    //                             "Audio Calling"),
+                                    //                       ),
+                                    //                       body:
+                                    //                           const JoinChannelAudio(),
+                                    //                     )));
+                                    //       },
+                                    //       child: Container(
+                                    //         padding: const EdgeInsets.all(10),
+                                    //         decoration: BoxDecoration(
+                                    //           color:
+                                    //               kBlueColor.withOpacity(0.1),
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(10),
+                                    //         ),
+                                    //         child: SvgPicture.asset(
+                                    //           'assets/icons/phone.svg',
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     const SizedBox(
+                                    //       width: 16,
+                                    //     ),
+                                    //     Container(
+                                    //       padding: const EdgeInsets.all(10),
+                                    //       decoration: BoxDecoration(
+                                    //         color:
+                                    //             kYellowColor.withOpacity(0.1),
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(10),
+                                    //       ),
+                                    //       child: SvgPicture.asset(
+                                    //         'assets/icons/chat.svg',
+                                    //       ),
+                                    //     ),
+                                    //     const SizedBox(
+                                    //       width: 16,
+                                    //     ),
+                                    //     InkWell(
+                                    //       onTap: () async {
+                                    //         Navigator.push(
+                                    //             context,
+                                    //             MaterialPageRoute(
+                                    //                 builder: (context) =>
+                                    //                     Scaffold(
+                                    //                       appBar: AppBar(
+                                    //                         backgroundColor:
+                                    //                             Colors.cyan,
+                                    //                         title: const Text(
+                                    //                             "Video Calling"),
+                                    //                       ),
+                                    //                       body:
+                                    //                           const TokenMaker(),
+                                    //                     )));
+                                    //       },
+                                    //       child: Container(
+                                    //         padding: const EdgeInsets.all(10),
+                                    //         decoration: BoxDecoration(
+                                    //           color:
+                                    //               kOrangeColor.withOpacity(0.1),
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(10),
+                                    //         ),
+                                    //         child: SvgPicture.asset(
+                                    //           'assets/icons/video.svg',
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
                                   ],
                                 )
                               ],

@@ -135,7 +135,7 @@ class _MealsListViewState extends State<MealsListView>
                     kacl: int.parse(calorie1.toStringAsFixed(0)),
                     meals: <String>[
                       'Target:',
-                      targetbreakfast.toStringAsFixed(0) + ' kacl'
+                      '${targetbreakfast.toStringAsFixed(0)} kacl'
                     ],
                     startColor: '#FA7D82',
                     endColor: '#FFB295',
@@ -147,7 +147,7 @@ class _MealsListViewState extends State<MealsListView>
                     kacl: int.parse(calorie2.toStringAsFixed(0)),
                     meals: <String>[
                       'Target:',
-                      targetlunch.toStringAsFixed(0) + ' kacl'
+                      '${targetlunch.toStringAsFixed(0)} kacl'
                     ],
                     startColor: '#48D1CC',
                     endColor: '#20B2AA',
@@ -159,7 +159,7 @@ class _MealsListViewState extends State<MealsListView>
                     kacl: int.parse(calorie3.toStringAsFixed(0)),
                     meals: <String>[
                       'Target:',
-                      targetsnack.toStringAsFixed(0) + ' kacl'
+                      '${targetsnack.toStringAsFixed(0)} kacl'
                     ],
                     startColor: '#FE95B6',
                     endColor: '#FF5287',
@@ -171,7 +171,7 @@ class _MealsListViewState extends State<MealsListView>
                     kacl: int.parse(calorie4.toStringAsFixed(0)),
                     meals: <String>[
                       'Target:',
-                      targetdinner.toStringAsFixed(0) + ' kacl'
+                      '${targetdinner.toStringAsFixed(0)} kacl'
                     ],
                     startColor: '#6F72CA',
                     endColor: '#1E1466',

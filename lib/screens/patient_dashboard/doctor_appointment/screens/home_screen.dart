@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
-                child: SearchBar(),
+                child: CustomSearchBar(),
               ),
               const SizedBox(
                 height: 20,
@@ -175,9 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 DoctorCard(
                                   doctors[index].uid,
                                   doctors[index].displayName,
-                                  doctors[index].specialization! +
-                                      "-" +
-                                      doctors[index].hospital!,
+                                  "${doctors[index].specialization!}-${doctors[index].hospital!}",
                                   (index % 2 == 0) ? kBlueColor : kYellowColor,
                                   doctors[index].bio,
                                 ),

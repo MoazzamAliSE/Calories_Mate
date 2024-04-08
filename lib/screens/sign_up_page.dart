@@ -57,15 +57,15 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(
               height: 60,
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
+            const Padding(
+              padding: EdgeInsets.all(20),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
                         "Create Your Account",
                         style: TextStyle(
@@ -386,7 +386,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget buildRowDivider({required Size size}) {
     return SizedBox(
       width: size.width * 0.8,
-      child: Row(children: const <Widget>[
+      child: const Row(children: <Widget>[
         Expanded(child: Divider(color: Colors.grey)),
         Padding(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -399,7 +399,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  _signup(String _email, String _password) async {
+  _signup(String email, String password) async {
     try {
       //Create Get Firebase Auth User
       SharedPreferences prefs = await SharedPreferences.getInstance();

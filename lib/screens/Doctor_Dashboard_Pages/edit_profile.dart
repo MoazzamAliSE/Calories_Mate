@@ -46,7 +46,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
   @override
   Widget build(BuildContext context) {
-    ImagePicker _picker = ImagePicker();
+    ImagePicker picker = ImagePicker();
     return Scaffold(
         backgroundColor: FitnessAppTheme.background,
         appBar: AppBar(
@@ -125,9 +125,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                   left: 16, top: 6, right: 16),
                               child: Column(
                                 children: <Widget>[
-                                  Row(
+                                  const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
+                                    children: [
                                       Text(
                                         "Complete your Profile",
                                         style: TextStyle(
@@ -156,7 +156,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                     children: [
                                       InkWell(
                                         onTap: () async {
-                                          image = await _picker.pickImage(
+                                          image = await picker.pickImage(
                                               source: ImageSource.gallery,
                                               imageQuality: 80);
                                           if (image != null) {
@@ -381,8 +381,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                               File(image!.path));
                                     }
                                   },
-                                  child: Text("Update Profile".toUpperCase(),
-                                      style: const TextStyle(fontSize: 14)),
                                   style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
@@ -393,7 +391,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                               borderRadius:
                                                   BorderRadius.circular(30.0),
                                               side: const BorderSide(
-                                                  color: Colors.cyan))))),
+                                                  color: Colors.cyan)))),
+                                  child: Text("Update Profile".toUpperCase(),
+                                      style: const TextStyle(fontSize: 14))),
                             ),
                           ),
                           const SizedBox(height: 20),

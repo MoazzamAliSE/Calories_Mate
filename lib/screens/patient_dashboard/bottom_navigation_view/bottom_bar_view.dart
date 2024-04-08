@@ -13,10 +13,10 @@ class BottomBarView extends StatefulWidget {
   final Function()? addClick;
   final List<TabIconData>? tabIconsList;
   @override
-  _BottomBarViewState createState() => _BottomBarViewState();
+  State<BottomBarView> createState() => BottomBarViewState();
 }
 
-class _BottomBarViewState extends State<BottomBarView>
+class BottomBarViewState extends State<BottomBarView>
     with TickerProviderStateMixin {
   AnimationController? animationController;
 
@@ -201,10 +201,10 @@ class TabIcons extends StatefulWidget {
   final TabIconData? tabIconData;
   final Function()? removeAllSelect;
   @override
-  _TabIconsState createState() => _TabIconsState();
+  State<TabIcons> createState() => TabIconsState();
 }
 
-class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
+class TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
   @override
   void initState() {
     widget.tabIconData?.animationController = AnimationController(
@@ -248,8 +248,8 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                   scale: Tween<double>(begin: 0.88, end: 1.0).animate(
                       CurvedAnimation(
                           parent: widget.tabIconData!.animationController!,
-                          curve:
-                              const Interval(0.1, 1.0, curve: Curves.fastOutSlowIn))),
+                          curve: const Interval(0.1, 1.0,
+                              curve: Curves.fastOutSlowIn))),
                   child: Image.asset(widget.tabIconData!.isSelected
                       ? widget.tabIconData!.selectedImagePath
                       : widget.tabIconData!.imagePath),

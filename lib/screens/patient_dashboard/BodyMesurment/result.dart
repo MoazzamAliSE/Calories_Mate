@@ -35,10 +35,10 @@ class Result extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ResultState createState() => _ResultState();
+  State<Result> createState() => ResultState();
 }
 
-class _ResultState extends State<Result> {
+class ResultState extends State<Result> {
   String formattedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   final _preferencesService = PreferencesService();
   var _bMW = "";
@@ -333,8 +333,8 @@ class _ResultState extends State<Result> {
                       blurRadius: 8.0),
                 ],
               ),
-              child: Column(
-                children: const <Widget>[
+              child: const Column(
+                children: <Widget>[
                   Text(
                     'Recalculate',
                     style: TextStyle(
@@ -382,8 +382,8 @@ class _ResultState extends State<Result> {
                       blurRadius: 8.0),
                 ],
               ),
-              child: Column(
-                children: const <Widget>[
+              child: const Column(
+                children: <Widget>[
                   Text(
                     'Save',
                     style: TextStyle(

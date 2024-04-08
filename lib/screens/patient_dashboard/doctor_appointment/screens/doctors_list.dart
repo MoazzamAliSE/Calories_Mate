@@ -70,9 +70,7 @@ class _DoctorsListState extends State<DoctorsList> {
                                   DoctorCard(
                                     doctorsCategory[index].uid,
                                     doctorsCategory[index].displayName,
-                                    doctorsCategory[index].specialization! +
-                                        "-" +
-                                        doctorsCategory[index].hospital!,
+                                    "${doctorsCategory[index].specialization!}-${doctorsCategory[index].hospital!}",
                                     (index % 2 == 0)
                                         ? kBlueColor
                                         : kYellowColor,

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:calories_mate/screens/Doctor_Dashboard_Pages/appointments.dart';
 import 'package:calories_mate/screens/Doctor_Dashboard_Pages/availability.dart';
 import 'package:calories_mate/screens/Doctor_Dashboard_Pages/important_notifications.dart';
@@ -133,23 +132,23 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          "Dr. " + name,
-                                          style: GoogleFonts.openSans(
-                                              textStyle: const TextStyle(
+                                          "Dr. $name",
+                                          style: 
+                                              const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 18,
-                                                  fontWeight: FontWeight.bold)),
+                                                  fontWeight: FontWeight.bold)
                                         ),
                                         const SizedBox(
                                           height: 4,
                                         ),
                                         Text(
                                           "$specialization ($hospital)",
-                                          style: GoogleFonts.openSans(
-                                              textStyle: const TextStyle(
+                                          style: 
+                                              const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14,
-                                                  fontWeight: FontWeight.w600)),
+                                                  fontWeight: FontWeight.w600)
                                         ),
                                       ],
                                     ),
@@ -282,33 +281,33 @@ class OptionsCreater extends StatelessWidget {
                     ),
                     Text(
                       data.title,
-                      style: GoogleFonts.openSans(
-                          textStyle: const TextStyle(
+                      style: 
+                          const TextStyle(
                               color: Colors.black,
                               fontSize: 16,
-                              fontWeight: FontWeight.w600)),
+                              fontWeight: FontWeight.w600)
                     ),
                     const SizedBox(
                       height: 8,
                     ),
                     Text(
                       data.subtitle,
-                      style: GoogleFonts.openSans(
-                          textStyle: const TextStyle(
+                      style: 
+                          const TextStyle(
                               color: Colors.grey,
                               fontSize: 10,
-                              fontWeight: FontWeight.w600)),
+                              fontWeight: FontWeight.w600)
                     ),
                     const SizedBox(
                       height: 14,
                     ),
                     Text(
                       data.event,
-                      style: GoogleFonts.openSans(
-                          textStyle: const TextStyle(
+                      style: 
+                          const TextStyle(
                               color: Colors.blueGrey,
                               fontSize: 11,
-                              fontWeight: FontWeight.w600)),
+                              fontWeight: FontWeight.w600)
                     ),
                   ],
                 ),

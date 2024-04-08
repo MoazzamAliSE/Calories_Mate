@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
                   Center(
                     child: Text(
                       "Let's take a quick survey,",
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -72,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
                         "Lets Start Survey",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: Colors.black),
                       ),
                     ),

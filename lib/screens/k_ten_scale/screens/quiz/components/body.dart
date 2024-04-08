@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // So that we have acccess our controller
-    QuestionController _questionController = Get.put(QuestionController());
+    QuestionController questionController = Get.put(QuestionController());
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -32,17 +32,17 @@ class Body extends StatelessWidget {
                   () => Text.rich(
                     TextSpan(
                       text:
-                          "Question ${_questionController.questionNumber.value}",
+                          "Question ${questionController.questionNumber.value}",
                       style: Theme.of(context)
                           .textTheme
-                          .headline4!
+                          .headlineMedium!
                           .copyWith(color: kSecondaryColor),
                       children: [
                         TextSpan(
-                          text: "/${_questionController.questions.length}",
+                          text: "/${questionController.questions.length}",
                           style: Theme.of(context)
                               .textTheme
-                              .headline5!
+                              .headlineSmall!
                               .copyWith(color: kSecondaryColor),
                         ),
                       ],
@@ -56,11 +56,11 @@ class Body extends StatelessWidget {
                 child: PageView.builder(
                   // Block swipe to next qn
                   physics: const NeverScrollableScrollPhysics(),
-                  controller: _questionController.pageController,
-                  onPageChanged: _questionController.updateTheQnNum,
-                  itemCount: _questionController.questions.length,
+                  controller: questionController.pageController,
+                  onPageChanged: questionController.updateTheQnNum,
+                  itemCount: questionController.questions.length,
                   itemBuilder: (context, index) => QuestionCard(
-                      question: _questionController.questions[index]),
+                      question: questionController.questions[index]),
                 ),
               ),
               const SizedBox(height: kDefaultPadding),

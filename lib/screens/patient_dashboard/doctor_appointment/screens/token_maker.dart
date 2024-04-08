@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/video_calling.dart';
 
 String updatedtoken = "";
 String channelNameEntered = "";
@@ -61,8 +59,7 @@ class _TokenMakerState extends State<TokenMaker> {
       debugShowCheckedModeBanner: false,
       title: 'Create Channel',
       theme: ThemeData(
-        backgroundColor: Colors.cyan,
-        primarySwatch: Colors.cyan,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan).copyWith(background: Colors.cyan),
       ),
       home: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -112,12 +109,12 @@ class _TokenMakerState extends State<TokenMaker> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           updatedtoken = (snapshot.data!.title).toString();
-          SchedulerBinding.instance!.addPostFrameCallback((_) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const MediaChannelRelay()));
-          });
+          // SchedulerBinding.instance!.addPostFrameCallback((_) {
+          //   Navigator.pushReplacement(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => const MediaChannelRelay()));
+          // });
         } else if (snapshot.hasError) {
           Fluttertoast.showToast(
               msg: '${snapshot.error}', gravity: ToastGravity.TOP);

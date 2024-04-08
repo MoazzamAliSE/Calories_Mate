@@ -351,16 +351,12 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                                       ),
                                     ),
                                     Text(
-                                      " " +
-                                          DateFormat('yyyy-MM-dd')
+                                      " ${DateFormat('yyyy-MM-dd')
                                               .parse(formattedDate)
-                                              .day
-                                              .toString() +
-                                          " " +
-                                          df
+                                              .day} ${df
                                               .format(DateFormat('yyyy-MM-dd')
                                                   .parse(formattedDate))
-                                              .substring(3, 6),
+                                              .substring(3, 6)}",
                                       textAlign: TextAlign.left,
                                       style: const TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,

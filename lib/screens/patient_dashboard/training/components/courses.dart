@@ -89,7 +89,7 @@ class Courses extends StatelessWidget {
                             width: size.width * 0.01,
                           ),
                           Text(
-                            course.time.toString() + ' min',
+                            '${course.time} min',
                             style: TextStyle(
                               color: Constants.black.withOpacity(0.3),
                             ),
@@ -112,13 +112,13 @@ class Courses extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
+        const Padding(
+          padding: EdgeInsets.symmetric(
             horizontal: Constants.appPadding,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
                 'Exercises',
                 style: TextStyle(

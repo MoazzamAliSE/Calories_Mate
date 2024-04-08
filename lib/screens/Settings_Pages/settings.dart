@@ -118,14 +118,14 @@ class _SettingsPageState extends State<SettingsPage> {
                                   child: Container(
                                     height: 20,
                                     width: 20,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.green,
+                                        shape: BoxShape.circle),
                                     child: const Icon(
                                       Icons.edit,
                                       color: Colors.white,
                                       size: 12,
                                     ),
-                                    decoration: const BoxDecoration(
-                                        color: Colors.green,
-                                        shape: BoxShape.circle),
                                   ),
                                 ),
                               ],

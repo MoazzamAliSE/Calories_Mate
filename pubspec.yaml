@@ -37,7 +37,6 @@ dependencies:
   google_sign_in:
   flutter_screenutil:   
   shared_preferences:
-  google_fonts:
   flutter_svg: 
   fluttertoast:
   flutter_rating_bar:
@@ -50,10 +49,10 @@ dependencies:
   get_it:
   double_back_to_close_app:
   cloud_firestore:
-  liquid_progress_indicator:
+  liquid_progress_indicator_v2: ^0.5.0
   draw_graph:
   dio:
-  flutter_dotenv: 
+  flutter_dotenv: ^5.1.0 
   agora_rtc_engine:
   permission_handler:
   carousel_slider:
@@ -94,27 +93,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/sign-in.png
     - assets/icons/
-    - assets/icons/bg.svg
-    - assets/icons/clock.svg
-    - assets/icons/K10_survey.jpg
-    - assets/images/detail_illustration.png
-    - assets/images/doctor1.png
-    - assets/images/doctor2.png
-    - assets/images/doctor3.png
-    - assets/images/onboarding_illustration.png
-    - assets/icons/psychiatrist.png
-    - assets/images/mentalHealth.png
-    - assets/images/google-logo.png
-    - assets/images/ReliveLogo.png
-    - assets/images/GetStarted.png
-    - assets/settings.png
-    - assets/appointment.png
-    - assets/patient.png
-    - assets/available.png
-    - assets/interaction.png
-    - assets/report.png
     - assets/fitness_app/
     - assets/images/
     - .env
