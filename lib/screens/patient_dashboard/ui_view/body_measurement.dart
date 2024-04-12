@@ -31,7 +31,7 @@ class _BodyMeasurementViewState extends State<BodyMeasurementView> {
   String timeAppeared = "";
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
   }
 

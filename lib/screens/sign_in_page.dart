@@ -278,11 +278,11 @@ class _SignInPageState extends State<SignInPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        buildRowDivider(size: size),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        GoogleSignIn(buttonText: "Sign in with Google"),
+                        // buildRowDivider(size: size),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // GoogleSignIn(buttonText: "Sign in with Google"),
                         const SizedBox(
                           height: 10,
                         ),

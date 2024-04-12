@@ -30,17 +30,16 @@ class _SplashscreenState extends State<Splashscreen> {
                 MaterialPageRoute(builder: (context) => const WelcomePage())));
       }
     }
-    if (FirebaseAuth.instance.currentUser?.uid == null ||
-        user.emailVerified == false) {
+    if (FirebaseAuth.instance.currentUser?.uid == null) {
       // signed in
       Timer(
           const Duration(seconds: 1),
           () => Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const WelcomePage())));
     } else {
-      //if (user.emailVerified) {
+     
       Timer(const Duration(seconds: 1), () => userExistAuth());
-      //}
+  
     }
   }
 

@@ -98,7 +98,7 @@ class QuestionController extends GetxController
     update();
 
     // Once user select an ans after 3s it will go to the next qn
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 1), () {
       nextQuestion();
     });
     scoretotal = numOffiveScoreAns * 5 +
@@ -112,7 +112,7 @@ class QuestionController extends GetxController
     if (_questionNumber.value != _questions.length) {
       _isAnswered = false;
       _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.ease);
+          duration: const Duration(milliseconds: 100), curve: Curves.ease);
 
       // Reset the counter
       _animationController.reset();
@@ -122,7 +122,7 @@ class QuestionController extends GetxController
       _animationController.forward().whenComplete(nextQuestion);
     } else {
       // Get package provide us simple way to navigate another page
-      Get.to(const ScoreScreen());
+      Get.to(() => const ScoreScreen());
     }
   }
 

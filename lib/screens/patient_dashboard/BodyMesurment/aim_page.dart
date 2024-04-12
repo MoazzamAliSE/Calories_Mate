@@ -87,7 +87,7 @@ class AimPageState extends State<AimPage> {
                 child: Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                  height: 350,
+                  height: 400,
                   width: 200,
                   decoration: BoxDecoration(
                     color: inactiveCard,

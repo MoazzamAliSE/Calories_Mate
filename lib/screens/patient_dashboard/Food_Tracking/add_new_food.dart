@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -8,7 +9,7 @@ import 'package:calories_mate/screens/patient_dashboard/my_diary/my_diary_screen
 import 'package:calories_mate/services/database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-late Response response;
+Response? response;
 var dio = Dio();
 String carbo = "";
 String protein = "";
@@ -172,6 +173,7 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
                             ),
                             GestureDetector(
                               onTap: () async {
+                                // httprequest("1 cup rice");// for test
                                 httprequest(
                                     "${servingsController.text} $dropdownValue ${foodnameController.text}");
                               },
@@ -446,28 +448,43 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
   }
 
   Future<void> httprequest(String name) async {
-    dio.options.headers['x-app-id'] = dotenv.env['APP_ID'];
-    dio.options.headers["x-app-key"] = dotenv.env['APP_KEY'];
+    log("request is $name");
+    // dio.options.headers['x-app-id'] = dotenv.env['APP_ID'];
+    // dio.options.headers["x-app-key"] = dotenv.env['APP_KEY'];
+    dio.options.headers['x-app-id'] = "8b70f96e";
+    dio.options.headers["x-app-key"] = "b6f1d1b83b52aafd7af6f59690f94724";
     try {
       response = await dio.post(
           'https://trackapi.nutritionix.com/v2/natural/nutrients',
           data: {'query': name});
+      log("response is $response");
+      log("response is ${response!.data}");
+      log("response is ${response!.statusCode}");
     } catch (e) {
+      log("Error: $e");
+      log("response is $response");
+      log("response is $response");
+
+      log("response is ${response?.data}");
+      log("response is ${response?.statusCode}");
       Fluttertoast.showToast(
           msg: 'Food not found. Please enter the data yourself',
           gravity: ToastGravity.TOP);
+      return;
     }
-    foodName = response.data['foods'][0]['food_name'].toString();
-    calories = response.data['foods'][0]['nf_calories'].toString();
-    carbo = response.data['foods'][0]['nf_total_carbohydrate'].toString();
-    protein = response.data['foods'][0]['nf_protein'].toString();
-    fat = response.data['foods'][0]['nf_total_fat'].toString();
-    cholesterol =
-        (double.parse(response.data['foods'][0]['nf_cholesterol'].toString()) /
-                1000)
-            .toString();
-    sugars = response.data['foods'][0]['nf_sugars'].toString();
-    if (response.statusCode == 200) {
+    foodName = response?.data['foods'][0]['food_name'].toString() ?? "";
+    calories = response?.data['foods'][0]['nf_calories'].toString() ?? "";
+    carbo =
+        response?.data['foods'][0]['nf_total_carbohydrate'].toString() ?? "";
+    protein = response?.data['foods'][0]['nf_protein'].toString() ?? "";
+    fat = response?.data['foods'][0]['nf_total_fat'].toString() ?? "";
+    cholesterol = (double.parse(
+                response?.data['foods'][0]['nf_cholesterol'].toString() ??
+                    "0") /
+            1000)
+        .toString();
+    sugars = response?.data['foods'][0]['nf_sugars'].toString() ?? "";
+    if (response?.statusCode == 200) {
       setState(() {
         foodName = foodnameController.text;
         quantity = servingsController.text;

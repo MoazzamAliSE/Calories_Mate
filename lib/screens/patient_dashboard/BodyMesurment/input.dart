@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:calories_mate/screens/patient_dashboard/BodyMesurment/aim_page.dart';
+import 'package:get/get.dart';
 
 const Color inactiveCard = Color(0xFFE0F7FA);
 const Color activeCard = Colors.white;
@@ -47,7 +48,7 @@ class InputPageState extends State<InputPage> {
         children: <Widget>[
           Container(
             // padding: EdgeInsets.all(10),
-            height: 210,
+            height: 230,
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             // constraints: BoxConstraints(minWidth: 50,maxWidth: 50),
             decoration: BoxDecoration(
@@ -76,99 +77,102 @@ class InputPageState extends State<InputPage> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            updateGenderSelected(2);
-                          });
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            color: femaleCard,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: Colors.black45.withOpacity(0.2),
-                                  offset: const Offset(1.1, 4.0),
-                                  blurRadius: 8.0),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              const Icon(
-                                FontAwesomeIcons.venus,
-                                color: Colors.cyan,
-                                size: 100,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "FEMALE",
-                                style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            updateGenderSelected(1);
-                          });
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            color: maleCard,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: Colors.black45.withOpacity(0.2),
-                                  offset: const Offset(1.1, 4.0),
-                                  blurRadius: 8.0),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              const Icon(
-                                FontAwesomeIcons.mars,
-                                color: Colors.cyan,
-                                size: 100,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "MALE",
-                                style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              updateGenderSelected(2);
+                            });
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 130,
+                            decoration: BoxDecoration(
+                              color: femaleCard,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    color: Colors.black45.withOpacity(0.2),
+                                    offset: const Offset(1.1, 4.0),
+                                    blurRadius: 8.0),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                const Icon(
+                                  FontAwesomeIcons.venus,
+                                  color: Colors.cyan,
+                                  size: 80,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "FEMALE",
+                                  style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              updateGenderSelected(1);
+                            });
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 130,
+                            decoration: BoxDecoration(
+                              color: maleCard,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    color: Colors.black45.withOpacity(0.2),
+                                    offset: const Offset(1.1, 4.0),
+                                    blurRadius: 8.0),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                const Icon(
+                                  FontAwesomeIcons.mars,
+                                  color: Colors.cyan,
+                                  size: 100,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "MALE",
+                                  style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -178,7 +182,7 @@ class InputPageState extends State<InputPage> {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  height: 165,
+                  height: 180,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
@@ -290,8 +294,8 @@ class InputPageState extends State<InputPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                height: 150,
-                width: 280,
+                height: 220,
+                width: Get.width * .90,
                 margin:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
@@ -302,7 +306,7 @@ class InputPageState extends State<InputPage> {
                     Expanded(
                       child: Container(
                         width: 50,
-                        height: 150,
+                        height: 200,
                         decoration: BoxDecoration(
                           color: activeCard,
                           borderRadius: BorderRadius.circular(20.0),
@@ -366,7 +370,7 @@ class InputPageState extends State<InputPage> {
                                   },
                                 ),
                                 const SizedBox(
-                                  width: 15,
+                                  width: 5,
                                 ),
                                 IconButton(
                                   icon: CircleAvatar(
@@ -397,7 +401,7 @@ class InputPageState extends State<InputPage> {
                     ),
                     Expanded(
                       child: Container(
-                        height: 150,
+                        height: 200,
                         decoration: BoxDecoration(
                           color: activeCard,
                           borderRadius: BorderRadius.circular(20.0),
@@ -461,7 +465,7 @@ class InputPageState extends State<InputPage> {
                                   },
                                 ),
                                 const SizedBox(
-                                  width: 15,
+                                  width: 5,
                                 ),
                                 IconButton(
                                   icon: CircleAvatar(

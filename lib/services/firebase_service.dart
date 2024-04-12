@@ -8,9 +8,12 @@ class FirebaseService {
 
   FirebaseService();
 
-  Future<UserModel> getUser() async {
-    var firebaseUser = _auth.currentUser!;
-    return UserModel(firebaseUser.uid, displayName: firebaseUser.email!);
+  Future<UserModel?> getUser() async {
+    if (_auth.currentUser != null) {
+      var firebaseUser = _auth.currentUser!;
+      return UserModel(firebaseUser.uid, displayName: firebaseUser.email!);
+    }
+    return null;
   }
 
   Future<String?> signInwithGoogle() async {

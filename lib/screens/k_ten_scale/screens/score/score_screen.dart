@@ -38,7 +38,7 @@ class ScoreScreen extends StatelessWidget {
               const InterpretationTable(),
               const Spacer(flex: 3),
               InkWell(
-                onTap: () => Get.to(const FitnessAppHomeScreen()),
+                onTap: () => Get.to(() => const FitnessAppHomeScreen()),
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,

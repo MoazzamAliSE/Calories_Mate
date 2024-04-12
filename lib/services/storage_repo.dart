@@ -13,7 +13,7 @@ class StorageRepo {
 
   Future<String> uploadFile(File file) async {
     var user = await _firebaseService.getUser();
-    var storageRef = storage.ref().child("user/profile/${user.uid}");
+    var storageRef = storage.ref().child("user/profile/${user!.uid}");
     var uploadTask = storageRef.putFile(file);
     return (await uploadTask).ref.getDownloadURL();
   }

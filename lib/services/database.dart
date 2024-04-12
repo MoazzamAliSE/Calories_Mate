@@ -1,3 +1,4 @@
+import 'package:calories_mate/utils/custom_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:calories_mate/screens/Settings_Pages/new_password.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/my_diary_screen.dart';
@@ -76,14 +77,20 @@ class DatabaseService {
 
   Future<void> updateSetGoalData(String mealType, String calories, String carbo,
       String protein, String fat, String sugars, String cholesterol) async {
-    return await foodSetGoal.doc(mealType).set({
-      'Target Calories': calories,
-      'Target Carbohydrate': carbo,
-      'Target Protein': protein,
-      'Target Fat': fat,
-      'Target Sugars': sugars,
-      'Target Cholesterol': cholesterol,
-    });
+    try {
+      return await foodSetGoal.doc(mealType).set({
+        'Target Calories': calories,
+        'Target Carbohydrate': carbo,
+        'Target Protein': protein,
+        'Target Fat': fat,
+        'Target Sugars': sugars,
+        'Target Cholesterol': cholesterol,
+      }).then((value) {
+        CustomDialog.showDialog(isSuccess: true, message: "goal set");
+      });
+    } catch (e) {
+      CustomDialog.showDialog(isSuccess: false, message: "goal set failed");
+    }
   }
 
   final CollectionReference foodCollectionbreakfast = FirebaseFirestore.instance
@@ -244,15 +251,20 @@ class DatabaseService {
       String lastSeen,
       String age,
       String gender) async {
-    return await bodyCollection.doc(formattedDate).set({
-      'height(cm)': height,
-      'weight(kg)': weight,
-      'BMR(Body Metabolic Rate)': bMR,
-      'BMW(Body Mass weight)': bMW,
-      'BMW status': status,
-      'last seen': lastSeen,
-      'age': age,
-      'gender': gender
-    });
+    try {
+      return await bodyCollection.doc(formattedDate).set({
+        'height(cm)': height,
+        'weight(kg)': weight,
+        'BMR(Body Metabolic Rate)': bMR,
+        'BMW(Body Mass weight)': bMW,
+        'BMW status': status,
+        'last seen': lastSeen,
+        'age': age,
+        'gender': gender
+      }).then((value) =>
+          CustomDialog.showDialog(isSuccess: true, message: "saved"));
+    } catch (e) {
+      CustomDialog.showDialog(isSuccess: false, message: "failed");
+    }
   }
 }

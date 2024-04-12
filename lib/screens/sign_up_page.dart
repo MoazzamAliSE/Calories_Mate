@@ -363,14 +363,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        buildRowDivider(size: size),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        GoogleSignIn(buttonText: "Sign up with Google"),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        // buildRowDivider(size: size),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // GoogleSignIn(buttonText: "Sign up with Google"),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
                       ],
                     ),
                   ),

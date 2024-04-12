@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/dashboard_doctor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:calories_mate/screens/sign_up_page.dart';
-import 'k_ten_scale/ktenscale.dart';
+import 'k_ten_scale/Tenscale.dart';
 
 late User user;
 
@@ -17,22 +17,22 @@ class VerifyScreen extends StatefulWidget {
 
 class _VerifyScreenState extends State<VerifyScreen> {
   final auth = FirebaseAuth.instance;
-  late Timer timer;
+  // late Timer timer;
 
   @override
   void initState() {
     user = auth.currentUser!;
-    user.sendEmailVerification();
+    // user.sendEmailVerification();
 
-    timer = Timer.periodic(const Duration(seconds: 4), (timer) {
-      checkEmailVerified();
-    });
+    // timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+    checkEmailVerified();
+    // });
     super.initState();
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    // timer.cancel();
     super.dispose();
   }
 
@@ -74,17 +74,17 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   Future<void> checkEmailVerified() async {
     user = auth.currentUser!;
-    await user.reload();
-    if (user.emailVerified) {
-      timer.cancel();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      if (prefs.getString('login_as') == "doctor") {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const DoctorDashBoard()));
-      } else if (prefs.getString('login_as') == "patient") {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ktenScale()));
-      }
+    // await user.reload();
+    // if (user.emailVerified) {
+    // timer.cancel();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('login_as') == "doctor") {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const DoctorDashBoard()));
+    } else if (prefs.getString('login_as') == "patient") {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const TenScale()));
     }
+    // }
   }
 }

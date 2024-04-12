@@ -42,8 +42,11 @@ class WelcomeScreen extends StatelessWidget {
                   Center(
                     child: Text(
                       "Let's take a quick survey,",
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .copyWith(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -58,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.normal))),
                   const Spacer(), // 1/6
                   InkWell(
-                    onTap: () => Get.to(const QuizScreen()),
+                    onTap: () => Get.to(() => const QuizScreen()),
                     child: Container(
                       width: double.infinity,
                       alignment: Alignment.center,

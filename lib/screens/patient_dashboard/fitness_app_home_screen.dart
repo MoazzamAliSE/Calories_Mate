@@ -1,8 +1,10 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:calories_mate/screens/Settings_Pages/settings.dart';
 import 'package:calories_mate/screens/patient_dashboard/training/training_home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'doctor_appointment/screens/doctor_appointment.dart';
 import 'fitness_app_theme.dart';
