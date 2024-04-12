@@ -5,9 +5,9 @@ import 'package:calories_mate/screens/patient_dashboard/BodyMesurment/result.dar
 const Color inactiveCard = Color(0xFFFFFFFF);
 var exerciseList = [
   "Little to no exercise",
-  "Light exercise (1–3 days per week)",
-  "Moderate exercise (3–5 days per week)",
-  "Heavy exercise (6–7 days per week)",
+  "Light exercise (1-3 days per week)",
+  "Moderate exercise (3-5 days per week)",
+  "Heavy exercise (6-7 days per week)",
   "Very heavy exercise (twice per day)"
 ];
 var goalList = [

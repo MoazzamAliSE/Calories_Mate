@@ -131,25 +131,19 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
-                                          "Dr. $name",
-                                          style: 
-                                              const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold)
-                                        ),
+                                        Text("Dr. $name",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold)),
                                         const SizedBox(
                                           height: 4,
                                         ),
-                                        Text(
-                                          "$specialization ($hospital)",
-                                          style: 
-                                              const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600)
-                                        ),
+                                        Text("$specialization ($hospital)",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600)),
                                       ],
                                     ),
                                   ),
@@ -186,37 +180,37 @@ class OptionsCreater extends StatelessWidget {
     title: "Patients Data",
     subtitle: "About assigned patients",
     event: "3 Patients",
-    img: "assets/patient.png",
+    img: "assets/images/patient.png",
   );
   Items item2 = Items(
     title: "Appointments",
     subtitle: "Info about appointments ",
     event: "4 appointments",
-    img: "assets/appointment.png",
+    img: "assets/images/appointment.png",
   );
   Items item3 = Items(
     title: "Availability",
     subtitle: "Set your available timings",
     event: "3 slots",
-    img: "assets/available.png",
+    img: "assets/images/available.png",
   );
   Items item4 = Items(
     title: "Interaction",
     subtitle: "Interact with random patients",
     event: "3 random available",
-    img: "assets/interaction.png",
+    img: "assets/images/interaction.png",
   );
   Items item5 = Items(
     title: "Report",
     subtitle: "Report a patient",
     event: "1 reported",
-    img: "assets/report.png",
+    img: "assets/images/report.png",
   );
   Items item6 = Items(
     title: "Settings",
     subtitle: "Access different settings",
     event: "2 Items",
-    img: "assets/settings.png",
+    img: "assets/images/settings.png",
   );
 
   OptionsCreater({Key? key}) : super(key: key);
@@ -279,36 +273,27 @@ class OptionsCreater extends StatelessWidget {
                     const SizedBox(
                       height: 6,
                     ),
-                    Text(
-                      data.title,
-                      style: 
-                          const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600)
-                    ),
+                    Text(data.title,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600)),
                     const SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      data.subtitle,
-                      style: 
-                          const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600)
-                    ),
+                    Text(data.subtitle,
+                        style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600)),
                     const SizedBox(
                       height: 14,
                     ),
-                    Text(
-                      data.event,
-                      style: 
-                          const TextStyle(
-                              color: Colors.blueGrey,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600)
-                    ),
+                    Text(data.event,
+                        style: const TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ),

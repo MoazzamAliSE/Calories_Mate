@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:calories_mate/services/locator.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'navigation/navigate.dart';
-import 'utils/constants.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future main() async {
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: Constants.title,
       initialRoute: '/initial-screen',
       routes: Navigate.routes,
       theme: ThemeData(

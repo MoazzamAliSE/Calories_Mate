@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:calories_mate/screens/Settings_Pages/new_password.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/my_diary_screen.dart';
 import 'package:calories_mate/services/database.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Response? response;
 var dio = Dio();
