@@ -4,7 +4,6 @@ import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:calories_mate/screens/verify_email.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:calories_mate/services/database.dart';
-import 'package:calories_mate/utils/google_sign_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late User user;
@@ -360,17 +359,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                     )),
                               )
                             ]),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        // buildRowDivider(size: size),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
-                        // GoogleSignIn(buttonText: "Sign up with Google"),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
                       ],
                     ),
                   ),

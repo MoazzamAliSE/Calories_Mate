@@ -47,6 +47,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 VideoSuggestions(),
                 DiffStyles(),
                 Courses(),
+                
                 SizedBox(
                   height: 80,
                 )

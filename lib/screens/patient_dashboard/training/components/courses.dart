@@ -14,7 +14,7 @@ class Courses extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: 10, vertical: Constants.appPadding / 3),
       child: Container(
-        height: size.height * 0.2,
+        height: size.height * 0.205,
         decoration: BoxDecoration(
             color: Constants.white,
             borderRadius: BorderRadius.circular(30.0),
@@ -126,13 +126,13 @@ class Courses extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              Text(
-                'See All',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: Constants.primary),
-              ),
+              // Text(
+              //   'See All',
+              //   style: TextStyle(
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w800,
+              //       color: Constants.primary),
+              // ),
             ],
           ),
         ),

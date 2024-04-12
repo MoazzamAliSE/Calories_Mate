@@ -242,7 +242,7 @@ class _SettingsPageState extends State<ChangePassPage> {
                   }
                   if (reauthChecker == true) {
                     FirebaseService service = FirebaseService();
-                    await service.signOutFromGoogle();
+                    await service.signOut();
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

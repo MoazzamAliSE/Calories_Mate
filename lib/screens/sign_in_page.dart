@@ -4,7 +4,6 @@ import 'package:calories_mate/screens/reset_password.dart';
 import 'package:calories_mate/screens/sign_up_page.dart';
 import 'package:calories_mate/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:calories_mate/utils/google_sign_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dashboard_doctor.dart';
 import 'patient_dashboard/fitness_app_home_screen.dart';
@@ -275,14 +274,6 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        // buildRowDivider(size: size),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
-                        // GoogleSignIn(buttonText: "Sign in with Google"),
                         const SizedBox(
                           height: 10,
                         ),

@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:calories_mate/services/user_model.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   FirebaseService();
 
@@ -12,23 +10,6 @@ class FirebaseService {
     if (_auth.currentUser != null) {
       var firebaseUser = _auth.currentUser!;
       return UserModel(firebaseUser.uid, displayName: firebaseUser.email!);
-    }
-    return null;
-  }
-
-  Future<String?> signInwithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-      await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException {
-      rethrow;
     }
     return null;
   }
@@ -42,8 +23,7 @@ class FirebaseService {
         displayName: authresult.user!.displayName.toString());
   }
 
-  Future<void> signOutFromGoogle() async {
-    await _googleSignIn.signOut();
+  Future<void> signOut() async {
     await _auth.signOut();
   }
 }

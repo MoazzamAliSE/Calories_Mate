@@ -128,13 +128,13 @@ class DiffStyles extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              Text(
-                'See All',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.cyan),
-              ),
+              // Text(
+              //   'See All',
+              //   style: TextStyle(
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w800,
+              //       color: Colors.cyan),
+              // ),
             ],
           ),
         ),

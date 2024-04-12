@@ -21,7 +21,6 @@ class Constants {
 
   static const double appPadding = 20.0;
   //text
-  static const title = "Google Sign In";
   static const textIntro = "Mental Health \n";
   static const textIntroDesc1 = "Self-care is how you take your power back";
   static const textSmallSignUp = "Sign up takes only 2 minutes!";
@@ -29,12 +28,10 @@ class Constants {
   static const textStart = "Get Started";
   static const textSignInTitle = "Welcome back!";
   static const textSmallSignIn = "You've been missed";
-  static const textSignInGoogle = "Sign In With Google";
   static const textAcc = "Don't have an account? ";
   static const textSignUp = "Sign Up here";
   static const textHome = "Home";
   static const signUp = "Sign Up ";
-  static const textSignUpGoogle = "Sign up with Google";
 
   //navigate
   static const signInNavigate = '/sign-in';

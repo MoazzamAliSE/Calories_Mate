@@ -272,7 +272,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   GestureDetector(
                     onTap: () async {
                       FirebaseService service = FirebaseService();
-                      await service.signOutFromGoogle();
+                      await service.signOut();
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
