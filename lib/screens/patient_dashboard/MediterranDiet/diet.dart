@@ -14,9 +14,6 @@ class _DietState extends State<Diet> {
       appBar: AppBar(
         title: const Text("Diet"),
       ),
-      body: const Center(
-        child: Text("In Future"),
-      ),
     );
   }
 }

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:calories_mate/screens/verify_email.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:calories_mate/services/database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late User user;
@@ -40,7 +40,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         width: double.infinity,
