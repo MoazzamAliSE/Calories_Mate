@@ -1,8 +1,11 @@
+import 'package:calories_mate/screens/chat/chat_with.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/category_card.dart';
 import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/doctor_card.dart';
 import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/search_bar.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import '../constant.dart';
 import 'doctor_model.dart';
 
@@ -29,6 +32,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.cyan,
         elevation: 1,
+      ),
+      floatingActionButton: SafeArea(
+        child: GestureDetector(
+          onTap: () {
+            Get.to(()=>ChatWith());
+          },
+          child: Container(
+            margin: EdgeInsets.only(bottom: 70),
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              shape: BoxShape.circle
+            ),
+            child: Icon(Icons.chat,color: Colors.white,),
+          ),
+        ),
       ),
       backgroundColor: kBackgroundColor,
       body: SafeArea(

@@ -1,3 +1,5 @@
+import 'package:calories_mate/screens/splashscreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:calories_mate/screens/reset_password.dart';
@@ -335,9 +337,12 @@ class _SignInPageState extends State<SignInPage> {
       prefs.setString('password', password);
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((_) {
+          .then((_) async {
         user = auth.currentUser!;
         if (user.emailVerified) {
+          final s=await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).get();
+          userEmail=s.get('email');
+          userName=s.get('name');
           if (prefs.getString('login_as') == "doctor") {
             Navigator.pushReplacement(
                 context,

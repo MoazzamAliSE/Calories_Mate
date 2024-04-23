@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:calories_mate/screens/chat/chat_screen.dart';
 import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/schedule_card.dart';
 import 'package:calories_mate/utils/load_profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../constant.dart';
 
@@ -204,7 +206,16 @@ class _DetailScreenState extends State<DetailScreen> {
                                     //   ],
                                     // ),
                                   ],
-                                )
+                                ),
+                                Spacer(),
+                                InkWell(
+                                    onTap: () => Get.to(()=>ChatScreen(
+                                      name: widget._name,
+                                      uid: widget._uid,
+                                      email: '',
+                                    )),
+                                    child: Icon(Icons.chat,color: Colors.blue,)),
+                                SizedBox(width: 20,)
                               ],
                             ),
                             const SizedBox(

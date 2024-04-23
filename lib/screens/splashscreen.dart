@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/dashboard_doctor.dart';
@@ -6,7 +7,8 @@ import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:calories_mate/screens/welcome_page.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
-
+String? userName;
+String? userEmail;
 class Splashscreen extends StatefulWidget {
   const Splashscreen({Key? key}) : super(key: key);
 
@@ -45,6 +47,9 @@ class _SplashscreenState extends State<Splashscreen> {
 
   userExistAuth() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+    final s=await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).get();
+    userEmail=s.get('email');
+    userName=s.get('name');
     if (pref.getString('login_as') == "doctor") {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const DoctorDashBoard()));

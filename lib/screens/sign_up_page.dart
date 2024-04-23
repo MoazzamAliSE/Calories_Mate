@@ -1,4 +1,5 @@
 import 'package:calories_mate/screens/sign_in_page.dart';
+import 'package:calories_mate/screens/splashscreen.dart';
 import 'package:calories_mate/screens/verify_email.dart';
 import 'package:calories_mate/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -392,6 +393,8 @@ class _SignUpPageState extends State<SignUpPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', email);
       prefs.setString('password', password);
+      username=fullnameController.value.text.toString();
+      userEmail=email;
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((_) async {
