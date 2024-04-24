@@ -1,11 +1,16 @@
 import 'dart:typed_data';
 
 import 'package:calories_mate/screens/chat/chat_screen.dart';
+import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/agora.config.dart';
 import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/schedule_card.dart';
+import 'package:calories_mate/screens/splashscreen.dart';
 import 'package:calories_mate/utils/load_profile_pic.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../constant.dart';
 
@@ -28,6 +33,44 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          showGeneralDialog(context: context, pageBuilder: (context, animation, secondaryAnimation) {
+            return AlertDialog(
+              title: Text('Book Appointment',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
+              content: Text('Are you sure to book appointment',style: TextStyle(color: Colors.black,fontSize: 14),),
+              actions: [
+                TextButton(onPressed: () {
+                  Navigator.pop(context);
+                }, child: Text('Cancel',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                TextButton(onPressed: () {
+                  FirebaseFirestore.instance.collection('userdata').doc(widget._uid).collection('appointments').doc(
+                    FirebaseAuth.instance.currentUser!.uid,
+                  ).set(
+                    {
+                      'name' : userName,
+                      'email' : userEmail,
+                      'uid' : FirebaseAuth.instance.currentUser!.uid,
+                      'date' : DateFormat('dd MMM yyyy').format(DateTime.now()),
+                      'time' :  DateFormat('hh:mm a').format(DateTime.now()),
+                    }
+                  );
+                }, child: Text('Ok',style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)),
+              ],
+            );
+          },);
+        },
+        child: Container(
+        height: 55,
+            width: 150,
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(30)
+            ),
+            alignment: Alignment.center,
+            child: const Text('Book Appointment',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+      ),
       body: SingleChildScrollView(
         child: FutureBuilder(
             future: loadProfilePic(widget._uid),

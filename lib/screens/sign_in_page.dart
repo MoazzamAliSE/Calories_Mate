@@ -339,7 +339,7 @@ class _SignInPageState extends State<SignInPage> {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((_) async {
         user = auth.currentUser!;
-        if (user.emailVerified) {
+
           final s=await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).get();
           userEmail=s.get('email');
           userName=s.get('name');
@@ -422,11 +422,6 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ));
           }
-        } else {
-          Fluttertoast.showToast(
-              msg: "Please verify your email before signing-in",
-              gravity: ToastGravity.TOP);
-        }
       });
     } on FirebaseAuthException catch (error) {
       errorMessage = error.message.toString();
