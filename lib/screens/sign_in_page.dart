@@ -343,12 +343,14 @@ class _SignInPageState extends State<SignInPage> {
           final s=await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).get();
           userEmail=s.get('email');
           userName=s.get('name');
-          if (prefs.getString('login_as') == "doctor") {
+          if (s.get('type') == "doctor") {
+            prefs.setString('login_as', 'doctor');
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const DoctorDashBoard()));
-          } else if (prefs.getString('login_as') == "patient") {
+          } else if (s.get('type') == "patient") {
+            prefs.setString('login_as', 'patient');
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

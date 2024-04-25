@@ -82,8 +82,8 @@ class _SplashscreenState extends State<Splashscreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const SizedBox(),
-                Image.asset("assets/images/ReliveLogo.png",
-                    width: double.infinity, height: 90),
+                Image.asset("assets/images/Blue Black Funky Fitness Coach Logo_20240420_150138_0000.png",
+                    width: double.infinity,),
                 const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
                 )

@@ -33,44 +33,44 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          showGeneralDialog(context: context, pageBuilder: (context, animation, secondaryAnimation) {
-            return AlertDialog(
-              title: Text('Book Appointment',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
-              content: Text('Are you sure to book appointment',style: TextStyle(color: Colors.black,fontSize: 14),),
-              actions: [
-                TextButton(onPressed: () {
-                  Navigator.pop(context);
-                }, child: Text('Cancel',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-                TextButton(onPressed: () {
-                  FirebaseFirestore.instance.collection('userdata').doc(widget._uid).collection('appointments').doc(
-                    FirebaseAuth.instance.currentUser!.uid,
-                  ).set(
-                    {
-                      'name' : userName,
-                      'email' : userEmail,
-                      'uid' : FirebaseAuth.instance.currentUser!.uid,
-                      'date' : DateFormat('dd MMM yyyy').format(DateTime.now()),
-                      'time' :  DateFormat('hh:mm a').format(DateTime.now()),
-                    }
-                  );
-                }, child: Text('Ok',style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)),
-              ],
-            );
-          },);
-        },
-        child: Container(
-        height: 55,
-            width: 150,
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(30)
-            ),
-            alignment: Alignment.center,
-            child: const Text('Book Appointment',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-      ),
+      // floatingActionButton: GestureDetector(
+      //   onTap: () {
+      //     showGeneralDialog(context: context, pageBuilder: (context, animation, secondaryAnimation) {
+      //       return AlertDialog(
+      //         title: Text('Book Appointment',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
+      //         content: Text('Are you sure to book appointment',style: TextStyle(color: Colors.black,fontSize: 14),),
+      //         actions: [
+      //           TextButton(onPressed: () {
+      //             Navigator.pop(context);
+      //           }, child: Text('Cancel',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+      //           TextButton(onPressed: () {
+      //             FirebaseFirestore.instance.collection('userdata').doc(widget._uid).collection('appointments').doc(
+      //               FirebaseAuth.instance.currentUser!.uid,
+      //             ).set(
+      //               {
+      //                 'name' : userName,
+      //                 'email' : userEmail,
+      //                 'uid' : FirebaseAuth.instance.currentUser!.uid,
+      //                 'date' : DateFormat('dd MMM yyyy').format(DateTime.now()),
+      //                 'time' :  DateFormat('hh:mm a').format(DateTime.now()),
+      //               }
+      //             );
+      //           }, child: Text('Ok',style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)),
+      //         ],
+      //       );
+      //     },);
+      //   },
+      //   child: Container(
+      //   height: 55,
+      //       width: 150,
+      //       margin: EdgeInsets.symmetric(horizontal: 20),
+      //       decoration: BoxDecoration(
+      //         color: Colors.blue,
+      //         borderRadius: BorderRadius.circular(30)
+      //       ),
+      //       alignment: Alignment.center,
+      //       child: const Text('Book Appointment',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+      // ),
       body: SingleChildScrollView(
         child: FutureBuilder(
             future: loadProfilePic(widget._uid),

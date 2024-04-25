@@ -1,3 +1,4 @@
+import 'package:calories_mate/screens/workout/workout_training.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -855,7 +856,20 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                       )
                                     ],
                                   ),
-                                )
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        FitnessAppTheme.nearlyDarkBlue
+                                      )
+                                    ),
+                                      onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutTrainingScreen(),));
+                                  }, child: Center(child: Text('Exercise',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),)),
+                                ),
+                                SizedBox(height: 10,)
                               ],
                             ),
                           ),
