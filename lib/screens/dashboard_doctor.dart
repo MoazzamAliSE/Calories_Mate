@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:calories_mate/screens/chat/chat_with.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -37,6 +38,21 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatWith(),));
+          },
+          child: CircleAvatar(
+            radius: 30,
+            backgroundColor: Colors.blue.shade900,
+            child: Center(
+              child: Icon(Icons.message,color: Colors.white,),
+            ),
+          ),
+        ),
+      ),
         appBar: AppBar(
           title: const Text(
             'Doctor \'s Dashboard',

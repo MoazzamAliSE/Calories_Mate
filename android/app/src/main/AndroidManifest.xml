@@ -8,7 +8,7 @@
     <!--   The Agora SDK requires Bluetooth permissions in case users are using Bluetooth devices.  -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <application
-        android:label="calories_mate"
+        android:label="Calories Mate"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

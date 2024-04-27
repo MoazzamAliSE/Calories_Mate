@@ -27,8 +27,13 @@ class WelcomePage extends StatelessWidget {
             ),
             Column(
               children: [
-                Image.asset("assets/images/ReliveLogo.png",
-                    width: double.infinity, height: 75),
+                // Image.asset("assets/images/ReliveLogo.png",
+                //     width: double.infinity, height: 75),
+                Text('Calories Mate',style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold
+                ),),
                 const Text(
                   Constants.textIntroDesc1,
                   style: TextStyle(
