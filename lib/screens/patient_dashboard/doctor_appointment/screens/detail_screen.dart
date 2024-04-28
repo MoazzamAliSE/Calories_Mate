@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:calories_mate/screens/chat/chat_screen.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/agora.config.dart';
 import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/schedule_card.dart';
 import 'package:calories_mate/screens/splashscreen.dart';
 import 'package:calories_mate/utils/load_profile_pic.dart';

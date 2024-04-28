@@ -25,16 +25,18 @@ class WelcomePage extends StatelessWidget {
               child: Image.asset("assets/images/mentalHealth.png",
                   width: double.infinity, height: 320),
             ),
-            Column(
+            const Column(
               children: [
                 // Image.asset("assets/images/ReliveLogo.png",
                 //     width: double.infinity, height: 75),
-                Text('Calories Mate',style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-                ),),
-                const Text(
+                Text(
+                  'My Calorie Mate',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
                   Constants.textIntroDesc1,
                   style: TextStyle(
                       color: Colors.blueAccent,

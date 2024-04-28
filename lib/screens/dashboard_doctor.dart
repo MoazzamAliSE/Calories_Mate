@@ -5,11 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/Doctor_Dashboard_Pages/appointments.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/availability.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/important_notifications.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/interaction.dart';
 import 'package:calories_mate/screens/Doctor_Dashboard_Pages/patients_data.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/reports.dart';
 import 'Doctor_Dashboard_Pages/edit_profile.dart';
 import 'Settings_Pages/new_password.dart';
 import 'Settings_Pages/settings.dart';
@@ -38,21 +34,28 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatWith(),));
-          },
-          child: CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.blue.shade900,
-            child: Center(
-              child: Icon(Icons.message,color: Colors.white,),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChatWith(),
+                  ));
+            },
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.blue.shade900,
+              child: const Center(
+                child: Icon(
+                  Icons.message,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),
-      ),
         appBar: AppBar(
           title: const Text(
             'Doctor \'s Dashboard',
@@ -60,19 +63,6 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
           ),
           backgroundColor: Colors.cyan,
           elevation: 1,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.notification_add,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        const ImportantNotificationsPage()));
-              },
-            )
-          ],
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream:
@@ -195,37 +185,23 @@ class OptionsCreater extends StatelessWidget {
   Items item1 = Items(
     title: "Patients Data",
     subtitle: "About assigned patients",
-    event: "3 Patients",
     img: "assets/images/patient.png",
   );
   Items item2 = Items(
     title: "Appointments",
     subtitle: "Info about appointments ",
-    event: "4 appointments",
     img: "assets/images/appointment.png",
   );
-  Items item3 = Items(
-    title: "Availability",
-    subtitle: "Set your available timings",
-    event: "3 slots",
-    img: "assets/images/available.png",
-  );
+
   Items item4 = Items(
-    title: "Interaction",
-    subtitle: "Interact with random patients",
-    event: "3 random available",
+    title: "Chat",
+    subtitle: "Chat with your patients",
     img: "assets/images/interaction.png",
   );
-  Items item5 = Items(
-    title: "Report",
-    subtitle: "Report a patient",
-    event: "1 reported",
-    img: "assets/images/report.png",
-  );
+
   Items item6 = Items(
     title: "Settings",
     subtitle: "Access different settings",
-    event: "2 Items",
     img: "assets/images/settings.png",
   );
 
@@ -233,7 +209,7 @@ class OptionsCreater extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [item1, item2, item3, item4, item5, item6];
+    List<Items> myList = [item1, item2, item4, item6];
     return Flexible(
       child: GridView.count(
           childAspectRatio: 1.0,
@@ -248,21 +224,13 @@ class OptionsCreater extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) =>
                           const SettingsPage(role: "doctor")));
-                } else if (data.title == "Report") {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => const ReportsPage()));
-                } else if (data.title == "Interaction") {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const InteractionPage()));
-                } else if (data.title == "Availability") {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const AvailabilityPage()));
                 } else if (data.title == "Appointments") {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) =>
                           const AppointmentsPage()));
+                } else if (data.title == "Chat") {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => const ChatWith()));
                 } else if (data.title == "Patients Data") {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) =>
@@ -305,11 +273,6 @@ class OptionsCreater extends StatelessWidget {
                     const SizedBox(
                       height: 14,
                     ),
-                    Text(data.event,
-                        style: const TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ),
@@ -322,11 +285,6 @@ class OptionsCreater extends StatelessWidget {
 class Items {
   String title;
   String subtitle;
-  String event;
   String img;
-  Items(
-      {required this.title,
-      required this.subtitle,
-      required this.event,
-      required this.img});
+  Items({required this.title, required this.subtitle, required this.img});
 }

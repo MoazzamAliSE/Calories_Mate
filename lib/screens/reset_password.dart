@@ -53,11 +53,6 @@ class _ResetScreenState extends State<ResetScreen> {
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(50),
-                      // boxShadow: [BoxShadow(
-                      //     color: Colors.black12,
-                      //     blurRadius: 25,
-                      //     offset: Offset(0, 2)
-                      // )]
                     ),
                     child: Column(
                       children: <Widget>[
