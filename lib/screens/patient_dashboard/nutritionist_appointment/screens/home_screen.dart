@@ -1,13 +1,12 @@
 import 'package:calories_mate/screens/chat/chat_with.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/doctor_card.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/category_card.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/doctor_card.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/search_bar.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/category_card.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/search_bar.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import '../constant.dart';
-import 'doctor_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Doctor\'s Appointment',
+          'Nutritionist\'s Appointment',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.cyan,
@@ -36,16 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: SafeArea(
         child: GestureDetector(
           onTap: () {
-            Get.to(()=>ChatWith());
+            Get.to(() => const ChatWith());
           },
           child: Container(
-            margin: EdgeInsets.only(bottom: 70),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              shape: BoxShape.circle
+            margin: const EdgeInsets.only(bottom: 70),
+            padding: const EdgeInsets.all(15),
+            decoration:
+                const BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+            child: const Icon(
+              Icons.chat,
+              color: Colors.white,
             ),
-            child: Icon(Icons.chat,color: Colors.white,),
           ),
         ),
       ),
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Find Your Desired\nDoctor',
+                  'Find Your Desired\nNutritionist',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 32,
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Top Doctors',
+                  'Top Nutritionists',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              buildDoctorList(),
+              buildNutritionistList(),
             ],
           ),
         ),
@@ -153,17 +153,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<DoctorModel> doctors = [DoctorModel("", "", "", "", "", "")];
-  buildDoctorList() {
-    doctors.removeAt(0);
+  List<NutritionistModel> nutritionists = [
+    NutritionistModel("", "", "", "", "", "")
+  ];
+  buildNutritionistList() {
+    nutritionists.removeAt(0);
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('userdata').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.data != null) {
             for (var element in snapshot.data!.docs) {
               try {
-                if (element['type'] == "doctor") {
-                  doctors.add(DoctorModel(
+                if (element['type'] == "nutritionist") {
+                  nutritionists.add(NutritionistModel(
                       element.id,
                       element['name'],
                       element['specialization'],
@@ -186,17 +188,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: (doctors.length <= 3) ? doctors.length : 3,
+                    itemCount:
+                        (nutritionists.length <= 3) ? nutritionists.length : 3,
                     itemBuilder: (context, index) {
                       return Column(
                         children: (snapshot.data != null)
                             ? ([
-                                DoctorCard(
-                                  doctors[index].uid,
-                                  doctors[index].displayName,
-                                  "${doctors[index].specialization!}-${doctors[index].hospital!}",
+                                NutritionistCard(
+                                  nutritionists[index].uid,
+                                  nutritionists[index].displayName,
+                                  "${nutritionists[index].specialization!}-${nutritionists[index].hospital!}",
                                   (index % 2 == 0) ? kBlueColor : kYellowColor,
-                                  doctors[index].bio,
+                                  nutritionists[index].bio,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -212,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 
-  getDoctors() async {
+  getNutritionists() async {
     setState(() {});
     FirebaseFirestore.instance
         .collection('userdata')
@@ -220,8 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
         .listen((event) {
       for (var element in event.docs) {
         try {
-          if (element['type'] == "doctor") {
-            doctors.add(DoctorModel(
+          if (element['type'] == "nutritionist") {
+            nutritionists.add(NutritionistModel(
                 element.id,
                 element['name'],
                 element['specialization'],

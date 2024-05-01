@@ -1,14 +1,16 @@
+import 'package:calories_mate/screens/dashboard_nutritionist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/dashboard_doctor.dart';
 import 'package:calories_mate/screens/patient_dashboard/fitness_app_home_screen.dart';
 import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:calories_mate/screens/welcome_page.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+
 String? userName;
 String? userEmail;
+
 class Splashscreen extends StatefulWidget {
   const Splashscreen({Key? key}) : super(key: key);
 
@@ -39,20 +41,23 @@ class _SplashscreenState extends State<Splashscreen> {
           () => Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const WelcomePage())));
     } else {
-     
       Timer(const Duration(seconds: 1), () => userExistAuth());
-  
     }
   }
 
   userExistAuth() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    final s=await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).get();
-    userEmail=s.get('email');
-    userName=s.get('name');
-    if (pref.getString('login_as') == "doctor") {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const DoctorDashBoard()));
+    final s = await FirebaseFirestore.instance
+        .collection('userdata')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    userEmail = s.get('email');
+    userName = s.get('name');
+    if (pref.getString('login_as') == "nutritionist") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const NutritionistDashBoard()));
     } else if (pref.getString('login_as') == "patient") {
       Navigator.pushReplacement(
           context,
@@ -82,8 +87,10 @@ class _SplashscreenState extends State<Splashscreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const SizedBox(),
-                Image.asset("assets/images/Blue Black Funky Fitness Coach Logo_20240420_150138_0000.png",
-                    width: double.infinity,),
+                Image.asset(
+                  "assets/images/Blue Black Funky Fitness Coach Logo_20240420_150138_0000.png",
+                  width: double.infinity,
+                ),
                 const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
                 )

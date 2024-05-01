@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class PatientsDataPage extends StatefulWidget {
+  const PatientsDataPage({Key? key}) : super(key: key);
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  NutritionistDashBoardState createState() => NutritionistDashBoardState();
 }
 
-
-class _SettingsPageState extends State<ProfilePage> {
+class NutritionistDashBoardState extends State<PatientsDataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Profile',
+          'Patients Data',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.cyan,

@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/edit_profile.dart';
-import 'package:calories_mate/screens/Settings_Pages/about_us.dart';
+import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/edit_profile.dart';
 import 'package:calories_mate/screens/Settings_Pages/new_password.dart';
-import 'package:calories_mate/screens/Settings_Pages/help.dart';
 import 'package:calories_mate/screens/patient_dashboard/fitness_app_home_screen.dart';
 import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,14 +38,14 @@ class _SettingsPageState extends State<SettingsPage> {
         leading: IconButton(
           onPressed: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            if (prefs.getString('login_as') == "doctor") {
+            if (prefs.getString('login_as') == "nutritionist") {
               Navigator.of(context).pop();
             } else {
-              if (widget.role == "doctor") {
+              if (widget.role == "nutritionist") {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const DoctorProfile()));
+                        builder: (context) => const NutritionistProfile()));
               } else {
                 Navigator.pushReplacement(
                     context,
@@ -105,31 +103,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: ListTile(
-                            leading: Stack(
-                              children: <Widget>[
-                                const CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      "https://media.giphy.com/media/B1CrvUCoMxhy8/giphy.gif"),
-                                ),
-                                Positioned(
-                                  bottom: 0.0,
-                                  right: 1.0,
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.green,
-                                        shape: BoxShape.circle),
-                                    child: const Icon(
-                                      Icons.edit,
-                                      color: Colors.white,
-                                      size: 12,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
                             title: Text(
                               name,
                               style: const TextStyle(
@@ -137,22 +110,24 @@ class _SettingsPageState extends State<SettingsPage> {
                                   color: Colors.white,
                                   fontSize: 20),
                             ),
-                            subtitle: const Text(
-                              "Talking with computer",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10),
+                            subtitle: Text(
+                              widget.role == "nutritionist"
+                                  ? "Wellcome Nutritionist"
+                                  : "Wellcome",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
                             ),
                             trailing: const Icon(
                               Icons.edit,
                               color: Colors.white,
                             ),
                             onTap: () {
-                              if (widget.role == "doctor") {
+                              if (widget.role == "nutritionist") {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DoctorProfile()));
+                                            const NutritionistProfile()));
                               } else {
                                 Navigator.pushReplacement(
                                     context,
@@ -187,69 +162,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Text(
                             "Change Password",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.cyan,
-                            size: 16,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 15,
-                    thickness: 1,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const AboutUsPage()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "About us",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.cyan,
-                            size: 16,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 15,
-                    thickness: 1,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) => const HelpPage()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Help",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,

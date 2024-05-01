@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:calories_mate/screens/Settings_Pages/settings.dart';
+import 'package:calories_mate/screens/chat/chat_with.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_appointment.dart';
 import 'package:calories_mate/screens/patient_dashboard/training/training_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 import 'bottom_navigation_view/bottom_bar_view.dart';
-import 'doctor_appointment/screens/doctor_appointment.dart';
 import 'fitness_app_theme.dart';
 import 'models/tab_icon_data.dart';
 import 'my_diary/my_diary_screen.dart';
@@ -103,7 +106,9 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
         ),
         BottomBarView(
           tabIconsList: tabIconsList,
-          addClick: () {},
+          addClick: () {
+            Get.to(() => const ChatWith());
+          },
           changeIndex: (int index) {
             setState(() {
               indexAdopted = index;
@@ -133,7 +138,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody = const DoctorAppointment();
+                  tabBody = const NutritionistAppointment();
                 });
               });
             } else if (index == 3) {

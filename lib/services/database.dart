@@ -21,7 +21,7 @@ class DatabaseService {
     });
   }
 
-  Future<void> updateDoctorUserData(
+  Future<void>  updateNutritionistUserData(
     String name,
     String username,
     String email,

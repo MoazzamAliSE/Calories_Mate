@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:calories_mate/screens/dashboard_nutritionist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/dashboard_doctor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:calories_mate/screens/sign_up_page.dart';
 import 'k_ten_scale/Tenscale.dart';
@@ -40,10 +40,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Email Verification',
-          style: TextStyle(color: Colors.white),
-        ),
         backgroundColor: Colors.cyan,
         elevation: 1,
         leading: IconButton(
@@ -57,17 +53,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-                'An email has been sent to ${user.email}. \nPlease Verify!'),
-          ),
-        ],
+      body: const Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }
@@ -78,9 +65,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
     // if (user.emailVerified) {
     // timer.cancel();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getString('login_as') == "doctor") {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const DoctorDashBoard()));
+    if (prefs.getString('login_as') == "nutritionist") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const NutritionistDashBoard()));
     } else if (prefs.getString('login_as') == "patient") {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const TenScale()));

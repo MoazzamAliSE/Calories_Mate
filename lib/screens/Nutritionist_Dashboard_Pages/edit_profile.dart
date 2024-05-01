@@ -1,25 +1,26 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:calories_mate/screens/dashboard_nutritionist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:calories_mate/services/database.dart';
 import 'package:calories_mate/services/locator.dart';
 import 'package:calories_mate/services/user_controller.dart';
-import '../dashboard_doctor.dart';
 
-class DoctorProfile extends StatefulWidget {
-  const DoctorProfile({Key? key}) : super(key: key);
+class NutritionistProfile extends StatefulWidget {
+  const NutritionistProfile({Key? key}) : super(key: key);
 
   @override
-  _DoctorProfileState createState() => _DoctorProfileState();
+  _NutritionistProfileState createState() => _NutritionistProfileState();
 }
 
 XFile? image;
 
-class _DoctorProfileState extends State<DoctorProfile> {
+class _NutritionistProfileState extends State<NutritionistProfile> {
   String name = "";
   String specialization = "";
   String hospital = "";
@@ -74,7 +75,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
               var sn = snapshot.data;
               if (sn != null) {
                 for (var element in sn.docs) {
-                  if (element.id == activeDoctor.uid) {
+                  if (element.id == activeNutritionist.uid) {
                     try {
                       name = element.get("name");
                       email = element.get("email");
@@ -405,7 +406,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
   }
 
   void updateUser() async {
-    await DatabaseService(uid: activeDoctor.uid).updateDoctorUserData(
+    await DatabaseService(uid: activeNutritionist.uid)
+        .updateNutritionistUserData(
       nameController.text,
       usernameController.text,
       emailController.text,
@@ -413,8 +415,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
       hospitalController.text,
       phoneController.text,
       aboutController.text,
-      "doctor",
+      "nutritionist",
     );
+
+    Get.back();
   }
 
   void rebuildAll(BuildContext context) {
@@ -431,7 +435,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
         bucket: "gs://mental-health-e175a.appspot.com");
     await firebaseStorage
         .ref()
-        .child("user/profile/${activeDoctor.uid}")
+        .child("user/profile/${activeNutritionist.uid}")
         .getData(100000000)
         .then((value) => {imageBytes = value!});
     return 1;

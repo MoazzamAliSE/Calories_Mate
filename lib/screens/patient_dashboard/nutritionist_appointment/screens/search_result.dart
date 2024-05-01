@@ -1,8 +1,8 @@
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/doctor_card.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/doctor_card.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/doctor_model.dart';
 
 import '../constant.dart';
 
@@ -23,12 +23,16 @@ class _SearchResultState extends State<SearchResult> {
     searchText = widget.searchText;
   }
 
-  List<DoctorModel> doctors = [DoctorModel("", "", "", "", "", "")];
-  List<DoctorModel> filteredDoctorsList = [DoctorModel("", "", "", "", "", "")];
+  List<NutritionistModel> nutritionists = [
+    NutritionistModel("", "", "", "", "", "")
+  ];
+  List<NutritionistModel> filteredNutritionistsList = [
+    NutritionistModel("", "", "", "", "", "")
+  ];
   dynamic dataList;
   @override
   Widget build(BuildContext context) {
-    filteredDoctorsList.removeAt(0);
+    filteredNutritionistsList.removeAt(0);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Search results"),
@@ -46,13 +50,13 @@ class _SearchResultState extends State<SearchResult> {
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('userdata').snapshots(),
           builder: (context, snapshot) {
-            doctors.clear();
-            filteredDoctorsList.clear();
+            nutritionists.clear();
+            filteredNutritionistsList.clear();
             if (snapshot.data != null) {
               for (var element in snapshot.data!.docs) {
                 try {
-                  if (element['type'] == "doctor") {
-                    doctors.add(DoctorModel(
+                  if (element['type'] == "nutritionist") {
+                    nutritionists.add(NutritionistModel(
                         element.id,
                         element['name'],
                         element['specialization'],
@@ -65,11 +69,11 @@ class _SearchResultState extends State<SearchResult> {
                 }
               }
             }
-            dataList = doctors.where((row) => (row.displayName!
+            dataList = nutritionists.where((row) => (row.displayName!
                 .toLowerCase()
                 .contains(searchText.toLowerCase())));
             dataList.forEach((element) {
-              filteredDoctorsList.add(element);
+              filteredNutritionistsList.add(element);
             });
             return SingleChildScrollView(
               child: Column(
@@ -80,7 +84,7 @@ class _SearchResultState extends State<SearchResult> {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
-                      'Find Your Desired\nDoctor',
+                      'Find Your Desired\nNutritionist',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
@@ -106,7 +110,7 @@ class _SearchResultState extends State<SearchResult> {
                           child: TextField(
                             controller: searchController..text = searchText,
                             decoration: const InputDecoration.collapsed(
-                              hintText: 'Search for doctors',
+                              hintText: 'Search for nutritionists',
                             ),
                             onChanged: (value) {
                               searchText = value;
@@ -140,17 +144,17 @@ class _SearchResultState extends State<SearchResult> {
                     physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: filteredDoctorsList.length,
+                    itemCount: filteredNutritionistsList.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: (snapshot.data != null)
                             ? ([
-                                DoctorCard(
-                                  filteredDoctorsList[index].uid,
-                                  filteredDoctorsList[index].displayName,
-                                  "${filteredDoctorsList[index].specialization!}-${filteredDoctorsList[index].hospital!}",
+                                NutritionistCard(
+                                  filteredNutritionistsList[index].uid,
+                                  filteredNutritionistsList[index].displayName,
+                                  "${filteredNutritionistsList[index].specialization!}-${filteredNutritionistsList[index].hospital!}",
                                   (index % 2 == 0) ? kBlueColor : kYellowColor,
-                                  filteredDoctorsList[index].bio,
+                                  filteredNutritionistsList[index].bio,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -169,8 +173,8 @@ class _SearchResultState extends State<SearchResult> {
   }
 
   void search(String text) {
-    doctors = [DoctorModel("", "", "", "", "", "")];
-    filteredDoctorsList = [DoctorModel("", "", "", "", "", "")];
+    nutritionists = [NutritionistModel("", "", "", "", "", "")];
+    filteredNutritionistsList = [NutritionistModel("", "", "", "", "", "")];
     setState(() {
       searchText = text;
     });

@@ -1,13 +1,14 @@
-import 'package:calories_mate/screens/splashscreen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:calories_mate/screens/dashboard_nutritionist.dart';
 import 'package:calories_mate/screens/reset_password.dart';
 import 'package:calories_mate/screens/sign_up_page.dart';
+import 'package:calories_mate/screens/splashscreen.dart';
 import 'package:calories_mate/utils/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dashboard_doctor.dart';
+
 import 'patient_dashboard/fitness_app_home_screen.dart';
 
 late User user;
@@ -340,90 +341,93 @@ class _SignInPageState extends State<SignInPage> {
           .then((_) async {
         user = auth.currentUser!;
 
-          final s=await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).get();
-          userEmail=s.get('email');
-          userName=s.get('name');
-          if (s.get('type') == "doctor") {
-            prefs.setString('login_as', 'doctor');
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const DoctorDashBoard()));
-          } else if (s.get('type') == "patient") {
-            prefs.setString('login_as', 'patient');
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const FitnessAppHomeScreen()));
-          } else {
-            showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Select Role As:'),
-                      content: SizedBox(
-                        height: 200,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                Navigator.pop(context);
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.setString('login_as', "patient");
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const FitnessAppHomeScreen()));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.shade200,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Center(
-                                      child: Text('Patient'),
-                                    ),
+        final s = await FirebaseFirestore.instance
+            .collection('userdata')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+        userEmail = s.get('email');
+        userName = s.get('name');
+        if (s.get('type') == "nutritionist") {
+          prefs.setString('login_as', 'nutritionist');
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const NutritionistDashBoard()));
+        } else if (s.get('type') == "patient") {
+          prefs.setString('login_as', 'patient');
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const FitnessAppHomeScreen()));
+        } else {
+          showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Select Role As:'),
+                    content: SizedBox(
+                      height: 200,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              Navigator.pop(context);
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setString('login_as', "patient");
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const FitnessAppHomeScreen()));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Center(
+                                    child: Text('Patient'),
                                   ),
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () async {
-                                Navigator.pop(context);
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.setString('login_as', "doctor");
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DoctorDashBoard()));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.shade200,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Center(
-                                      child: Text('Doctor'),
-                                    ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              Navigator.pop(context);
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setString('login_as', "nutritionist");
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const NutritionistDashBoard()));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Center(
+                                    child: Text('Nutritionist'),
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ));
-          }
+                    ),
+                  ));
+        }
       });
     } on FirebaseAuthException catch (error) {
       errorMessage = error.message.toString();

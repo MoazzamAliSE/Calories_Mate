@@ -2,7 +2,7 @@
 // import 'dart:developer';
 // import 'package:agora_rtc_engine/agora_rtc_engine.dart';
  
-// import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/agora.config.dart'
+// import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/agora.config.dart'
 //     as config;
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';

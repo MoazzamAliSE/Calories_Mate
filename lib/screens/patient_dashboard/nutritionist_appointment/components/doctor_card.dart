@@ -1,20 +1,20 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/detail_screen.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/detail_screen.dart';
 import 'package:calories_mate/utils/load_profile_pic.dart';
 
 import '../constant.dart';
 
 //ignore: must_be_immutable
-class DoctorCard extends StatelessWidget {
+class NutritionistCard extends StatelessWidget {
   final String? _uid;
   final String? _name;
   final String? _description;
   final String? _bio;
   final dynamic _bgColor;
 
-  const DoctorCard(
+  const NutritionistCard(
       this._uid, this._name, this._description, this._bgColor, this._bio,
       {Key? key})
       : super(key: key);
@@ -42,7 +42,7 @@ class DoctorCard extends StatelessWidget {
                           radius: 35,
                           backgroundImage: Image.memory(snapshot.data!).image,
                         )
-                      : Image.asset('assets/images/doctor1.png'),
+                      : Image.asset('assets/images/nutritionist1.png'),
                   title: Text(
                     _name!,
                     style: TextStyle(

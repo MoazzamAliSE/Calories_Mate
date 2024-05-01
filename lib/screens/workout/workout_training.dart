@@ -14,26 +14,32 @@ class WorkoutTrainingScreen extends StatelessWidget {
     'Calf',
   ];
 
+  WorkoutTrainingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(top: 18.0,bottom: 10),
-          child: Text("Workout Screen",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),),
+        title: const Padding(
+          padding: EdgeInsets.only(top: 18.0, bottom: 10),
+          child: Text(
+            "Workout Screen",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
         ),
-        backgroundColor: Color.fromARGB(255, 4, 34, 66),
+        backgroundColor: const Color.fromARGB(255, 4, 34, 66),
       ),
-      backgroundColor: Color.fromARGB(255, 107, 136, 166),
+      backgroundColor: const Color.fromARGB(255, 107, 136, 166),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: ListView.builder(
           itemCount: workoutCategories.length,
           itemExtent: 120.0, // Set the height of each item (container) to 120
           itemBuilder: (context, index) {
             final categoryName = workoutCategories[index];
             return Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0), // Add vertical padding between containers
+              padding: const EdgeInsets.symmetric(
+                  vertical: 8.0), // Add vertical padding between containers
               child: WorkoutButton(
                 categoryName: categoryName,
                 onPressed: () {
@@ -59,7 +65,8 @@ class WorkoutButton extends StatelessWidget {
   final String categoryName;
   final VoidCallback onPressed;
 
-  WorkoutButton({required this.categoryName, required this.onPressed});
+  const WorkoutButton(
+      {super.key, required this.categoryName, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +79,7 @@ class WorkoutButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 offset: Offset(0, 2),
@@ -80,20 +87,20 @@ class WorkoutButton extends StatelessWidget {
               ),
             ],
           ),
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 categoryName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Image.asset(
-                'assets/images/${categoryName}.png',
+                'assets/images/$categoryName.png',
                 width: 100.0,
                 height: 100.0,
               ),

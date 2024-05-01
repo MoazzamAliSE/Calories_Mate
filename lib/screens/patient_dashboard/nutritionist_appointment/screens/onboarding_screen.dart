@@ -31,7 +31,7 @@ class OnboardingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Choose The Doctor\nYou Want',
+                      'Choose The Nutritionist\nYou Want',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 32,

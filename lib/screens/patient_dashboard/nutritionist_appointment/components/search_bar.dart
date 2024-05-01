@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/search_result.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/search_result.dart';
 import '../constant.dart';
 
 class CustomSearchBar extends StatefulWidget {
@@ -32,7 +32,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           ),
           child: TextField(
             decoration: const InputDecoration.collapsed(
-              hintText: 'Search for doctors',
+              hintText: 'Search for nutritionists',
             ),
             onChanged: (value) {
               searchText = value;

@@ -393,8 +393,8 @@ class _SignUpPageState extends State<SignUpPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', email);
       prefs.setString('password', password);
-      username=fullnameController.value.text.toString();
-      userEmail=email;
+      username = fullnameController.value.text.toString();
+      userEmail = email;
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((_) async {
@@ -441,12 +441,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         InkWell(
                           onTap: () async {
                             await DatabaseService(uid: user.uid).updateUserData(
-                                fullname, username, email, "doctor");
+                                fullname, username, email, "nutritionist");
                             Navigator.pop(context);
                             password = passwordController.text;
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                            prefs.setString('login_as', "doctor");
+                            prefs.setString('login_as', "nutritionist");
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -462,7 +462,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: const Padding(
                                 padding: EdgeInsets.all(20.0),
                                 child: Center(
-                                  child: Text('Doctor'),
+                                  child: Text('Nutritionist'),
                                 ),
                               ),
                             ),

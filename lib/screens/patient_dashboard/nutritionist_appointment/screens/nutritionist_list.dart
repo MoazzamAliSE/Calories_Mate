@@ -1,22 +1,24 @@
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/doctor_card.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/doctor_card.dart';
 import '../constant.dart';
-import 'doctor_model.dart';
 
-class DoctorsList extends StatefulWidget {
+class NutritionistsList extends StatefulWidget {
   final String role;
-  const DoctorsList({Key? key, required this.role}) : super(key: key);
+  const NutritionistsList({Key? key, required this.role}) : super(key: key);
 
   @override
-  _DoctorsListState createState() => _DoctorsListState();
+  _NutritionistsListState createState() => _NutritionistsListState();
 }
 
-class _DoctorsListState extends State<DoctorsList> {
-  List<DoctorModel> doctorsCategory = [DoctorModel("", "", "", "", "", "")];
+class _NutritionistsListState extends State<NutritionistsList> {
+  List<NutritionistModel> nutritionistsCategory = [
+    NutritionistModel("", "", "", "", "", "")
+  ];
   @override
   Widget build(BuildContext context) {
-    doctorsCategory.removeAt(0);
+    nutritionistsCategory.removeAt(0);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.role),
@@ -41,9 +43,9 @@ class _DoctorsListState extends State<DoctorsList> {
                 if (snapshot.data != null) {
                   for (var element in snapshot.data!.docs) {
                     try {
-                      if (element['type'] == "doctor" &&
+                      if (element['type'] == "nutritionist" &&
                           element['specialization'] == widget.role) {
-                        doctorsCategory.add(DoctorModel(
+                        nutritionistsCategory.add(NutritionistModel(
                             element.id,
                             element['name'],
                             element['specialization'],
@@ -62,19 +64,19 @@ class _DoctorsListState extends State<DoctorsList> {
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      itemCount: doctorsCategory.length,
+                      itemCount: nutritionistsCategory.length,
                       itemBuilder: (context, index) {
                         return Column(
                           children: (snapshot.data != null)
                               ? ([
-                                  DoctorCard(
-                                    doctorsCategory[index].uid,
-                                    doctorsCategory[index].displayName,
-                                    "${doctorsCategory[index].specialization!}-${doctorsCategory[index].hospital!}",
+                                  NutritionistCard(
+                                    nutritionistsCategory[index].uid,
+                                    nutritionistsCategory[index].displayName,
+                                    "${nutritionistsCategory[index].specialization!}-${nutritionistsCategory[index].hospital!}",
                                     (index % 2 == 0)
                                         ? kBlueColor
                                         : kYellowColor,
-                                    doctorsCategory[index].bio,
+                                    nutritionistsCategory[index].bio,
                                   ),
                                   const SizedBox(
                                     height: 10,

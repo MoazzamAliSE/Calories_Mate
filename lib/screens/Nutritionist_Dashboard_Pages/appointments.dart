@@ -6,10 +6,10 @@ class AppointmentsPage extends StatefulWidget {
   const AppointmentsPage({Key? key}) : super(key: key);
 
   @override
-  DoctorDashBoardState createState() => DoctorDashBoardState();
+  NutritionistDashBoardState createState() => NutritionistDashBoardState();
 }
 
-class DoctorDashBoardState extends State<AppointmentsPage> {
+class NutritionistDashBoardState extends State<AppointmentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
-  ChatScreen(
+  const ChatScreen(
       {super.key, required this.name, required this.uid, required this.email});
   final String name;
   final String uid;
@@ -37,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -47,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Center(
@@ -57,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Text(
                     widget.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 14),
@@ -65,8 +65,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
-            Spacer(),
-            Icon(Icons.more_vert_rounded, color: Colors.white)
+            const Spacer(),
+            const Icon(Icons.more_vert_rounded, color: Colors.white)
           ],
         ),
       ),
@@ -83,7 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(
                       color: Colors.black,
                     ),
@@ -100,14 +100,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   return Container();
                 }
 
-                Timer(Duration(milliseconds: 100,),() {
+                Timer(const Duration(milliseconds: 100,),() {
                   controller.jumpTo(controller.position.maxScrollExtent);
 
                 },);
 
                 return ListView.builder(
                   controller: controller,
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
                     return messages[index]['sender'] == widget.uid
@@ -121,11 +121,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 children: [
                                   Text(
                                     messages[index]['msg'].toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   ),
                                   Text(
                                     messages[index]['time'].toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -140,11 +140,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 children: [
                                   Text(
                                     messages[index]['msg'].toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   ),
                                   Text(
                                     messages[index]['time'].toString(),
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -161,13 +161,13 @@ class _ChatScreenState extends State<ChatScreen> {
             decoration: BoxDecoration(color: Colors.blue.withOpacity(.2)),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Expanded(
                     child: TextFormField(
                   controller: msg,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Type your Message',
                       hintStyle: TextStyle(
@@ -175,7 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 14)),
                 )),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 GestureDetector(
@@ -233,14 +233,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
 
 
-                      Timer(Duration(milliseconds: 50), () {
+                      Timer(const Duration(milliseconds: 50), () {
                         controller.jumpTo(controller.position.maxScrollExtent);
                       });
 
 
                     }
                   },
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.blue,
                     child: Center(
@@ -251,7 +251,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
               ],

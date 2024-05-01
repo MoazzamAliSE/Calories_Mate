@@ -164,7 +164,7 @@ class BottomBarViewState extends State<BottomBarView>
                           focusColor: Colors.transparent,
                           onTap: widget.addClick,
                           child: const Icon(
-                            Icons.mood,
+                            Icons.message,
                             color: FitnessAppTheme.white,
                             size: 32,
                           ),
@@ -250,9 +250,16 @@ class TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                           parent: widget.tabIconData!.animationController!,
                           curve: const Interval(0.1, 1.0,
                               curve: Curves.fastOutSlowIn))),
-                  child: Image.asset(widget.tabIconData!.isSelected
-                      ? widget.tabIconData!.selectedImagePath
-                      : widget.tabIconData!.imagePath),
+                  child: Image.asset(
+                    widget.tabIconData!.isSelected
+                        ? widget.tabIconData!.selectedImagePath
+                        : widget.tabIconData!.imagePath,
+                    color: widget.tabIconData!.isSelected
+                        ? FitnessAppTheme.nearlyDarkBlue
+                        : FitnessAppTheme.grey,
+                    height: 40,
+                    width: 40,
+                  ),
                 ),
                 Positioned(
                   top: 4,

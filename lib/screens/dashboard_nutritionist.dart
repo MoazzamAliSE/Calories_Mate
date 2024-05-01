@@ -1,25 +1,26 @@
 import 'dart:typed_data';
 import 'package:calories_mate/screens/chat/chat_with.dart';
+import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/appointments.dart';
-import 'package:calories_mate/screens/Doctor_Dashboard_Pages/patients_data.dart';
-import 'Doctor_Dashboard_Pages/edit_profile.dart';
+import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/appointments.dart';
+import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/patients_data.dart';
+import 'Nutritionist_Dashboard_Pages/edit_profile.dart';
 import 'Settings_Pages/new_password.dart';
 import 'Settings_Pages/settings.dart';
 
-class DoctorDashBoard extends StatefulWidget {
-  const DoctorDashBoard({Key? key}) : super(key: key);
+class NutritionistDashBoard extends StatefulWidget {
+  const NutritionistDashBoard({Key? key}) : super(key: key);
 
   @override
-  DoctorDashBoardState createState() => DoctorDashBoardState();
+  NutritionistDashBoardState createState() => NutritionistDashBoardState();
 }
 
-User activeDoctor = auth.currentUser!;
+User activeNutritionist = auth.currentUser!;
 
-class DoctorDashBoardState extends State<DoctorDashBoard> {
+class NutritionistDashBoardState extends State<NutritionistDashBoard> {
   String name = "";
   String specialization = "";
   String hospital = "";
@@ -28,7 +29,7 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
   @override
   void initState() {
     super.initState();
-    activeDoctor = auth.currentUser!;
+    activeNutritionist = auth.currentUser!;
   }
 
   @override
@@ -44,10 +45,10 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
                     builder: (context) => const ChatWith(),
                   ));
             },
-            child: CircleAvatar(
+            child: const CircleAvatar(
               radius: 30,
-              backgroundColor: Colors.blue.shade900,
-              child: const Center(
+              backgroundColor: FitnessAppTheme.nearlyBlue,
+              child: Center(
                 child: Icon(
                   Icons.message,
                   color: Colors.white,
@@ -58,7 +59,7 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
         ),
         appBar: AppBar(
           title: const Text(
-            'Doctor \'s Dashboard',
+            'Nutritionist \'s Dashboard',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.cyan,
@@ -71,7 +72,7 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
               var sn = snapshot.data;
               if (sn != null) {
                 for (var element in sn.docs) {
-                  if (element.id == activeDoctor.uid) {
+                  if (element.id == activeNutritionist.uid) {
                     try {
                       name = element.get("name");
                     } catch (e) {
@@ -116,7 +117,7 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            const DoctorProfile()));
+                                            const NutritionistProfile()));
                               },
                               child: Row(
                                 children: <Widget>[
@@ -173,7 +174,7 @@ class DoctorDashBoardState extends State<DoctorDashBoard> {
         bucket: "gs://mental-health-e175a.appspot.com");
     await firebaseStorage
         .ref()
-        .child("user/profile/${activeDoctor.uid}")
+        .child("user/profile/${activeNutritionist.uid}")
         .getData(100000000)
         .then((value) => {dashBytes = value!});
     return 1;
@@ -223,7 +224,7 @@ class OptionsCreater extends StatelessWidget {
                 if (data.title == "Settings") {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          const SettingsPage(role: "doctor")));
+                          const SettingsPage(role: "nutritionist")));
                 } else if (data.title == "Appointments") {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) =>

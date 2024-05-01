@@ -614,8 +614,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                               padding:
                                                   const EdgeInsets.only(top: 6),
                                               child: Text(
-                                                '${(alltargetcarbs - alldatacarbo)
-                                                        .toStringAsFixed(0)}g left',
+                                                '${(alltargetcarbs - alldatacarbo).toStringAsFixed(0)}g left',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily:
@@ -720,10 +719,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                       const EdgeInsets.only(
                                                           top: 6),
                                                   child: Text(
-                                                    '${(alltargetprotein -
-                                                                alldataprotein)
-                                                            .toStringAsFixed(
-                                                                0)}g left',
+                                                    '${(alltargetprotein - alldataprotein).toStringAsFixed(0)}g left',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily:
@@ -832,9 +828,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                       const EdgeInsets.only(
                                                           top: 6),
                                                   child: Text(
-                                                    '${(alltargetfat - alldatafat)
-                                                            .toStringAsFixed(
-                                                                0)}g left',
+                                                    '${(alltargetfat - alldatafat).toStringAsFixed(0)}g left',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily:
@@ -858,18 +852,35 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                        FitnessAppTheme.nearlyDarkBlue
-                                      )
-                                    ),
+                                      style: const ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStatePropertyAll(
+                                                  FitnessAppTheme
+                                                      .nearlyDarkBlue)),
                                       onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutTrainingScreen(),));
-                                  }, child: Center(child: Text('Exercise',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),)),
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WorkoutTrainingScreen(),
+                                            ));
+                                      },
+                                      child: const Center(
+                                        child: Text(
+                                          'Exercise',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )),
                                 ),
-                                SizedBox(height: 10,)
+                                const SizedBox(
+                                  height: 10,
+                                )
                               ],
                             ),
                           ),

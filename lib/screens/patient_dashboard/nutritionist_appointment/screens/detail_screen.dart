@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:calories_mate/screens/chat/chat_screen.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/components/schedule_card.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/schedule_card.dart';
 import 'package:calories_mate/screens/splashscreen.dart';
 import 'package:calories_mate/utils/load_profile_pic.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,97 +33,166 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: () async{
-          final date=await showDatePicker(context: context, firstDate: DateTime.now(), lastDate: DateTime.now().add(Duration(days: 7)));
-          if(date!=null){
-            final time=await showTimePicker(context: context, initialTime: TimeOfDay.now());
-            if(time!=null){
-              showGeneralDialog(context: context, pageBuilder: (context, animation, secondaryAnimation) {
-                return AlertDialog(
-                  title: Text('Book Appointment',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
-                  content: Text('Are you sure to book appointment',style: TextStyle(color: Colors.black,fontSize: 14),),
-                  actions: [
-                    TextButton(onPressed: () {
-                      Navigator.pop(context);
-                    }, child: Text('Cancel',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-                    TextButton(onPressed: () async{
-                      Get.back();
-                      try{
+        onTap: () async {
+          final date = await showDatePicker(
+              context: context,
+              firstDate: DateTime.now(),
+              lastDate: DateTime.now().add(const Duration(days: 7)));
+          if (date != null) {
+            final time = await showTimePicker(
+                context: context, initialTime: TimeOfDay.now());
+            if (time != null) {
+              showGeneralDialog(
+                context: context,
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return AlertDialog(
+                    title: const Text(
+                      'Book Appointment',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                    content: const Text(
+                      'Are you sure to book appointment',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          )),
+                      TextButton(
+                          onPressed: () async {
+                            Get.back();
+                            try {
+                              await FirebaseFirestore.instance
+                                  .collection('userdata')
+                                  .doc(widget._uid)
+                                  .collection('appointments')
+                                  .doc(
+                                    FirebaseAuth.instance.currentUser!.uid,
+                                  )
+                                  .set({
+                                'name': userName,
+                                'email': userEmail,
+                                'uid': FirebaseAuth.instance.currentUser!.uid,
+                                'date': DateFormat('dd MMM yyyy').format(date),
+                                'time':
+                                    '${time.hour}:${time.minute} ${time.period.name}',
+                              });
 
-                        await FirebaseFirestore.instance.collection('userdata').doc(widget._uid).collection('appointments').doc(
-                          FirebaseAuth.instance.currentUser!.uid,
-                        ).set(
-                            {
-                              'name' : userName,
-                              'email' : userEmail,
-                              'uid' : FirebaseAuth.instance.currentUser!.uid,
-                              'date' : DateFormat('dd MMM yyyy').format(date),
-                              'time' :  '${time.hour}:${time.minute} ${time.period.name}',
+                              await FirebaseFirestore.instance
+                                  .collection('userdata')
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .collection('appointments')
+                                  .doc(
+                                    widget._uid,
+                                  )
+                                  .set({
+                                'name': widget._name,
+                                'email': '',
+                                'uid': widget._uid,
+                                'date': DateFormat('dd MMM yyyy').format(date),
+                                'time':
+                                    '${time.hour}:${time.minute} ${time.period.name}',
+                              });
+
+                              showGeneralDialog(
+                                context: Get.context!,
+                                pageBuilder:
+                                    (c, animation, secondaryAnimation) {
+                                  return AlertDialog(
+                                    title: const Text(
+                                      'Book Appointment',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    ),
+                                    content: const Text(
+                                      'Your appointment is succesfully booked',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: const Text(
+                                            'Ok',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          ))
+                                    ],
+                                  );
+                                },
+                              );
+                            } catch (_) {
+                              showGeneralDialog(
+                                context: Get.context!,
+                                pageBuilder:
+                                    (c, animation, secondaryAnimation) {
+                                  return AlertDialog(
+                                    title: const Text(
+                                      'Book Appointment',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    ),
+                                    content: Text(
+                                      _.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: const Text(
+                                            'Ok',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          ))
+                                    ],
+                                  );
+                                },
+                              );
                             }
-                        );
-
-
-                        await FirebaseFirestore.instance.collection('userdata').doc(FirebaseAuth.instance.currentUser!.uid).collection('appointments').doc(
-                          widget._uid,
-                        ).set(
-                            {
-                              'name' : widget._name,
-                              'email' : '',
-                              'uid' : widget._uid,
-                              'date' : DateFormat('dd MMM yyyy').format(date),
-                              'time' :  '${time.hour}:${time.minute} ${time.period.name}',
-                            }
-                        );
-
-                        showGeneralDialog(context: Get.context!, pageBuilder: (c, animation, secondaryAnimation) {
-                          return AlertDialog(
-                            title: Text('Book Appointment',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
-                            content: Text('Your appointment is succesfully booked',style: TextStyle(color: Colors.black),),
-                            actions: [
-                              TextButton(onPressed: () {
-                                Get.back();
-                              }, child: Text('Ok',style: TextStyle(color: Colors.blue),))
-                            ],
-                          );
-                        },);
-
-                      }catch(_){
-                        showGeneralDialog(context: Get.context!, pageBuilder: (c, animation, secondaryAnimation) {
-                          return AlertDialog(
-                            title: Text('Book Appointment',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
-                            content: Text(_.toString(),style: TextStyle(color: Colors.black),),
-                            actions: [
-                              TextButton(onPressed: () {
-                                Get.back();
-                              }, child: Text('Ok',style: TextStyle(color: Colors.blue),))
-                            ],
-                          );
-                        },);
-                      }
-
-
-
-
-                    }, child: Text('Ok',style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)),
-                  ],
-                );
-              },);
+                          },
+                          child: const Text(
+                            'Ok',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ],
+                  );
+                },
+              );
             }
           }
-
-
-
         },
         child: Container(
-        height: 55,
+            height: 55,
             width: 150,
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(30)
-            ),
+                color: Colors.blue, borderRadius: BorderRadius.circular(30)),
             alignment: Alignment.center,
-            child: const Text('Book Appointment',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+            child: const Text(
+              'Book Appointment',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            )),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder(
@@ -191,7 +260,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             Image.memory(snapshot.data!).image,
                                       )
                                     : Image.asset(
-                                        'assets/images/doctor1.png',
+                                        'assets/images/nutritionist1.png',
                                         scale: 5,
                                       ),
                                 const SizedBox(
@@ -304,22 +373,27 @@ class _DetailScreenState extends State<DetailScreen> {
                                     // ),
                                   ],
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 InkWell(
-                                    onTap: () => Get.to(()=>ChatScreen(
-                                      name: widget._name,
-                                      uid: widget._uid,
-                                      email: '',
+                                    onTap: () => Get.to(() => ChatScreen(
+                                          name: widget._name,
+                                          uid: widget._uid,
+                                          email: '',
+                                        )),
+                                    child: const Icon(
+                                      Icons.chat,
+                                      color: Colors.blue,
                                     )),
-                                    child: Icon(Icons.chat,color: Colors.blue,)),
-                                SizedBox(width: 20,)
+                                const SizedBox(
+                                  width: 20,
+                                )
                               ],
                             ),
                             const SizedBox(
                               height: 50,
                             ),
                             Text(
-                              'About Doctor',
+                              'About Nutritionist',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,

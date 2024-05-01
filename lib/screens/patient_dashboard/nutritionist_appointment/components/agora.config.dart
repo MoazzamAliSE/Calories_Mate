@@ -1,4 +1,4 @@
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/token_maker.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/token_maker.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Get your own App ID at https://dashboard.agora.io/

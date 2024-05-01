@@ -1,5 +1,5 @@
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_list.dart';
 import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/patient_dashboard/doctor_appointment/screens/doctors_list.dart';
 import '../constant.dart';
 
 //ignore: must_be_immutable
@@ -21,7 +21,7 @@ class CategoryCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-              builder: (context) => DoctorsList(role: _category)));
+              builder: (context) => NutritionistsList(role: _category)));
         },
         child: Stack(
           children: <Widget>[
