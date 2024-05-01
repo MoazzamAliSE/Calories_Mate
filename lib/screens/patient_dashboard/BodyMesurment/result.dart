@@ -72,14 +72,13 @@ class ResultState extends State<Result> {
       body: ListView(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 flex: 4,
                 child: Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  height: 170,
+                  height: 180,
                   width: 150,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -92,15 +91,16 @@ class ResultState extends State<Result> {
                     ],
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      const Text(
-                        "Body Mass Weight",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.cyan,
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Body Mass Weight",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.cyan,
+                          ),
                         ),
                       ),
                       const Divider(
@@ -110,65 +110,58 @@ class ResultState extends State<Result> {
                         indent: 25,
                         endIndent: 25,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Your Status: ",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  // fontWeight: FontWeight.w500,
-                                  color: Colors.grey[600],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                const Text(
+                                  "Your Status: ",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    // fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                _status,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey[600],
+                                Text(
+                                  _status,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "BMW Value: ",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey[600],
-                                  // fontWeight: FontWeight.w500,
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                const Text(
+                                  "BMW Value: ",
+                                  style: TextStyle(
+                                    fontSize: 18,
+
+                                    // fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                _bMW.toString(),
-                                style: TextStyle(
-                                  fontSize: 27,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey[600],
+                                Text(
+                                  _bMW.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 8),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
                               widget.msg,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.grey[600],
-                                fontWeight: FontWeight.w500,
+                              style: const TextStyle(
+                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -181,7 +174,6 @@ class ResultState extends State<Result> {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 flex: 5,
@@ -201,107 +193,102 @@ class ResultState extends State<Result> {
                     ],
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      const Text(
-                        "Basal Metabolic Rate",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.cyan,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Basal Metabolic Rate",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.cyan,
+                          ),
                         ),
                       ),
-                      const Divider(
-                        height: 2,
-                        thickness: 1,
-                        color: Colors.grey,
-                        indent: 25,
-                        endIndent: 25,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "BMR Value: ",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey[600],
-                                  // fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Text(
-                                _bMR.toString(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 27,
-                                  color: Colors.grey[600],
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Divider(
+                              height: 2,
+                              thickness: 1,
+                              color: Colors.grey,
+                              indent: 25,
+                              endIndent: 25,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    const Text(
+                                      "BMR Value: ",
+                                      style: TextStyle(
+                                        fontSize: 18,
 
-                      const Text(
-                        "Current Calories",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.cyan,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      // Divider(height: 2,thickness: 1,color: Colors.grey,indent: 25,endIndent: 25,),
-                      Text(
-                        widget.currentCalorie,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        "(As per Activity)",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Text(
-                        "Daily Calories Required",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.cyan,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      // Divider(height: 2,thickness: 1,color: Colors.grey,indent: 25,endIndent: 25,),
-                      Text(
-                        widget.goalCalorie,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        "(As per Activity)",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
+                                        // fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      _bMR.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 27,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+
+                            const Text(
+                              "Current Calories",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            // Divider(height: 2,thickness: 1,color: Colors.grey,indent: 25,endIndent: 25,),
+                            Text(
+                              widget.currentCalorie,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              "(As per Activity)",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              "Daily Calories Required",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            // Divider(height: 2,thickness: 1,color: Colors.grey,indent: 25,endIndent: 25,),
+                            Text(
+                              widget.goalCalorie,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              "(As per Activity)",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -338,7 +325,7 @@ class ResultState extends State<Result> {
                   Text(
                     'Recalculate',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -387,7 +374,7 @@ class ResultState extends State<Result> {
                   Text(
                     'Save',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -398,7 +385,7 @@ class ResultState extends State<Result> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 18,
           ),
         ],
       ),

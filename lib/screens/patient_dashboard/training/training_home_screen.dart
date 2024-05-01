@@ -1,8 +1,7 @@
-import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:calories_mate/screens/patient_dashboard/training/components/courses.dart';
 import 'package:calories_mate/screens/patient_dashboard/training/components/diff_styles.dart';
 import 'package:calories_mate/screens/patient_dashboard/training/components/video_suggestions.dart';
+import 'package:calories_mate/screens/workout/workout_training.dart';
+import 'package:flutter/material.dart';
 
 class TrainingScreen extends StatefulWidget {
   const TrainingScreen({key}) : super(key: key);
@@ -21,40 +20,22 @@ class _TrainingScreenState extends State<TrainingScreen> {
           "Training",
           style: TextStyle(color: Colors.white),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-          ),
-          Icon(
-            Platform.isAndroid ? Icons.more_vert : Icons.more_horiz,
-            color: Colors.white,
-          ),
-          const SizedBox(
-            width: 10,
-          )
-        ],
       ),
-      body: ListView(
-        children: const <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-            child: Column(
-              children: <Widget>[
-                VideoSuggestions(),
-                DiffStyles(),
-                Courses(),
-                
-                SizedBox(
-                  height: 80,
-                )
-              ],
-            ),
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const VideoSuggestions(),
+              const DiffStyles(),
+              // const Courses(),
+              WorkoutTrainingScreen(),
+              const SizedBox(
+                height: 80,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

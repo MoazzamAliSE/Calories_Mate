@@ -1,3 +1,4 @@
+import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -219,7 +220,6 @@ final Map<String, String> itemSetRoutineTime = {
   'Leg Press': '3-4 sets of 8-12 reps.',
   'Walking Lunges': '3-4 sets of 12-16 lunges (6-8 per leg).',
   'Leg Curls': '3-4 sets of 8-12 reps.',
-  'Deadlifts': '3-4 sets of 5-8 reps.',
   'Standing Calf Raises': '3-4 sets of 15-20 reps.',
   'Seated Calf Raises': '3-4 sets of 15-20 reps.',
   'Calf Press': '3-4 sets of 15-20 reps.',
@@ -316,9 +316,9 @@ class WorkoutDetailsScreen extends StatelessWidget {
     final List<String> workoutItems = getWorkoutItems();
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 107, 136, 166),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 4, 34, 66),
+        foregroundColor: FitnessAppTheme.white,
+        backgroundColor: FitnessAppTheme.cyan,
         title: Text(
           categoryName,
           style: const TextStyle(color: Colors.white),
@@ -368,7 +368,7 @@ class WorkoutItemContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(32.0),
         boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 2.0)],
       ),
       child: Row(
@@ -428,7 +428,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     final videoLink = itemVideoLinks[widget.itemName] ?? '';
 
     // Initialize the video controller with the video URL
-    _videoController = VideoPlayerController.network(videoLink);
+    _videoController = VideoPlayerController.networkUrl(Uri.parse(videoLink));
     _videoController.initialize().then((_) {
       setState(() {});
       _videoController.play();
@@ -463,9 +463,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 107, 136, 166),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 4, 34, 66),
+        foregroundColor: Colors.white,
+        backgroundColor: FitnessAppTheme.cyan,
         title: const Text(
           'Workout Practice',
           style: TextStyle(color: Colors.white),
@@ -480,7 +480,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             )
           else
             const Center(child: CircularProgressIndicator()),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -488,7 +487,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 icon: const Icon(
                   Icons.replay_10,
                   size: 32.0,
-                  color: Colors.white,
+                  color: FitnessAppTheme.cyan,
                 ),
                 onPressed: skipBackward,
               ),
@@ -496,7 +495,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 icon: Icon(
                   _isPlaying ? Icons.pause : Icons.play_arrow,
                   size: 32.0,
-                  color: Colors.white,
+                  color: FitnessAppTheme.cyan,
                 ),
                 onPressed: togglePlayPause,
               ),
@@ -504,7 +503,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 icon: const Icon(
                   Icons.forward_10,
                   size: 32.0,
-                  color: Colors.white,
+                  color: FitnessAppTheme.cyan,
                 ),
                 onPressed: skipForward,
               ),
@@ -513,7 +512,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           const SizedBox(
             height: 20,
           ),
-          // Item Details UI
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 15),

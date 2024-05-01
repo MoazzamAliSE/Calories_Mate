@@ -112,31 +112,28 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             subtitle: Text(
                               widget.role == "nutritionist"
-                                  ? "Wellcome Nutritionist"
-                                  : "Wellcome",
+                                  ? "WellCome Nutritionist"
+                                  : "WellCome Dear Patient",
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 10),
                             ),
-                            trailing: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                            onTap: () {
-                              if (widget.role == "nutritionist") {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const NutritionistProfile()));
-                              } else {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const FitnessAppHomeScreen()));
-                              }
-                              //open edit profile
-                            },
+                            trailing: widget.role == "nutritionist"
+                                ? const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  )
+                                : null,
+                            onTap: widget.role == "nutritionist"
+                                ? () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const NutritionistProfile()));
+
+                                    //open edit profile
+                                  }
+                                : null,
                           ),
                         ),
                       )

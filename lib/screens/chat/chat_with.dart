@@ -1,4 +1,5 @@
 import 'package:calories_mate/screens/chat/chat_screen.dart';
+import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,18 @@ class ChatWith extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Row(
+              Row(
                 children: [
-                  Text(
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(Icons.arrow_back),
+                  ),
+                  const Text(
                     'Chats',
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 4, 250, 250),
                         fontSize: 25,
                         fontWeight: FontWeight.bold),
                   ),
@@ -75,7 +82,8 @@ class ChatWith extends StatelessWidget {
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 20,
-                            backgroundColor: Colors.blue.withOpacity(.2),
+                            backgroundColor:
+                                FitnessAppTheme.nearlyBlue.withOpacity(.2),
                             child: const Center(
                               child: Icon(
                                 Icons.person,

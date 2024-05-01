@@ -1,4 +1,3 @@
-import 'package:calories_mate/screens/workout/workout_training.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,9 @@ double alltargetfat = 0;
 double carbspercent = 0;
 double proteinpercent = 0;
 double fatpercent = 0;
+double targetCalories = 0;
+double consumedCalories = 0;
+double consumedPercentage = 0;
 late User user1;
 late String eatenCalorie;
 
@@ -52,6 +54,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
             alldatafat = 0;
             alldataprotein = 0;
             alldatacarbo = 0;
+
             for (var i = 0; i < snapshot.data!.docs.length; i++) {
               alldatacalories = alldatacalories +
                   double.parse(snapshot.data!.docs[i]["Total Calories"]);
@@ -77,6 +80,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                   alltargetfat = 0;
                   alltargetprotein = 0;
                   alltargetcarbs = 0;
+
                   for (var i = 0; i < snapshot.data!.docs.length; i++) {
                     alltargetcarbs = alltargetcarbs +
                         double.parse(
@@ -85,7 +89,16 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                         double.parse(snapshot.data!.docs[i]["Target Protein"]);
                     alltargetfat = alltargetfat +
                         double.parse(snapshot.data!.docs[i]["Target Fat"]);
+                    targetCalories =
+                        double.parse(snapshot.data!.docs[i]["Target Calories"]);
                   }
+
+                  consumedCalories =
+                      alldatacalories; // Assuming alldatacalories contains the consumed calories
+
+// Calculate consumed percentage
+                  consumedPercentage =
+                      (consumedCalories / targetCalories) * 100;
                   carbspercent = double.parse(
                               ((alldatacarbo / alltargetcarbs) * 70)
                                   .toStringAsFixed(0))
@@ -283,137 +296,137 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                               const SizedBox(
                                                 height: 8,
                                               ),
-                                              Row(
-                                                children: <Widget>[
-                                                  Container(
-                                                    height: 48,
-                                                    width: 1,
-                                                    decoration: BoxDecoration(
-                                                      color: HexColor('#F56E98')
-                                                          .withOpacity(0.5),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .all(
-                                                              Radius.circular(
-                                                                  4.0)),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 4,
-                                                                  bottom: 2),
-                                                          child: Text(
-                                                            'Burned',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  FitnessAppTheme
-                                                                      .fontName,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 16,
-                                                              letterSpacing:
-                                                                  -0.1,
-                                                              color: FitnessAppTheme
-                                                                  .grey
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children: <Widget>[
-                                                            SizedBox(
-                                                              width: 28,
-                                                              height: 28,
-                                                              child: Image.asset(
-                                                                  "assets/fitness_app/burned.png"),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      left: 4,
-                                                                      bottom:
-                                                                          3),
-                                                              child: Text(
-                                                                '${(102 * widget.animation!.value).toInt()}',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontFamily:
-                                                                      FitnessAppTheme
-                                                                          .fontName,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  fontSize: 16,
-                                                                  color: FitnessAppTheme
-                                                                      .darkerText,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      left: 8,
-                                                                      bottom:
-                                                                          3),
-                                                              child: Text(
-                                                                'Kcal',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontFamily:
-                                                                      FitnessAppTheme
-                                                                          .fontName,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  fontSize: 12,
-                                                                  letterSpacing:
-                                                                      -0.2,
-                                                                  color: FitnessAppTheme
-                                                                      .grey
-                                                                      .withOpacity(
-                                                                          0.5),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              )
+                                              // Row(
+                                              //   children: <Widget>[
+                                              //     Container(
+                                              //       height: 48,
+                                              //       width: 1,
+                                              //       decoration: BoxDecoration(
+                                              //         color: HexColor('#F56E98')
+                                              //             .withOpacity(0.5),
+                                              //         borderRadius:
+                                              //             const BorderRadius
+                                              //                 .all(
+                                              //                 Radius.circular(
+                                              //                     4.0)),
+                                              //       ),
+                                              //     ),
+                                              //     Padding(
+                                              //       padding:
+                                              //           const EdgeInsets.all(
+                                              //               8.0),
+                                              //       child: Column(
+                                              //         mainAxisAlignment:
+                                              //             MainAxisAlignment
+                                              //                 .center,
+                                              //         crossAxisAlignment:
+                                              //             CrossAxisAlignment
+                                              //                 .start,
+                                              //         children: <Widget>[
+                                              //           Padding(
+                                              //             padding:
+                                              //                 const EdgeInsets
+                                              //                     .only(
+                                              //                     left: 4,
+                                              //                     bottom: 2),
+                                              //             child: Text(
+                                              //               'Burned',
+                                              //               textAlign: TextAlign
+                                              //                   .center,
+                                              //               style: TextStyle(
+                                              //                 fontFamily:
+                                              //                     FitnessAppTheme
+                                              //                         .fontName,
+                                              //                 fontWeight:
+                                              //                     FontWeight
+                                              //                         .w500,
+                                              //                 fontSize: 16,
+                                              //                 letterSpacing:
+                                              //                     -0.1,
+                                              //                 color: FitnessAppTheme
+                                              //                     .grey
+                                              //                     .withOpacity(
+                                              //                         0.5),
+                                              //               ),
+                                              //             ),
+                                              //           ),
+                                              //           Row(
+                                              //             mainAxisAlignment:
+                                              //                 MainAxisAlignment
+                                              //                     .center,
+                                              //             crossAxisAlignment:
+                                              //                 CrossAxisAlignment
+                                              //                     .end,
+                                              //             children: <Widget>[
+                                              //               SizedBox(
+                                              //                 width: 28,
+                                              //                 height: 28,
+                                              //                 child: Image.asset(
+                                              //                     "assets/fitness_app/burned.png"),
+                                              //               ),
+                                              //               Padding(
+                                              //                 padding:
+                                              //                     const EdgeInsets
+                                              //                         .only(
+                                              //                         left: 4,
+                                              //                         bottom:
+                                              //                             3),
+                                              //                 child: Text(
+                                              //                   '$burnedCalories', // Display dynamic burned calories value here
+                                              //                   textAlign:
+                                              //                       TextAlign
+                                              //                           .center,
+                                              //                   style:
+                                              //                       const TextStyle(
+                                              //                     fontFamily:
+                                              //                         FitnessAppTheme
+                                              //                             .fontName,
+                                              //                     fontWeight:
+                                              //                         FontWeight
+                                              //                             .w600,
+                                              //                     fontSize: 16,
+                                              //                     color: FitnessAppTheme
+                                              //                         .darkerText,
+                                              //                   ),
+                                              //                 ),
+                                              //               ),
+                                              //               Padding(
+                                              //                 padding:
+                                              //                     const EdgeInsets
+                                              //                         .only(
+                                              //                         left: 8,
+                                              //                         bottom:
+                                              //                             3),
+                                              //                 child: Text(
+                                              //                   'Kcal',
+                                              //                   textAlign:
+                                              //                       TextAlign
+                                              //                           .center,
+                                              //                   style:
+                                              //                       TextStyle(
+                                              //                     fontFamily:
+                                              //                         FitnessAppTheme
+                                              //                             .fontName,
+                                              //                     fontWeight:
+                                              //                         FontWeight
+                                              //                             .w600,
+                                              //                     fontSize: 12,
+                                              //                     letterSpacing:
+                                              //                         -0.2,
+                                              //                     color: FitnessAppTheme
+                                              //                         .grey
+                                              //                         .withOpacity(
+                                              //                             0.5),
+                                              //                   ),
+                                              //                 ),
+                                              //               ),
+                                              //             ],
+                                              //           )
+                                              //         ],
+                                              //       ),
+                                              //     )
+                                              //   ],
+                                              // )
                                             ],
                                           ),
                                         ),
@@ -439,10 +452,11 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                       Radius.circular(100.0),
                                                     ),
                                                     border: Border.all(
-                                                        width: 4,
-                                                        color: FitnessAppTheme
-                                                            .nearlyDarkBlue
-                                                            .withOpacity(0.2)),
+                                                      width: 4,
+                                                      color: FitnessAppTheme
+                                                          .nearlyDarkBlue
+                                                          .withOpacity(0.2),
+                                                    ),
                                                   ),
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -453,7 +467,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                             .center,
                                                     children: <Widget>[
                                                       Text(
-                                                        '${(1503 * widget.animation!.value).toInt()}',
+                                                        '${(targetCalories - consumedCalories).toInt()}',
                                                         textAlign:
                                                             TextAlign.center,
                                                         style: const TextStyle(
@@ -494,18 +508,17 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                                     const EdgeInsets.all(4.0),
                                                 child: CustomPaint(
                                                   painter: CurvePainter(
-                                                      colors: [
-                                                        FitnessAppTheme
-                                                            .nearlyDarkBlue,
-                                                        HexColor("#48D1CC"),
-                                                        HexColor("#008B8B")
-                                                      ],
-                                                      angle: 140 +
-                                                          (360 - 140) *
-                                                              (1.0 -
-                                                                  widget
-                                                                      .animation!
-                                                                      .value)),
+                                                    colors: [
+                                                      FitnessAppTheme
+                                                          .nearlyDarkBlue,
+                                                      HexColor("#48D1CC"),
+                                                      HexColor("#008B8B")
+                                                    ],
+                                                    angle: 140 +
+                                                        (360 - 140) *
+                                                            (consumedPercentage /
+                                                                100),
+                                                  ),
                                                   child: const SizedBox(
                                                     width: 108,
                                                     height: 108,
@@ -851,33 +864,33 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 30),
-                                  child: ElevatedButton(
-                                      style: const ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStatePropertyAll(
-                                                  FitnessAppTheme
-                                                      .nearlyDarkBlue)),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WorkoutTrainingScreen(),
-                                            ));
-                                      },
-                                      child: const Center(
-                                        child: Text(
-                                          'Exercise',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      )),
-                                ),
+                                // Padding(
+
+                                //       horizontal: 30),
+                                //   child: ElevatedButton(
+                                //       style: const ButtonStyle(
+                                //           backgroundColor:
+                                //               MaterialStatePropertyAll(
+                                //                   FitnessAppTheme
+                                //                       .nearlyDarkBlue)),
+                                //       onPressed: () {
+                                //         Navigator.push(
+                                //             context,
+                                //             MaterialPageRoute(
+                                //               builder: (context) =>
+                                //                   WorkoutTrainingScreen(),
+                                //             ));
+                                //       },
+                                //       child: const Center(
+                                //         child: Text(
+                                //           'Exercise',
+                                //           style: TextStyle(
+                                //             color: Colors.white,
+                                //             fontWeight: FontWeight.bold,
+                                //           ),
+                                //         ),
+                                //       )),
+                                // ),
                                 const SizedBox(
                                   height: 10,
                                 )

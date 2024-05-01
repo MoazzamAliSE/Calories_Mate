@@ -80,24 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              buildCategoryList(),
-              const SizedBox(
-                height: 20,
-              ),
+              //  const SizedBox(
+              //   height: 20,
+              // ),
+              // buildCategoryList(),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
