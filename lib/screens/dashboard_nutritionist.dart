@@ -47,7 +47,7 @@ class NutritionistDashBoardState extends State<NutritionistDashBoard> {
             },
             child: const CircleAvatar(
               radius: 30,
-              backgroundColor: FitnessAppTheme.nearlyBlue,
+              backgroundColor: FitnessAppTheme.cyan,
               child: Center(
                 child: Icon(
                   Icons.message,
@@ -91,103 +91,92 @@ class NutritionistDashBoardState extends State<NutritionistDashBoard> {
                   }
                 }
               }
-              return FutureBuilder(
-                  future: profilePic(),
-                  builder: (context, snapshot) {
-                    return Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              colors: [
-                            Colors.cyan.shade700,
-                            Colors.cyan.shade300,
-                            Colors.cyanAccent
-                          ])),
-                      child: Column(
-                        children: <Widget>[
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16, right: 16),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const NutritionistProfile()));
-                              },
-                              child: Row(
-                                children: <Widget>[
-                                  (dashBytes != null)
-                                      ? CircleAvatar(
-                                          radius: 30.0,
-                                          backgroundImage:
-                                              Image.memory(dashBytes!).image,
-                                        )
-                                      : const CircleAvatar(
-                                          radius: 30.0,
-                                          child: Icon(Icons.photo_camera),
-                                        ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text("Dr. $name",
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold)),
-                                        const SizedBox(
-                                          height: 4,
-                                        ),
-                                        Text("$specialization ($hospital)",
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600)),
-                                      ],
-                                    ),
+              return Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        colors: [
+                      Colors.cyan.shade700,
+                      Colors.cyan.shade300,
+                      Colors.cyanAccent
+                    ])),
+                child: Column(
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const NutritionistProfile()));
+                        },
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text("Nutritionist: $name",
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold)),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Text("$specialization   $hospital ",
+                                          style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600)),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          OptionsCreater()
-                        ],
+                        ),
                       ),
-                    );
-                  });
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    OptionsCreater()
+                  ],
+                ),
+              );
             }));
   }
 
-  profilePic() async {
-    final FirebaseStorage firebaseStorage = FirebaseStorage.instanceFor(
-        bucket: "gs://mental-health-e175a.appspot.com");
-    await firebaseStorage
-        .ref()
-        .child("user/profile/${activeNutritionist.uid}")
-        .getData(100000000)
-        .then((value) => {dashBytes = value!});
-    return 1;
-  }
+  // profilePic() async {
+  //   final FirebaseStorage firebaseStorage = FirebaseStorage.instanceFor(
+  //       bucket: "gs://mental-health-e175a.appspot.com");
+  //   await firebaseStorage
+  //       .ref()
+  //       .child("user/profile/${activeNutritionist.uid}")
+  //       .getData(100000000)
+  //       .then((value) => {dashBytes = value!});
+  //   return 1;
+  // }
 }
 
 // ignore: must_be_immutable
 class OptionsCreater extends StatelessWidget {
-  Items item1 = Items(
-    title: "Patients Data",
-    subtitle: "About assigned patients",
-    img: "assets/images/patient.png",
-  );
+  // Items item1 = Items(
+  //   title: "Patients Data",
+  //   subtitle: "About assigned patients",
+  //   img: "assets/images/patient.png",
+  // );
   Items item2 = Items(
     title: "Appointments",
     subtitle: "Info about appointments ",
@@ -210,7 +199,12 @@ class OptionsCreater extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [item1, item2, item4, item6];
+    List<Items> myList = [
+      // item1,
+      item2,
+      item4,
+      item6,
+    ];
     return Flexible(
       child: GridView.count(
           childAspectRatio: 1.0,

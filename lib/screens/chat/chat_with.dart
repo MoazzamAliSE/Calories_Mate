@@ -83,7 +83,7 @@ class ChatWith extends StatelessWidget {
                           leading: CircleAvatar(
                             radius: 20,
                             backgroundColor:
-                                FitnessAppTheme.nearlyBlue.withOpacity(.2),
+                                FitnessAppTheme.cyan.withOpacity(.2),
                             child: const Center(
                               child: Icon(
                                 Icons.person,
