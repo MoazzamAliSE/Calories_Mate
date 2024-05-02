@@ -27,6 +27,13 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
   final df = DateFormat('dd-MMM-yyyy');
+  @override
+  void dispose() {
+    scrollController.dispose(); // Dispose the scroll controller
+    widget.animationController
+        ?.dispose(); // Dispose the animation controller if not null
+    super.dispose();
+  }
 
   @override
   void initState() {

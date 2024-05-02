@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-final List<String> imagesList = [
-  'https://akm-img-a-in.tosshub.com/indiatoday/sunsetyoga-2_647_062115121022.jpg?Q7x3aPFYhLV6E2CgD7oXmSdjoh5wnAiq&size=1200:675',
-  'https://i.guim.co.uk/img/media/d8b7a69601c6ac049fd8e57819786adc91506003/0_2_2545_1528/master/2545.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=694f53610eb345e25c763f20935d7c90',
+final List<String> videoUrls = [
+  'https://drive.google.com/uc?export=download&id=1IZRnD3UiXPMqOCkccbPn5rA3NunjUAnl',
+  'https://drive.google.com/uc?export=download&id=10zjtjrAz87Ty9SPiTAGB7Sa50Yq9gmmC',
+  'https://drive.google.com/uc?export=download&id=10zjtjrAz87Ty9SPiTAGB7Sa50Yq9gmmC',
 ];
 
 class VideoSuggestions extends StatefulWidget {
-  const VideoSuggestions({key}) : super(key: key);
+  const VideoSuggestions({Key? key}) : super(key: key);
 
   @override
   _VideoSuggestionsState createState() => _VideoSuggestionsState();
@@ -15,107 +17,56 @@ class VideoSuggestions extends StatefulWidget {
 
 class _VideoSuggestionsState extends State<VideoSuggestions> {
   int _currentIndex = 0;
+  VideoPlayerController? _previousController;
+  VideoPlayerController? _currentController;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentController = VideoPlayerController.networkUrl(
+        Uri.parse(videoUrls[_currentIndex]))
+      ..initialize().then((_) {
+        setState(() {}); // Ensure the first frame is shown after initialization
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            autoPlay: true,
+            autoPlay: false, // Disable auto sliding
             height: 170,
             onPageChanged: (index, reason) {
-              setState(
-                () {
-                  _currentIndex = index;
-                },
-              );
+              setState(() {
+                _previousController?.pause();
+                _previousController?.dispose();
+                _previousController = _currentController;
+                _currentIndex = index;
+                _currentController =
+                    VideoPlayerController.network(videoUrls[_currentIndex])
+                      ..initialize().then((_) {
+                        setState(
+                            () {}); // Ensure the first frame is shown after initialization
+                        _currentController!.play();
+                      });
+              });
             },
           ),
-          items: imagesList
-              .map(
-                (item) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Container(
-                    width: 400,
-                    decoration: BoxDecoration(
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              color: Colors.black45.withOpacity(0.1),
-                              offset: const Offset(0, 0),
-                              blurRadius: 10),
-                        ],
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              item,
-                            ),
-                            fit: BoxFit.cover),
-                        color: Colors.cyan,
-                        borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(55),
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    child: Column(
-                      children: <Widget>[
-                        const SizedBox(
-                          height: 115,
-                        ),
-                        Container(
-                          height: 55,
-                          width: 400,
-                          decoration: const BoxDecoration(
-                              color: Colors.black38,
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20))),
-                          child: Row(
-                            children: <Widget>[
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              const Icon(
-                                Icons.alarm,
-                                size: 20,
-                                color: Colors.white,
-                              ),
-                              const Text(
-                                "5 min",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Container(
-                                height: 45,
-                                width: 45,
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50))),
-                                child: const Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.play_arrow,
-                                      size: 30,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
+          items: [
+            for (var i = 0; i < videoUrls.length; i++)
+              VideoWidget(
+                controller: i == _currentIndex
+                    ? _currentController
+                    : _previousController,
+              ),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: imagesList.map((urlOfItem) {
-            int index = imagesList.indexOf(urlOfItem);
+          children: videoUrls.map((urlOfItem) {
+            int index = videoUrls.indexOf(urlOfItem);
             return Container(
               width: 10.0,
               height: 10.0,
@@ -131,6 +82,38 @@ class _VideoSuggestionsState extends State<VideoSuggestions> {
           }).toList(),
         )
       ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _currentController?.dispose();
+    _previousController?.dispose();
+    super.dispose();
+  }
+}
+
+class VideoWidget extends StatefulWidget {
+  final VideoPlayerController? controller;
+
+  const VideoWidget({Key? key, required this.controller}) : super(key: key);
+
+  @override
+  _VideoWidgetState createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child:
+            widget.controller != null && widget.controller!.value.isInitialized
+                ? VideoPlayer(widget.controller!)
+                : Container(),
+      ),
     );
   }
 }

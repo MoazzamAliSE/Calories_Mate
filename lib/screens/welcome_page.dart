@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:calories_mate/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -11,48 +12,51 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
           Colors.cyan.shade700,
           Colors.cyan.shade300,
           Colors.cyanAccent
         ])),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-              child: Image.asset("assets/images/mentalHealth.png",
-                  width: double.infinity, height: 320),
-            ),
-            const Column(
-              children: [
-                // Image.asset("assets/images/ReliveLogo.png",
-                //     width: double.infinity, height: 75),
-                Text(
-                  'My Calorie Mate',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  Constants.textIntroDesc1,
-                  style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const GetStarted(),
-            const SizedBox(
-              height: 2,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+                child: Image.asset("assets/images/mentalHealth.png",
+                    width: double.infinity, height: 320),
+              ),
+              const Column(
+                children: [
+                  // Image.asset("assets/images/ReliveLogo.png",
+                  //     width: double.infinity, height: 75),
+                  Text(
+                    'My Calorie Mate',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    Constants.textIntroDesc1,
+                    style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const GetStarted(),
+              const SizedBox(
+                height: 2,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -82,12 +86,8 @@ class _GetStartedState extends State<GetStarted> {
               onPressed: () async {
                 setState(() {
                   isLoading = true;
-                  Timer(
-                      const Duration(milliseconds: 500),
-                      () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInPage())));
+                  Timer(const Duration(milliseconds: 500),
+                      () => Get.off(() => const SignInPage()));
                 });
               },
               label: const Text(

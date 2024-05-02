@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:calories_mate/screens/sign_in_page.dart';
+import 'package:get/get.dart';
 
 class ResetScreen extends StatefulWidget {
   const ResetScreen({Key? key}) : super(key: key);
@@ -27,8 +28,7 @@ class _ResetScreenState extends State<ResetScreen> {
         elevation: 1,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const SignInPage()));
+            Get.off(() => const SignInPage());
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -80,10 +80,8 @@ class _ResetScreenState extends State<ResetScreen> {
                 onTap: () async {
                   _email = emailController.text;
                   auth.sendPasswordResetEmail(email: _email);
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInPage()));
+                  Get.off(() => const SignInPage());
+
                   Fluttertoast.showToast(
                       msg: "A reset password email has been sent to $_email",
                       gravity: ToastGravity.TOP);

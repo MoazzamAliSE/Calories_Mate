@@ -35,6 +35,13 @@ class _BodyMeasurementViewState extends State<BodyMeasurementView> {
   }
 
   @override
+  void dispose() {
+    // Cancel the stream subscription
+    widget.animationController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     user = auth.currentUser!;
 

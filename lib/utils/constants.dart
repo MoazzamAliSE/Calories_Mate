@@ -33,12 +33,6 @@ class Constants {
   static const textHome = "Home";
   static const signUp = "Sign Up ";
 
-  //navigate
-  static const signInNavigate = '/sign-in';
-  static const signUpNavigate = '/sign-up';
-  static const homeNavigate = '/home';
-  static const homerNavigate = '/new-home';
-
   static const statusBarColor = SystemUiOverlayStyle(
       statusBarColor: Constants.kPrimaryColor,
       statusBarIconBrightness: Brightness.dark);

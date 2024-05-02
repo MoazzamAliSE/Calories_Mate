@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/services/locator.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'navigation/navigate.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:calories_mate/screens/splashscreen.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/initial-screen',
-      routes: Navigate.routes,
+      home: const Splashscreen(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -26,6 +26,13 @@ class WaterView extends StatefulWidget {
 }
 
 class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
+  @override
+  void dispose() {
+    // Dispose the animation controller
+    widget.mainScreenAnimationController?.dispose();
+    super.dispose();
+  }
+
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 50));
     return true;

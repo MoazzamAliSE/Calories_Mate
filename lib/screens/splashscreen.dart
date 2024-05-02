@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/patient_dashboard/fitness_app_home_screen.dart';
 import 'package:calories_mate/screens/sign_in_page.dart';
 import 'package:calories_mate/screens/welcome_page.dart';
+import 'package:get/get.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,18 +29,14 @@ class _SplashscreenState extends State<Splashscreen> {
     } catch (error) {
       nullCheckErrorMessage = error.toString();
       if (nullCheckErrorMessage == "Null check operator used on a null value") {
-        Timer(
-            const Duration(seconds: 1),
-            () => Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const WelcomePage())));
+        Timer(const Duration(seconds: 1),
+            () => Get.off(() => const WelcomePage()));
       }
     }
     if (FirebaseAuth.instance.currentUser?.uid == null) {
       // signed in
       Timer(
-          const Duration(seconds: 1),
-          () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const WelcomePage())));
+          const Duration(seconds: 1), () => Get.off(() => const WelcomePage()));
     } else {
       Timer(const Duration(seconds: 1), () => userExistAuth());
     }
@@ -54,15 +51,9 @@ class _SplashscreenState extends State<Splashscreen> {
     userEmail = s.get('email');
     userName = s.get('name');
     if (pref.getString('login_as') == "nutritionist") {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const NutritionistDashBoard()));
+      Get.off(() => const NutritionistDashBoard());
     } else if (pref.getString('login_as') == "patient") {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const FitnessAppHomeScreen()));
+      Get.off(() => const FitnessAppHomeScreen());
     }
   }
 
@@ -76,6 +67,7 @@ class _SplashscreenState extends State<Splashscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+          height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
               gradient: LinearGradient(begin: Alignment.topCenter, colors: [
@@ -83,18 +75,20 @@ class _SplashscreenState extends State<Splashscreen> {
             Colors.cyan.shade300,
             Colors.cyanAccent
           ])),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const SizedBox(),
-                Image.asset(
-                  "assets/images/Blue Black Funky Fitness Coach Logo_20240420_150138_0000.png",
-                  width: double.infinity,
-                ),
-                const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
-                )
-              ])),
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(),
+                  Image.asset(
+                    "assets/images/Blue Black Funky Fitness Coach Logo_20240420_150138_0000.png",
+                    width: double.infinity,
+                  ),
+                  const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
+                  )
+                ]),
+          )),
     );
   }
 }

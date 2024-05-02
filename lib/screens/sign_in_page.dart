@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'patient_dashboard/fitness_app_home_screen.dart';
@@ -234,11 +235,7 @@ class _SignInPageState extends State<SignInPage> {
                               const Text("Forgot Password?"),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ResetScreen()));
+                                  Get.off(() => const ResetScreen());
                                 },
                                 child: Text("To Reset Click Here!",
                                     style: TextStyle(
@@ -289,11 +286,7 @@ class _SignInPageState extends State<SignInPage> {
                               const SizedBox(width: 10),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignUpPage()));
+                                  Get.off(() => const SignUpPage());
                                 },
                                 child: Text("Register now",
                                     style: TextStyle(
@@ -349,16 +342,10 @@ class _SignInPageState extends State<SignInPage> {
         userName = s.get('name');
         if (s.get('type') == "nutritionist") {
           prefs.setString('login_as', 'nutritionist');
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const NutritionistDashBoard()));
+          Get.off(() => const NutritionistDashBoard());
         } else if (s.get('type') == "patient") {
           prefs.setString('login_as', 'patient');
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const FitnessAppHomeScreen()));
+          Get.off(() => const FitnessAppHomeScreen());
         } else {
           showDialog<String>(
               context: context,
@@ -375,11 +362,7 @@ class _SignInPageState extends State<SignInPage> {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
                               prefs.setString('login_as', "patient");
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FitnessAppHomeScreen()));
+                              Get.off(() => const FitnessAppHomeScreen());
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -402,11 +385,7 @@ class _SignInPageState extends State<SignInPage> {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
                               prefs.setString('login_as', "nutritionist");
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const NutritionistDashBoard()));
+                              Get.off(() => const NutritionistDashBoard());
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

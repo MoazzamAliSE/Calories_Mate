@@ -5,6 +5,7 @@ import 'package:calories_mate/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late User user;
@@ -346,11 +347,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               const SizedBox(width: 10),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignInPage()));
+                                  Get.off(() => const SignInPage());
                                 },
                                 child: Text("Sign in",
                                     style: TextStyle(
@@ -417,11 +414,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setString('login_as', "patient");
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const VerifyScreen()));
+                            Get.off(() => const VerifyScreen());
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -447,11 +440,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setString('login_as', "nutritionist");
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const VerifyScreen()));
+
+                            Get.off(() => const VerifyScreen());
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

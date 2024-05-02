@@ -63,10 +63,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
               exit(0);
             }
           } else {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const FitnessAppHomeScreen()));
+            Get.off(() => const FitnessAppHomeScreen());
           }
           return false;
         },
