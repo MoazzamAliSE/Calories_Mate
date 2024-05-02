@@ -28,14 +28,13 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
         duration: const Duration(milliseconds: 2000), vsync: this);
     waveAnimationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
-    animationController!
-      .addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          animationController?.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          animationController?.forward();
-        }
-      });
+    animationController!.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        animationController?.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        animationController?.forward();
+      }
+    });
     waveAnimationController!.addListener(() {
       animList1.clear();
       for (int i = -2 - bottleOffset1.dx.toInt(); i <= 60 + 2; i++) {
@@ -71,8 +70,10 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    animationController?.dispose();
-    waveAnimationController?.dispose();
+    if (!animationController!.isDismissed) {
+      animationController?.dispose();
+      waveAnimationController?.dispose();
+    }
     super.dispose();
   }
 
@@ -136,24 +137,29 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    (widget.percentageValue.round() >= 100)?
-                      const Icon(Icons.check_circle, color: CupertinoColors.white, size: 30,):
-                    Text(
-                    (widget.percentageValue.round() >= 100)? "100":
-                      widget.percentageValue.round().toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontFamily: FitnessAppTheme.fontName,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 24,
-                        letterSpacing: 0.0,
-                        color: FitnessAppTheme.white,
-                      ),
-                    ),
+                    (widget.percentageValue.round() >= 100)
+                        ? const Icon(
+                            Icons.check_circle,
+                            color: CupertinoColors.white,
+                            size: 30,
+                          )
+                        : Text(
+                            (widget.percentageValue.round() >= 100)
+                                ? "100"
+                                : widget.percentageValue.round().toString(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontFamily: FitnessAppTheme.fontName,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 24,
+                              letterSpacing: 0.0,
+                              color: FitnessAppTheme.white,
+                            ),
+                          ),
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
-                        (widget.percentageValue.round() >= 100)? "":'%',
+                        (widget.percentageValue.round() >= 100) ? "" : '%',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontFamily: FitnessAppTheme.fontName,
@@ -176,7 +182,8 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                     parent: animationController!,
-                    curve: const Interval(0.0, 1.0, curve: Curves.fastOutSlowIn))),
+                    curve:
+                        const Interval(0.0, 1.0, curve: Curves.fastOutSlowIn))),
                 child: Container(
                   width: 2,
                   height: 2,
@@ -195,7 +202,8 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                     parent: animationController!,
-                    curve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn))),
+                    curve:
+                        const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn))),
                 child: Container(
                   width: 4,
                   height: 4,
@@ -214,7 +222,8 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                     parent: animationController!,
-                    curve: const Interval(0.6, 0.8, curve: Curves.fastOutSlowIn))),
+                    curve:
+                        const Interval(0.6, 0.8, curve: Curves.fastOutSlowIn))),
                 child: Container(
                   width: 3,
                   height: 3,

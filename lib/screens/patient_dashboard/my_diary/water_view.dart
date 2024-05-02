@@ -29,7 +29,10 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
   @override
   void dispose() {
     // Dispose the animation controller
-    widget.mainScreenAnimationController?.dispose();
+
+    if (!widget.mainScreenAnimationController!.isDismissed) {
+      widget.mainScreenAnimationController?.dispose();
+    }
     super.dispose();
   }
 

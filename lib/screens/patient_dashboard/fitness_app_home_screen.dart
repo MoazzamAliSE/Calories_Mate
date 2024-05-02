@@ -46,7 +46,9 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
 
   @override
   void dispose() {
-    animationController?.dispose();
+    if (!animationController!.isDismissed) {
+      animationController?.dispose();
+    }
     super.dispose();
   }
 

@@ -54,7 +54,9 @@ class _MealsListViewState extends State<MealsListView>
 
   @override
   void dispose() {
-    animationController?.dispose();
+    if (!animationController!.isDismissed) {
+      animationController?.dispose();
+    }
     super.dispose();
   }
 

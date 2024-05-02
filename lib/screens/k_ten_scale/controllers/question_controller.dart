@@ -78,8 +78,10 @@ class QuestionController extends GetxController
   @override
   void onClose() {
     super.onClose();
-    _animationController.dispose();
-    _pageController.dispose();
+    if (!_animationController.isDismissed) {
+      _animationController.dispose();
+      _pageController.dispose();
+    }
   }
 
   void checkAns(Question question, int selectedIndex) {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/water_view.dart';
@@ -28,13 +30,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
   double topBarOpacity = 0.0;
   final df = DateFormat('dd-MMM-yyyy');
   @override
-  void dispose() {
-    scrollController.dispose(); // Dispose the scroll controller
-    widget.animationController
-        ?.dispose(); // Dispose the animation controller if not null
-    super.dispose();
-  }
-
   @override
   void initState() {
     topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -180,6 +175,16 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     return true;
   }
 
+  Timer? _timer;
+  @override
+  void dispose() {
+    super.dispose();
+    if (!widget.animationController!.isDismissed) {
+      widget.animationController?.dispose();
+    }
+    _timer?.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -217,7 +222,14 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             itemCount: listViews.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
-              widget.animationController?.forward();
+              _timer = Timer(const Duration(milliseconds: 100), () {
+                if (widget.animationController != null &&
+                    widget.animationController!.status !=
+                        AnimationStatus.dismissed) {
+                  widget.animationController!.forward();
+                }
+              });
+
               return listViews[index];
             },
           );

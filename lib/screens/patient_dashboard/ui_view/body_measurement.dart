@@ -36,8 +36,10 @@ class _BodyMeasurementViewState extends State<BodyMeasurementView> {
 
   @override
   void dispose() {
+    if (!widget.animationController!.isDismissed) {
+      widget.animationController?.dispose();
+    }
     // Cancel the stream subscription
-    widget.animationController?.dispose();
     super.dispose();
   }
 
