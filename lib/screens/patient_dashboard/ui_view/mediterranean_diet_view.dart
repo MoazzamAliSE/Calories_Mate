@@ -39,8 +39,8 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
     with TickerProviderStateMixin {
   @override
   void dispose() {
-    if (!widget.animationController!.isDismissed) {
-      widget.animationController?.dispose();
+     if (!widget.animationController!.isDismissed) {
+    widget.animationController?.dispose();
     }
     super.dispose();
   }

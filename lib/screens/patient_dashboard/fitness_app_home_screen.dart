@@ -45,14 +45,6 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
   }
 
   @override
-  void dispose() {
-    if (!animationController!.isDismissed) {
-      animationController?.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       color: FitnessAppTheme.background,

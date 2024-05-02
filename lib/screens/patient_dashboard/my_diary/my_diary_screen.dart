@@ -31,11 +31,32 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
   final df = DateFormat('dd-MMM-yyyy');
   @override
   @override
+  @override
+  @override
   void initState() {
     topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
             parent: widget.animationController!,
             curve: const Interval(0, 0.5, curve: Curves.fastOutSlowIn)));
+
+    bool isControllerDisposed = false;
+
+    if (widget.animationController == null) {
+      isControllerDisposed = true;
+    } else {
+      // Check if the animationController has been disposed
+      try {
+        widget.animationController!.value;
+      } catch (_) {
+        isControllerDisposed = true;
+      }
+    }
+
+    // Check if animationController is not disposed before calling forward
+    if (!isControllerDisposed) {
+      widget.animationController!.forward();
+    }
+
     addAllListData();
 
     scrollController.addListener(() {
@@ -58,6 +79,12 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             topBarOpacity = 0.0;
           });
         }
+      }
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.animationController != null &&
+          !widget.animationController!.isDismissed) {
+        widget.animationController!.dispose();
       }
     });
     super.initState();
@@ -170,19 +197,15 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     );
   }
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
-  }
-
   Timer? _timer;
   @override
   void dispose() {
-    super.dispose();
+    _timer?.cancel();
     if (!widget.animationController!.isDismissed) {
+      print("dismissed");
       widget.animationController?.dispose();
     }
-    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -205,35 +228,18 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
   }
 
   Widget getMainListViewUI() {
-    return FutureBuilder<bool>(
-      future: getData(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox();
-        } else {
-          return ListView.builder(
-            controller: scrollController,
-            padding: EdgeInsets.only(
-              top: AppBar().preferredSize.height +
-                  MediaQuery.of(context).padding.top +
-                  24,
-              bottom: 62 + MediaQuery.of(context).padding.bottom,
-            ),
-            itemCount: listViews.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (BuildContext context, int index) {
-              _timer = Timer(const Duration(milliseconds: 100), () {
-                if (widget.animationController != null &&
-                    widget.animationController!.status !=
-                        AnimationStatus.dismissed) {
-                  widget.animationController!.forward();
-                }
-              });
-
-              return listViews[index];
-            },
-          );
-        }
+    return ListView.builder(
+      controller: scrollController,
+      padding: EdgeInsets.only(
+        top: AppBar().preferredSize.height +
+            MediaQuery.of(context).padding.top +
+            24,
+        bottom: 62 + MediaQuery.of(context).padding.bottom,
+      ),
+      itemCount: listViews.length,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (BuildContext context, int index) {
+        return listViews[index];
       },
     );
   }
