@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/Settings_Pages/new_password.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/meals_list_view.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/my_diary_screen.dart';
 import 'package:calories_mate/services/database.dart';
-import 'add_new_food.dart';
-import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
+import 'add_new_food.dart';
 
 double tCalorie = 0;
 double tCarbs = 0;
@@ -288,6 +288,7 @@ class BarChartSample1State extends State<BarChartSample1> {
   int touchedIndex = -1;
 
   bool isPlaying = false;
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -322,7 +323,8 @@ class BarChartSample1State extends State<BarChartSample1> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: BarChart(
                           isPlaying ? mainBarData() : mainBarData(),
-                          swapAnimationDuration: animDuration,
+                          swapAnimationDuration:
+                              const Duration(milliseconds: 150),
                         ),
                       ),
                     ),
@@ -508,22 +510,25 @@ class BarChartSample1State extends State<BarChartSample1> {
           //     fontWeight: FontWeight.bold,
           //     fontSize: 14),
           getTitlesWidget: (double value, TitleMeta a) {
-            switch (value.toInt()) {
-              case 0:
-                return const Text('CL');
-              case 1:
-                return const Text('C');
-              case 2:
-                return const Text('P');
-              case 3:
-                return const Text('F');
-              case 4:
-                return const Text('S');
-              case 5:
-                return const Text('CH');
-              default:
-                return const Text('N');
+            if (value >= 0 && value <= 5) {
+              switch (value.toInt()) {
+                case 0:
+                  return const Text('CL');
+                case 1:
+                  return const Text('C');
+                case 2:
+                  return const Text('P');
+                case 3:
+                  return const Text('F');
+                case 4:
+                  return const Text('S');
+                case 5:
+                  return const Text('CH');
+                default:
+                  return const Text('N');
+              }
             }
+            return const Text('N');
           },
         )),
 
@@ -538,14 +543,5 @@ class BarChartSample1State extends State<BarChartSample1> {
       barGroups: showingGroups(),
       gridData: const FlGridData(show: false),
     );
-  }
-
-  Future<dynamic> refreshState() async {
-    setState(() {});
-    await Future<dynamic>.delayed(
-        animDuration + const Duration(milliseconds: 50));
-    if (isPlaying) {
-      await refreshState();
-    }
   }
 }

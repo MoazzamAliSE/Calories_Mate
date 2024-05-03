@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:calories_mate/screens/splashscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
   }
+
   final ScrollController controller = ScrollController();
 
   final TextEditingController msg = TextEditingController();
@@ -30,7 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: FitnessAppTheme.cyan,
         elevation: 3,
         centerTitle: true,
         title: Row(
@@ -99,10 +101,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   return Container();
                 }
 
-                Timer(const Duration(milliseconds: 100,),() {
-                  controller.jumpTo(controller.position.maxScrollExtent);
-
-                },);
+                Timer(
+                  const Duration(
+                    milliseconds: 100,
+                  ),
+                  () {
+                    controller.jumpTo(controller.position.maxScrollExtent);
+                  },
+                );
 
                 return ListView.builder(
                   controller: controller,
@@ -157,7 +163,8 @@ class _ChatScreenState extends State<ChatScreen> {
           Container(
             height: 60,
             width: MediaQuery.sizeOf(context).width,
-            decoration: BoxDecoration(color: Colors.blue.withOpacity(.2)),
+            decoration:
+                BoxDecoration(color: FitnessAppTheme.cyan.withOpacity(.2)),
             child: Row(
               children: [
                 const SizedBox(
@@ -218,7 +225,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         'sender': FirebaseAuth.instance.currentUser!.uid,
                         'id': key
                       });
-                     await FirebaseFirestore.instance
+                      await FirebaseFirestore.instance
                           .collection('chats')
                           .doc(widget.uid)
                           .collection(FirebaseAuth.instance.currentUser!.uid)
@@ -230,18 +237,14 @@ class _ChatScreenState extends State<ChatScreen> {
                         'id': key
                       });
 
-
-
                       Timer(const Duration(milliseconds: 50), () {
                         controller.jumpTo(controller.position.maxScrollExtent);
                       });
-
-
                     }
                   },
                   child: const CircleAvatar(
                     radius: 20,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: FitnessAppTheme.cyan,
                     child: Center(
                       child: Icon(
                         Icons.send,

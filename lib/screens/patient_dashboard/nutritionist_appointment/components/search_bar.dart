@@ -43,7 +43,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           alignment: Alignment.centerRight,
           child: MaterialButton(
             onPressed: () {
-              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(
                   builder: (context) => SearchResult(searchText: searchText)));
             },
             color: Colors.cyan,

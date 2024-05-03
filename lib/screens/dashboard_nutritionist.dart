@@ -3,7 +3,6 @@ import 'package:calories_mate/screens/chat/chat_with.dart';
 import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/appointments.dart';
 import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/patients_data.dart';

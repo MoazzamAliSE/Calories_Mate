@@ -1,8 +1,6 @@
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/detail_screen.dart';
-import 'package:calories_mate/utils/load_profile_pic.dart';
 
 import '../constant.dart';
 
@@ -22,7 +20,7 @@ class NutritionistCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 DetailScreen(_name, _description, _uid, _bio)));
       },
@@ -31,34 +29,25 @@ class NutritionistCard extends StatelessWidget {
           color: _bgColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: FutureBuilder(
-            future: loadProfilePic(_uid!),
-            builder: (context, AsyncSnapshot<Uint8List?> snapshot) {
-              return Padding(
-                padding: const EdgeInsets.all(10),
-                child: ListTile(
-                  leading: (snapshot.data != null)
-                      ? CircleAvatar(
-                          radius: 35,
-                          backgroundImage: Image.memory(snapshot.data!).image,
-                        )
-                      : Image.asset('assets/images/nutritionist1.png'),
-                  title: Text(
-                    _name!,
-                    style: TextStyle(
-                      color: kTitleTextColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    _description!,
-                    style: TextStyle(
-                      color: kTitleTextColor.withOpacity(0.7),
-                    ),
-                  ),
-                ),
-              );
-            }),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: ListTile(
+            leading: Image.asset('assets/images/nutritionist1.png'),
+            title: Text(
+              _name!,
+              style: TextStyle(
+                color: kTitleTextColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Text(
+              _description!,
+              style: TextStyle(
+                color: kTitleTextColor.withOpacity(0.7),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -85,7 +85,7 @@ class _SplashscreenState extends State<Splashscreen> {
                     width: double.infinity,
                   ),
                   const CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
+                    color: Colors.blue,
                   )
                 ]),
           )),

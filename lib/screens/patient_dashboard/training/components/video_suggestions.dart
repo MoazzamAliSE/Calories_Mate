@@ -44,13 +44,13 @@ class _VideoSuggestionsState extends State<VideoSuggestions> {
                 _previousController?.dispose();
                 _previousController = _currentController;
                 _currentIndex = index;
-                _currentController =
-                    VideoPlayerController.network(videoUrls[_currentIndex])
-                      ..initialize().then((_) {
-                        setState(
-                            () {}); // Ensure the first frame is shown after initialization
-                        _currentController!.play();
-                      });
+                _currentController = VideoPlayerController.networkUrl(
+                    Uri.parse(videoUrls[_currentIndex]))
+                  ..initialize().then((_) {
+                    setState(
+                        () {}); // Ensure the first frame is shown after initialization
+                    _currentController!.play();
+                  });
               });
             },
           ),

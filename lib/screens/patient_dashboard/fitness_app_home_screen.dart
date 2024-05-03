@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:calories_mate/screens/Settings_Pages/settings.dart';
 import 'package:calories_mate/screens/chat/chat_with.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_appointment.dart';
@@ -7,8 +6,6 @@ import 'package:calories_mate/screens/patient_dashboard/training/training_home_s
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'fitness_app_theme.dart';
 import 'models/tab_icon_data.dart';
 import 'my_diary/my_diary_screen.dart';
@@ -20,35 +17,29 @@ class FitnessAppHomeScreen extends StatefulWidget {
   _FitnessAppHomeScreenState createState() => _FitnessAppHomeScreenState();
 }
 
-class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
-    with TickerProviderStateMixin {
-  AnimationController? animationController;
-
+class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen> {
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   int indexAdopted = 0;
-
-  Widget tabBody = Container(
-    color: FitnessAppTheme.background,
-  );
+  late Widget tabBody;
 
   @override
   void initState() {
+    super.initState();
+    initializeTabBody();
+  }
+
+  void initializeTabBody() {
     for (var tab in tabIconsList) {
       tab.isSelected = false;
     }
     tabIconsList[0].isSelected = true;
-
-    animationController = AnimationController(
-        duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = MyDiaryScreen(animationController: animationController);
-    super.initState();
+    tabBody = const MyDiaryScreen();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: FitnessAppTheme.background,
-      child: WillPopScope(
+    return Scaffold(
+      body: WillPopScope(
         onWillPop: () async {
           if (indexAdopted == 0) {
             if (Platform.isAndroid) {
@@ -61,87 +52,124 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
           }
           return false;
         },
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: FutureBuilder<bool>(
-            future: getData(),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (!snapshot.hasData) {
-                return const SizedBox();
-              } else {
-                return Stack(
-                  children: <Widget>[
-                    tabBody,
-                    bottomBar(),
+        child: Stack(
+          children: <Widget>[
+            tabBody,
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 62 + MediaQuery.of(context).padding.bottom,
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      offset: const Offset(0, -2),
+                      blurRadius: 8.0,
+                    ),
                   ],
-                );
-              }
-            },
-          ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8, top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(
+                      tabIconsList.length,
+                      (index) {
+                        final tabIconData = tabIconsList[index];
+                        return Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                indexAdopted = index;
+                                tabBody = _getSelectedTabBody(index);
+                              });
+                            },
+                            child: TabIcon(
+                              tabIconData: tabIconData,
+                              isSelected: index == indexAdopted,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 28.0,
+              left: MediaQuery.of(context).size.width / 2 - 28.0,
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const ChatWith());
+                },
+                child: Container(
+                  width: 56.0,
+                  height: 56.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: FitnessAppTheme.nearlyDarkBlue,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        offset: const Offset(0, 4),
+                        blurRadius: 8.0,
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.message,
+                    color: FitnessAppTheme.white,
+                    size: 32.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
+  Widget _getSelectedTabBody(int index) {
+    switch (index) {
+      case 0:
+        return const MyDiaryScreen();
+      case 1:
+        return const TrainingScreen();
+      case 2:
+        return const NutritionistAppointment();
+      case 3:
+        return const SettingsPage(role: "patient");
+      default:
+        return const SizedBox();
+    }
   }
+}
 
-  Widget bottomBar() {
+class TabIcon extends StatelessWidget {
+  final TabIconData tabIconData;
+  final bool isSelected;
+
+  const TabIcon({
+    Key? key,
+    required this.tabIconData,
+    required this.isSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Expanded(
-          child: SizedBox(),
-        ),
-        BottomBarView(
-          tabIconsList: tabIconsList,
-          addClick: () {
-            Get.to(() => const ChatWith());
-          },
-          changeIndex: (int index) {
-            setState(() {
-              indexAdopted = index;
-            });
-            if (index == 0) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody =
-                      MyDiaryScreen(animationController: animationController);
-                });
-              });
-            } else if (index == 1) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = const TrainingScreen();
-                });
-              });
-            } else if (index == 2) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = const NutritionistAppointment();
-                });
-              });
-            } else if (index == 3) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = const SettingsPage(role: "patient");
-                });
-              });
-            }
-          },
+        Image.asset(
+          isSelected ? tabIconData.selectedImagePath : tabIconData.imagePath,
+          width: 30.0,
+          height: 30.0,
+          color: isSelected ? FitnessAppTheme.nearlyDarkBlue : null,
         ),
       ],
     );

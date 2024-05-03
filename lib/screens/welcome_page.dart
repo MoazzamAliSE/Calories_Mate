@@ -106,7 +106,7 @@ class _GetStartedState extends State<GetStarted> {
             ),
           )
         : const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+            color: Colors.blueAccent,
           );
   }
 }

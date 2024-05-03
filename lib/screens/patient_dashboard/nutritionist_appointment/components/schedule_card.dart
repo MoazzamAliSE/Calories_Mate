@@ -1,24 +1,27 @@
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Import for date formatting
 
 import '../constant.dart';
 
-//ignore: must_be_immutable
 class ScheduleCard extends StatelessWidget {
-  final dynamic _title;
-  final dynamic _description;
-  final dynamic _date;
-  final dynamic _month;
-  final dynamic _bgColor;
+  final String title;
+  final String description;
+  final DateTime date;
+  final Color bgColor;
 
-  const ScheduleCard(
-      this._title, this._description, this._date, this._month, this._bgColor, {Key? key}) : super(key: key);
+  const ScheduleCard({
+    required this.title,
+    required this.description,
+    required this.date,
+    required this.bgColor,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: _bgColor.withOpacity(0.1),
+        color: bgColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
@@ -29,24 +32,24 @@ class ScheduleCard extends StatelessWidget {
               horizontal: 16,
             ),
             decoration: BoxDecoration(
-              color: _bgColor.withOpacity(0.3),
+              color: bgColor.withOpacity(0.3),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  _date,
+                  DateFormat('dd').format(date), // Format the date
                   style: TextStyle(
-                    color: _bgColor,
+                    color: bgColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  _month,
+                  DateFormat.EEEE().format(date), // Format the day
                   style: TextStyle(
-                    color: _bgColor,
+                    color: bgColor,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -55,14 +58,14 @@ class ScheduleCard extends StatelessWidget {
             ),
           ),
           title: Text(
-            _title,
+            title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: kTitleTextColor,
             ),
           ),
           subtitle: Text(
-            _description,
+            description,
             style: TextStyle(
               color: kTitleTextColor.withOpacity(0.7),
             ),

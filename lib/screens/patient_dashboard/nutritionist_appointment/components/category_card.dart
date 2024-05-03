@@ -20,7 +20,9 @@ class CategoryCard extends StatelessWidget {
       height: 160,
       child: InkWell(
         onTap: () {
-          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(
               builder: (context) => NutritionistsList(role: _category)));
         },
         child: Stack(

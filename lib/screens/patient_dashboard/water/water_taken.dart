@@ -30,11 +30,6 @@ class _WaterTakenState extends State<WaterTaken> {
   final TextEditingController _textFieldController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     user = auth.currentUser!;
 
