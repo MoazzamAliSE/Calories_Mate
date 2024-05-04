@@ -48,8 +48,17 @@ class _SplashscreenState extends State<Splashscreen> {
         .collection('userdata')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
-    userEmail = s.get('email');
-    userName = s.get('name');
+    try{
+      userEmail = s.get('email');
+    }catch(_){
+
+    }
+    try{
+      userName = s.get('name');
+    }catch(_){
+
+    }
+
     if (pref.getString('login_as') == "nutritionist") {
       Get.off(() => const NutritionistDashBoard());
     } else if (pref.getString('login_as') == "patient") {
