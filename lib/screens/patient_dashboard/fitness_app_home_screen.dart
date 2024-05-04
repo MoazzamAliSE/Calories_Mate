@@ -20,7 +20,7 @@ class FitnessAppHomeScreen extends StatefulWidget {
 class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen> {
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   int indexAdopted = 0;
-  late Widget tabBody;
+   Widget tabBody=MyDiaryScreen();
 
   @override
   void initState() {
@@ -32,8 +32,8 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen> {
     for (var tab in tabIconsList) {
       tab.isSelected = false;
     }
-    tabIconsList[0].isSelected = true;
     tabBody = const MyDiaryScreen();
+    tabIconsList[0].isSelected = true;
   }
 
   @override
