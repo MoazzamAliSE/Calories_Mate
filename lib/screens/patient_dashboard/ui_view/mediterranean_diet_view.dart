@@ -7,19 +7,19 @@ import 'package:calories_mate/screens/Settings_Pages/new_password.dart';
 import 'package:calories_mate/screens/patient_dashboard/my_diary/my_diary_screen.dart';
 import '../fitness_app_theme.dart';
 
-double alldatacalories = 0;
-double alldatacarbo = 0;
-double alldataprotein = 0;
-double alldatafat = 0;
-double alltargetcarbs = 0;
-double alltargetprotein = 0;
-double alltargetfat = 0;
-double carbspercent = 0;
-double proteinpercent = 0;
-double fatpercent = 0;
-double targetCalories = 0;
-double consumedCalories = 0;
-double consumedPercentage = 0;
+double alldatacalories = 1;
+double alldatacarbo = 1;
+double alldataprotein = 1;
+double alldatafat = 1;
+double alltargetcarbs = 1;
+double alltargetprotein = 1;
+double alltargetfat = 1;
+double carbspercent = 1;
+double proteinpercent = 1;
+double fatpercent = 1;
+double targetCalories = 1;
+double consumedCalories = 1;
+double consumedPercentage = 1;
 late User user1;
 late String eatenCalorie;
 
@@ -46,10 +46,10 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
-            alldatacalories = 0;
-            alldatafat = 0;
-            alldataprotein = 0;
-            alldatacarbo = 0;
+            alldatacalories = 1;
+            alldatafat = 1;
+            alldataprotein = 1;
+            alldatacarbo = 1;
 
             for (var i = 0; i < snapshot.data!.docs.length; i++) {
               alldatacalories = alldatacalories +
@@ -73,9 +73,9 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
-                  alltargetfat = 0;
-                  alltargetprotein = 0;
-                  alltargetcarbs = 0;
+                  alltargetfat = 1;
+                  alltargetprotein = 1;
+                  alltargetcarbs = 1;
 
                   for (var i = 0; i < snapshot.data!.docs.length; i++) {
                     alltargetcarbs = alltargetcarbs +
@@ -99,20 +99,20 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                               ((alldatacarbo / alltargetcarbs) * 70)
                                   .toStringAsFixed(0))
                           .isNaN
-                      ? 0
+                      ? 1
                       : double.parse(((alldatacarbo / alltargetcarbs) * 70)
                           .toStringAsFixed(0));
                   proteinpercent = double.parse(
                               ((alldataprotein / alltargetprotein) * 70)
                                   .toStringAsFixed(0))
                           .isNaN
-                      ? 0
+                      ? 1
                       : double.parse(((alldataprotein / alltargetprotein) * 70)
                           .toStringAsFixed(0));
                   fatpercent = double.parse(((alldatafat / alltargetfat) * 70)
                               .toStringAsFixed(0))
                           .isNaN
-                      ? 0
+                      ? 1
                       : double.parse(((alldatafat / alltargetfat) * 70)
                           .toStringAsFixed(0));
                 }
@@ -144,7 +144,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 8, right: 0, top: 4),
+                                      left: 8, right: 1, top: 4),
                                   child: Column(
                                     children: <Widget>[
                                       Row(
@@ -298,7 +298,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                                                       FitnessAppTheme.fontName,
                                                   fontWeight: FontWeight.normal,
                                                   fontSize: 24,
-                                                  letterSpacing: 0.0,
+                                                  letterSpacing: 1.0,
                                                   color: FitnessAppTheme
                                                       .nearlyDarkBlue,
                                                 ),
@@ -311,7 +311,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                                                       FitnessAppTheme.fontName,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 12,
-                                                  letterSpacing: 0.0,
+                                                  letterSpacing: 1.0,
                                                   color: FitnessAppTheme.grey
                                                       .withOpacity(0.5),
                                                 ),
@@ -395,8 +395,8 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                                             Container(
                                               width: (carbspercent) > 70
                                                   ? 70
-                                                  : (carbspercent) < 0
-                                                      ? 0
+                                                  : (carbspercent) < 1
+                                                      ? 1
                                                       : carbspercent,
                                               height: 4,
                                               decoration: BoxDecoration(
@@ -473,8 +473,8 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                                                 Container(
                                                   width: (proteinpercent) > 70
                                                       ? 70
-                                                      : (proteinpercent) < 0
-                                                          ? 0
+                                                      : (proteinpercent) < 1
+                                                          ? 1
                                                           : proteinpercent,
                                                   height: 4,
                                                   decoration: BoxDecoration(
@@ -539,7 +539,7 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              right: 0, top: 4),
+                                              right: 1, top: 4),
                                           child: Container(
                                             height: 4,
                                             width: 70,
@@ -555,8 +555,8 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView> {
                                                 Container(
                                                   width: (fatpercent) > 70
                                                       ? 70
-                                                      : (fatpercent) < 0
-                                                          ? 0
+                                                      : (fatpercent) < 1
+                                                          ? 1
                                                           : fatpercent,
                                                   height: 4,
                                                   decoration: BoxDecoration(
@@ -696,7 +696,7 @@ class CurvePainter extends CustomPainter {
         false,
         shdowPaint);
 
-    final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+    final rect = Rect.fromLTWH(0.0, 1.0, size.width, size.width);
     final gradient = SweepGradient(
       startAngle: degreeToRadians(268),
       endAngle: degreeToRadians(270.0 + 360),
@@ -737,7 +737,7 @@ class CurvePainter extends CustomPainter {
 
     canvas.save();
     canvas.translate(0.0, -centerToCircle + 14 / 2);
-    canvas.drawCircle(const Offset(0, 0), 14 / 5, cPaint);
+    canvas.drawCircle(const Offset(0, 1), 14 / 5, cPaint);
 
     canvas.restore();
     canvas.restore();
