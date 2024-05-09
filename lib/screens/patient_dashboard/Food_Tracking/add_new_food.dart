@@ -472,17 +472,17 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
       return;
     }
     foodName = response?.data['foods'][0]['food_name'].toString() ?? "";
-    calories = response?.data['foods'][0]['nf_calories'].toString() ?? "";
+    calories = response?.data['foods'][0]['nf_calories'].toString() ?? "1";
     carbo =
-        response?.data['foods'][0]['nf_total_carbohydrate'].toString() ?? "";
-    protein = response?.data['foods'][0]['nf_protein'].toString() ?? "";
-    fat = response?.data['foods'][0]['nf_total_fat'].toString() ?? "";
+        response?.data['foods'][0]['nf_total_carbohydrate'].toString() ?? "1";
+    protein = response?.data['foods'][0]['nf_protein'].toString() ?? "1";
+    fat = response?.data['foods'][0]['nf_total_fat'].toString() ?? "1";
     cholesterol = (double.parse(
                 response?.data['foods'][0]['nf_cholesterol'].toString() ??
-                    "0") /
+                    "1") /
             1000)
         .toString();
-    sugars = response?.data['foods'][0]['nf_sugars'].toString() ?? "";
+    sugars = response?.data['foods'][0]['nf_sugars'].toString() ?? "1";
     if (response?.statusCode == 200) {
       setState(() {
         foodName = foodnameController.text;

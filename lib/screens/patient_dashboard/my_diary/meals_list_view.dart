@@ -9,14 +9,14 @@ import 'package:hexcolor/hexcolor.dart';
 import '../fitness_app_theme.dart';
 import 'my_diary_screen.dart';
 
-double calorie1 = 0;
-double calorie2 = 0;
-double calorie3 = 0;
-double calorie4 = 0;
-double targetbreakfast = 0;
-double targetlunch = 0;
-double targetsnack = 0;
-double targetdinner = 0;
+double calorie1 = 1;
+double calorie2 = 1;
+double calorie3 = 1;
+double calorie4 = 1;
+double targetbreakfast = 1;
+double targetlunch = 1;
+double targetsnack = 1;
+double targetdinner = 1;
 double rCalorie = 2500;
 double rCarbs = 300;
 double rProtein = 56;
@@ -62,22 +62,22 @@ class _MealsListViewState extends State<MealsListView> {
             try {
               calorie1 = double.parse(snapshot.data!.docs[0]["Total Calories"]);
             } catch (e) {
-              calorie1 = 0;
+              calorie1 = 1;
             }
             try {
               calorie2 = double.parse(snapshot.data!.docs[1]["Total Calories"]);
             } catch (e) {
-              calorie2 = 0;
+              calorie2 = 1;
             }
             try {
               calorie3 = double.parse(snapshot.data!.docs[2]["Total Calories"]);
             } catch (e) {
-              calorie3 = 0;
+              calorie3 = 1;
             }
             try {
               calorie4 = double.parse(snapshot.data!.docs[3]["Total Calories"]);
             } catch (e) {
-              calorie4 = 0;
+              calorie4 = 1;
             }
           }
           return StreamBuilder<QuerySnapshot>(
@@ -95,25 +95,25 @@ class _MealsListViewState extends State<MealsListView> {
                     targetbreakfast =
                         double.parse(snapshot.data!.docs[0]["Target Calories"]);
                   } catch (e) {
-                    targetbreakfast = 0;
+                    targetbreakfast = 1;
                   }
                   try {
                     targetlunch =
                         double.parse(snapshot.data!.docs[1]["Target Calories"]);
                   } catch (e) {
-                    targetlunch = 0;
+                    targetlunch = 1;
                   }
                   try {
                     targetsnack =
                         double.parse(snapshot.data!.docs[2]["Target Calories"]);
                   } catch (e) {
-                    targetsnack = 0;
+                    targetsnack = 1;
                   }
                   try {
                     targetdinner =
                         double.parse(snapshot.data!.docs[3]["Target Calories"]);
                   } catch (e) {
-                    targetdinner = 0;
+                    targetdinner = 1;
                   }
                 }
                 List<MealsListData> mealsListData = [

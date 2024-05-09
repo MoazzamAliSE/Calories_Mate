@@ -39,7 +39,6 @@ class _NutritionistProfileState extends State<NutritionistProfile> {
 
   @override
   Widget build(BuildContext context) {
-    ImagePicker picker = ImagePicker();
     return Scaffold(
         backgroundColor: FitnessAppTheme.background,
         appBar: AppBar(
