@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/detail_screen.dart';
 
 import '../constant.dart';
-
+BuildContext? cardContext;
 //ignore: must_be_immutable
 class NutritionistCard extends StatelessWidget {
   final String? _uid;

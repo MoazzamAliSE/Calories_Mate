@@ -221,7 +221,9 @@ class OptionsCreater extends StatelessWidget {
                 } else if (data.title == "Appointments") {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          const AppointmentsPage()));
+                          const AppointmentsPage(
+                            showButtons: true,
+                          )));
                 } else if (data.title == "Chat") {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => const ChatWith()));

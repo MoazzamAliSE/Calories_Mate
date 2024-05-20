@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../components/doctor_card.dart';
 import '../constant.dart';
 
 //ignore: must_be_immutable
@@ -30,6 +31,7 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
+    cardContext=context;
     return Scaffold(
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 60),
@@ -73,14 +75,18 @@ class _DetailScreenState extends State<DetailScreen> {
                             onPressed: () async {
                               Navigator.pop(context);
                               try {
+                                final key=DateTime.now().microsecondsSinceEpoch.toString();
                                 await FirebaseFirestore.instance
                                     .collection('userdata')
                                     .doc(widget._uid)
                                     .collection('appointments')
                                     .doc(
-                                      FirebaseAuth.instance.currentUser!.uid,
+                                      // FirebaseAuth.instance.currentUser!.uid,
+                                  key
                                     )
                                     .set({
+                                  'key' : key,
+                                  'status' : 'pending',
                                   'name': userName,
                                   'email': userEmail,
                                   'uid': FirebaseAuth.instance.currentUser!.uid,
@@ -95,9 +101,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                     .doc(FirebaseAuth.instance.currentUser!.uid)
                                     .collection('appointments')
                                     .doc(
-                                      widget._uid,
+                                     key
                                     )
                                     .set({
+                                  'key' : key,
+                                  'status' : 'pending',
                                   'name': widget._name,
                                   'email': '',
                                   'uid': widget._uid,
@@ -108,7 +116,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 });
 
                                 showDialog(
-                                  context: context,
+                                  context: cardContext!,
                                   builder: (context) {
                                     return AlertDialog(
                                       title: const Text(
@@ -119,7 +127,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             fontSize: 14),
                                       ),
                                       content: const Text(
-                                        'Your appointment is succesfully booked',
+                                        'Your request for booking is successfully send to doctor',
                                         style: TextStyle(color: Colors.black),
                                       ),
                                       actions: [

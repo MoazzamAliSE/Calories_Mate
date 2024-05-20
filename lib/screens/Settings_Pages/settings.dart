@@ -1,3 +1,4 @@
+import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/appointments.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/Nutritionist_Dashboard_Pages/edit_profile.dart';
@@ -138,7 +139,34 @@ class _SettingsPageState extends State<SettingsPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Divider(
+
+               if(widget.role != "nutritionist")   GestureDetector(
+                    onTap: () async {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentsPage(showButtons: false),));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "My Appointments",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          const Icon(
+                            Icons.person,
+                            color: Colors.cyan,
+                            size: 25,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if(widget.role != "nutritionist")  const Divider(
                     height: 15,
                     thickness: 1,
                   ),
