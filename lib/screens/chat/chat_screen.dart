@@ -36,25 +36,13 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: FitnessAppTheme.cyan,
         elevation: 3,
         centerTitle: true,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              child: Center(
-                child: Icon(
-                  Icons.person,
-                  color: Colors.black26,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -65,13 +53,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14),
+                        fontSize: 16),
                   ),
                 ],
               ),
             ),
-            const Spacer(),
-            const Icon(Icons.more_vert_rounded, color: Colors.white)
           ],
         ),
       ),
@@ -79,323 +65,500 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('chats')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .collection(widget.uid)
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.black,
-                        ),
-                      );
-                    }
-                    List<Map<String, dynamic>>? messages = snapshot.data?.docs
-                        .map((e) =>
-                    {
-                      'type' : e.get('type'),
-                      'status' : e.get('status'),
-                       'msg': e.get('msg'),
-                      'time': e.get('time'),
-                      'sender': e.get('sender')
-                    })
-                        .toList();
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('chats')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .collection(widget.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                  );
+                }
+                List<Map<String, dynamic>>? messages = snapshot.data?.docs
+                    .map((e) => {
+                          'type': e.get('type'),
+                          'status': e.get('status'),
+                          'msg': e.get('msg'),
+                          'time': e.get('time'),
+                          'sender': e.get('sender')
+                        })
+                    .toList();
 
-                    if (messages == null || messages.isEmpty) {
-                      return Container();
-                    }
+                if (messages == null || messages.isEmpty) {
+                  return Container();
+                }
 
-                    Timer(
-                      const Duration(
-                        milliseconds: 100,
-                      ),
-                          () {
-                        controller.jumpTo(controller.position.maxScrollExtent);
-                      },
-                    );
-
-                    return ListView.builder(
-                      controller: controller,
-                      padding: const EdgeInsets.only(top: 10),
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        return messages[index]['sender'] == widget.uid
-                            ? Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(right: 70, top: 10),
-                            child:messages[index]['type']=='text' ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  messages[index]['msg'].toString(),
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                                Text(
-                                  messages[index]['time'].toString(),
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                              ],
-                            ) :
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: messages[index]['type']=='image'? messages[index]['status'] =='loading' ? Container(
-                                height: 200,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(.04),
-                                    border: Border.all(color: Colors.black12)
-                                ),
-                                alignment: Alignment.center,
-                                child:  Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    CircularProgressIndicator(color: Colors.white,),
-                                    SizedBox(height: 5,),
-                                    Text('Loading',style: TextStyle(color: Colors.black),)
-                                  ],
-                                ),
-                              ) :
-                              messages[index]['status'] =='error' ? Container(
-                                height: 200,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(.04),
-                                    border: Border.all(color: Colors.black12)
-                                ),
-                                alignment: Alignment.center,
-                                child:  Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text('Error! Please send again',style: TextStyle(color:
-                                    Colors.black,),)
-                                  ],
-                                ),
-                              ):
-                              GestureDetector(
-                                onTap: () {
-                                  showGeneralDialog(
-                                    barrierColor: Colors.black,
-                                    transitionDuration: const Duration(milliseconds: 100),
-                                    barrierDismissible: true,
-                                    barrierLabel: 'Barrier',
-                                    context: context,
-                                    pageBuilder: (context, animation, secondaryAnimation) {
-                                      return Center(
-                                        child: Hero(
-                                          tag: 'IMAGEVIEW',
-                                          child: Scaffold(
-                                            backgroundColor: Colors.black,
-                                            body: Container(
-                                                color: Colors.black,
-                                                child: Center(child: CachedNetworkImage(imageUrl: messages[index]['msg'],
-                                                  imageBuilder: (context, imageProvider) {
-                                                    return PhotoView(imageProvider: imageProvider);
-                                                  },
-                                                ))),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: CachedNetworkImage(imageUrl: messages[index]['msg'],
-                                  placeholder: (context, url) {
-                                    return Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(.04),
-                                          border: Border.all(color: Colors.black12)
-                                      ),
-                                      alignment: Alignment.center,
-                                      child:  Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          CircularProgressIndicator(color: Colors.black,),
-                                          SizedBox(height: 5,),
-                                          Text('Loading',style: TextStyle(color: Colors.black),)
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  imageBuilder: (context, imageProvider) {
-                                    return Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: imageProvider
-                                          ),
-                                          border: Border.all(color: Colors.black12)
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.bottomRight,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                            bottom: 10,
-                                            right: 10,
-                                          ),
-                                          child: Text(messages[index]['time'],style: TextStyle(color: Colors.white),),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ) : SizedBox(),
-                            ),
-                          ),
-                        )
-                            : Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 70, top: 10),
-                            child: messages[index]['type']=='text' ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  messages[index]['msg'].toString(),
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                                Text(
-                                  messages[index]['time'].toString(),
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                              ],
-                            ) :
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: messages[index]['type']=='image'? messages[index]['status'] =='loading' ? Container(
-                              height: 200,
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(.04),
-                                  border: Border.all(color: Colors.black12)
-                              ),
-                              alignment: Alignment.center,
-                              child:  Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  CircularProgressIndicator(color: Colors.white,),
-                                  SizedBox(height: 5,),
-                                  Text('Loading',style: TextStyle(color: Colors.black),)
-                                ],
-                              ),
-                            ) :
-                            messages[index]['status'] =='error' ? Container(
-                              height: 200,
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(.04),
-                                  border: Border.all(color: Colors.black12)
-                              ),
-                              alignment: Alignment.center,
-                              child:  Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text('Error! Please send again',style: TextStyle(color:
-                                  Colors.black,),)
-                                ],
-                              ),
-                            ):
-                            GestureDetector(
-                              onTap: () {
-                                  showGeneralDialog(
-                                    barrierColor: Colors.black,
-                                    transitionDuration: const Duration(milliseconds: 100),
-                                    barrierDismissible: true,
-                                    barrierLabel: 'Barrier',
-                                    context: context,
-                                    pageBuilder: (context, animation, secondaryAnimation) {
-                                      return Center(
-                                        child: Hero(
-                                          tag: 'IMAGEVIEW',
-                                          child: Scaffold(
-                                            backgroundColor: Colors.black,
-                                            body: Container(
-                                                color: Colors.black,
-                                                child: Center(child: CachedNetworkImage(imageUrl: messages[index]['msg'],
-                                                  imageBuilder: (context, imageProvider) {
-                                                    return PhotoView(imageProvider: imageProvider);
-                                                  },
-                                                ))),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                              },
-                              child: CachedNetworkImage(imageUrl: messages[index]['msg'],
-                                placeholder: (context, url) {
-                                  return Container(
-                                    height: 200,
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(.04),
-                                        border: Border.all(color: Colors.black12)
-                                    ),
-                                    alignment: Alignment.center,
-                                    child:  Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        CircularProgressIndicator(color: Colors.black,),
-                                        SizedBox(height: 5,),
-                                        Text('Loading',style: TextStyle(color: Colors.black),)
-                                      ],
-                                    ),
-                                  );
-                                },
-                                imageBuilder: (context, imageProvider) {
-                                  return Container(
-                                    height: 200,
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: imageProvider
-                                        ),
-                                        border: Border.all(color: Colors.black12)
-                                    ),
-                                  child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: 10,
-                                        right: 10,
-                                      ),
-                                      child: Text(messages[index]['time'],style: TextStyle(color: Colors.white),),
-                                    ),
-                                  ),
-                                  );
-                                },
-                              ),
-                            ) : SizedBox(),
-                          ),
-                        ));
-                      },
-                    );
+                Timer(
+                  const Duration(
+                    milliseconds: 100,
+                  ),
+                  () {
+                    controller.jumpTo(controller.position.maxScrollExtent);
                   },
-                ),
-              )),
+                );
+
+                return ListView.builder(
+                  controller: controller,
+                  padding: const EdgeInsets.only(top: 10),
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    return messages[index]['sender'] == widget.uid
+                        ? Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 70, top: 10),
+                              child: messages[index]['type'] == 'text'
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          messages[index]['msg'].toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          messages[index]['time'].toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: messages[index]['type'] == 'image'
+                                          ? messages[index]['status'] ==
+                                                  'loading'
+                                              ? Container(
+                                                  height: 200,
+                                                  width: 200,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.black
+                                                          .withOpacity(.04),
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black12)),
+                                                  alignment: Alignment.center,
+                                                  child: const Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              : messages[index]['status'] ==
+                                                      'error'
+                                                  ? Container(
+                                                      height: 200,
+                                                      width: 200,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(.04),
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .black12)),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: const Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'Error! Please send again',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : GestureDetector(
+                                                      onTap: () {
+                                                        showGeneralDialog(
+                                                          barrierColor:
+                                                              Colors.black,
+                                                          transitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      100),
+                                                          barrierDismissible:
+                                                              true,
+                                                          barrierLabel:
+                                                              'Barrier',
+                                                          context: context,
+                                                          pageBuilder: (context,
+                                                              animation,
+                                                              secondaryAnimation) {
+                                                            return Center(
+                                                              child: Hero(
+                                                                tag:
+                                                                    'IMAGEVIEW',
+                                                                child: Scaffold(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .black,
+                                                                  body: Container(
+                                                                      color: Colors.black,
+                                                                      child: Center(
+                                                                          child: CachedNetworkImage(
+                                                                        imageUrl:
+                                                                            messages[index]['msg'],
+                                                                        imageBuilder:
+                                                                            (context,
+                                                                                imageProvider) {
+                                                                          return PhotoView(
+                                                                              imageProvider: imageProvider);
+                                                                        },
+                                                                      ))),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            messages[index]
+                                                                ['msg'],
+                                                        placeholder:
+                                                            (context, url) {
+                                                          return Container(
+                                                            height: 200,
+                                                            width: 200,
+                                                            decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        .04),
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .black12)),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: const Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                CircularProgressIndicator(
+                                                                  color: Colors
+                                                                      .black,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 5,
+                                                                ),
+                                                                Text(
+                                                                  'Loading',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                        imageBuilder: (context,
+                                                            imageProvider) {
+                                                          return Container(
+                                                            height: 200,
+                                                            width: 200,
+                                                            decoration: BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image:
+                                                                        imageProvider),
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .black12)),
+                                                            child: Align(
+                                                              alignment: Alignment
+                                                                  .bottomRight,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  bottom: 10,
+                                                                  right: 10,
+                                                                ),
+                                                                child: Text(
+                                                                  messages[
+                                                                          index]
+                                                                      ['time'],
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    )
+                                          : const SizedBox(),
+                                    ),
+                            ),
+                          )
+                        : Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 70, top: 10),
+                              child: messages[index]['type'] == 'text'
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          messages[index]['msg'].toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          messages[index]['time'].toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: messages[index]['type'] == 'image'
+                                          ? messages[index]['status'] ==
+                                                  'loading'
+                                              ? Container(
+                                                  height: 200,
+                                                  width: 200,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.black
+                                                          .withOpacity(.04),
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black12)),
+                                                  alignment: Alignment.center,
+                                                  child: const Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              : messages[index]['status'] ==
+                                                      'error'
+                                                  ? Container(
+                                                      height: 200,
+                                                      width: 200,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(.04),
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .black12)),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: const Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'Error! Please send again',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : GestureDetector(
+                                                      onTap: () {
+                                                        showGeneralDialog(
+                                                          barrierColor:
+                                                              Colors.black,
+                                                          transitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      100),
+                                                          barrierDismissible:
+                                                              true,
+                                                          barrierLabel:
+                                                              'Barrier',
+                                                          context: context,
+                                                          pageBuilder: (context,
+                                                              animation,
+                                                              secondaryAnimation) {
+                                                            return Center(
+                                                              child: Hero(
+                                                                tag:
+                                                                    'IMAGEVIEW',
+                                                                child: Scaffold(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .black,
+                                                                  body: Container(
+                                                                      color: Colors.black,
+                                                                      child: Center(
+                                                                          child: CachedNetworkImage(
+                                                                        imageUrl:
+                                                                            messages[index]['msg'],
+                                                                        imageBuilder:
+                                                                            (context,
+                                                                                imageProvider) {
+                                                                          return PhotoView(
+                                                                              imageProvider: imageProvider);
+                                                                        },
+                                                                      ))),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            messages[index]
+                                                                ['msg'],
+                                                        placeholder:
+                                                            (context, url) {
+                                                          return Container(
+                                                            height: 200,
+                                                            width: 200,
+                                                            decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        .04),
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .black12)),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: const Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                CircularProgressIndicator(
+                                                                  color: Colors
+                                                                      .black,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 5,
+                                                                ),
+                                                                Text(
+                                                                  'Loading',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                        imageBuilder: (context,
+                                                            imageProvider) {
+                                                          return Container(
+                                                            height: 200,
+                                                            width: 200,
+                                                            decoration: BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image:
+                                                                        imageProvider),
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .black12)),
+                                                            child: Align(
+                                                              alignment: Alignment
+                                                                  .bottomRight,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                  bottom: 10,
+                                                                  right: 10,
+                                                                ),
+                                                                child: Text(
+                                                                  messages[
+                                                                          index]
+                                                                      ['time'],
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    )
+                                          : const SizedBox(),
+                                    ),
+                            ));
+                  },
+                );
+              },
+            ),
+          )),
           Container(
             height: 60,
-            width: MediaQuery
-                .sizeOf(context)
-                .width,
+            width: MediaQuery.sizeOf(context).width,
             decoration:
-            BoxDecoration(color: FitnessAppTheme.cyan.withOpacity(.2)),
+                BoxDecoration(color: FitnessAppTheme.cyan.withOpacity(.2)),
             child: Row(
               children: [
                 const SizedBox(
@@ -403,28 +566,25 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 Expanded(
                     child: TextFormField(
-                      controller: msg,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Type your Message',
-                          hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14)),
-                    )),
+                  controller: msg,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Type your Message',
+                      hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
+                )),
                 const SizedBox(
                   width: 20,
                 ),
                 GestureDetector(
                     onTap: () async {
-                      final picker = await ImagePicker().pickImage(
-                          source: ImageSource.gallery);
+                      final picker = await ImagePicker()
+                          .pickImage(source: ImageSource.gallery);
                       if (picker != null) {
                         final key =
-                        DateTime
-                            .now()
-                            .microsecondsSinceEpoch
-                            .toString();
+                            DateTime.now().microsecondsSinceEpoch.toString();
                         FirebaseFirestore.instance
                             .collection('chatWith')
                             .doc(widget.uid)
@@ -448,14 +608,13 @@ class _ChatScreenState extends State<ChatScreen> {
                           'lastMsg': 'Image',
                         });
 
-
-                         FirebaseFirestore.instance
+                        FirebaseFirestore.instance
                             .collection('chats')
                             .doc(FirebaseAuth.instance.currentUser!.uid)
                             .collection(widget.uid)
                             .doc(key)
                             .set({
-                          'msg':'',
+                          'msg': '',
                           'type': 'image',
                           'status': 'loading',
                           'time': DateFormat('h:mm a').format(DateTime.now()),
@@ -477,30 +636,15 @@ class _ChatScreenState extends State<ChatScreen> {
                           'id': key
                         });
 
-
-                        try{
-                          String url=await FileServices.uploadFile(filePath: picker.path,
-                              uploadPath: '/Images/${DateTime
-                                  .now()
-                                  .microsecondsSinceEpoch
-                                  .toString()}');
+                        try {
+                          String url = await FileServices.uploadFile(
+                              filePath: picker.path,
+                              uploadPath:
+                                  '/Images/${DateTime.now().microsecondsSinceEpoch.toString()}');
                           await FirebaseFirestore.instance
                               .collection('chats')
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .collection(widget.uid)
-                              .doc(key)
-                              .update({
-                            'msg':url,
-                            'type': 'image',
-                            'status': 'complete',
-                            'time': DateFormat('h:mm a').format(DateTime.now()),
-                            'sender': FirebaseAuth.instance.currentUser!.uid,
-                            'id': key
-                          });
-                          await FirebaseFirestore.instance
-                              .collection('chats')
-                              .doc(widget.uid)
-                              .collection(FirebaseAuth.instance.currentUser!.uid)
                               .doc(key)
                               .update({
                             'msg': url,
@@ -510,14 +654,28 @@ class _ChatScreenState extends State<ChatScreen> {
                             'sender': FirebaseAuth.instance.currentUser!.uid,
                             'id': key
                           });
-                        }catch(_){
+                          await FirebaseFirestore.instance
+                              .collection('chats')
+                              .doc(widget.uid)
+                              .collection(
+                                  FirebaseAuth.instance.currentUser!.uid)
+                              .doc(key)
+                              .update({
+                            'msg': url,
+                            'type': 'image',
+                            'status': 'complete',
+                            'time': DateFormat('h:mm a').format(DateTime.now()),
+                            'sender': FirebaseAuth.instance.currentUser!.uid,
+                            'id': key
+                          });
+                        } catch (_) {
                           FirebaseFirestore.instance
                               .collection('chats')
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .collection(widget.uid)
                               .doc(key)
                               .set({
-                            'msg':'_',
+                            'msg': '_',
                             'type': 'image',
                             'status': 'error',
                             'time': DateFormat('h:mm a').format(DateTime.now()),
@@ -528,7 +686,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           FirebaseFirestore.instance
                               .collection('chats')
                               .doc(widget.uid)
-                              .collection(FirebaseAuth.instance.currentUser!.uid)
+                              .collection(
+                                  FirebaseAuth.instance.currentUser!.uid)
                               .doc(key)
                               .set({
                             'msg': '_',
@@ -540,26 +699,25 @@ class _ChatScreenState extends State<ChatScreen> {
                           });
                         }
 
-
                         Timer(const Duration(milliseconds: 50), () {
-                          controller.jumpTo(controller.position
-                              .maxScrollExtent);
+                          controller
+                              .jumpTo(controller.position.maxScrollExtent);
                         });
                       }
                     },
-                    child: Icon(
-                      Icons.image, color: Colors.lightBlueAccent, size: 30,)),
-                SizedBox(width: 20,),
+                    child: const Icon(
+                      Icons.image,
+                      color: Colors.lightBlueAccent,
+                      size: 30,
+                    )),
+                const SizedBox(
+                  width: 20,
+                ),
                 GestureDetector(
                   onTap: () async {
-                    if (msg.value.text
-                        .toString()
-                        .isNotEmpty) {
+                    if (msg.value.text.toString().isNotEmpty) {
                       final key =
-                      DateTime
-                          .now()
-                          .microsecondsSinceEpoch
-                          .toString();
+                          DateTime.now().microsecondsSinceEpoch.toString();
                       String s = msg.value.text.toString();
                       FirebaseFirestore.instance
                           .collection('chatWith')
@@ -592,7 +750,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           .set({
                         'msg': s,
                         'type': 'text',
-                        'status' : '_',
+                        'status': '_',
                         'time': DateFormat('h:mm a').format(DateTime.now()),
                         'sender': FirebaseAuth.instance.currentUser!.uid,
                         'id': key
@@ -605,7 +763,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           .set({
                         'msg': s,
                         'type': 'text',
-                        'status' : '_',
+                        'status': '_',
                         'time': DateFormat('h:mm a').format(DateTime.now()),
                         'sender': FirebaseAuth.instance.currentUser!.uid,
                         'id': key

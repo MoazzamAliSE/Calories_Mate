@@ -1,6 +1,7 @@
 import 'package:calories_mate/screens/chat/chat_with.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/doctor_card.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/nutritionist_model.dart';
+import 'package:calories_mate/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/category_card.dart';
@@ -16,8 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: const EdgeInsets.only(bottom: 70),
             padding: const EdgeInsets.all(15),
             decoration:
-                const BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+                const BoxDecoration(color: Colors.cyan, shape: BoxShape.circle),
             child: const Icon(
               Icons.chat,
               color: Colors.white,

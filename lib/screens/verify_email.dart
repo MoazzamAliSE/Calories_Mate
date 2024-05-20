@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:calories_mate/screens/dashboard_nutritionist.dart';
+import 'package:calories_mate/screens/patient_dashboard/fitness_app_home_screen.dart';
+import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,7 +58,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     if (prefs.getString('login_as') == "nutritionist") {
       Get.off(() => const NutritionistDashBoard());
     } else if (prefs.getString('login_as') == "patient") {
-      Get.off(() => const TenScale());
+      Get.off(() => const FitnessAppHomeScreen());
     }
   }
 }

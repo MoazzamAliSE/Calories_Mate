@@ -140,64 +140,71 @@ class _SettingsPageState extends State<SettingsPage> {
                     height: 10,
                   ),
 
-               if(widget.role != "nutritionist")   GestureDetector(
-                    onTap: () async {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentsPage(showButtons: false),));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "My Appointments",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[600],
+                  if (widget.role != "nutritionist")
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const AppointmentsPage(showButtons: false),
+                            ));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "My Appointments",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey[600],
+                              ),
                             ),
-                          ),
-                          const Icon(
-                            Icons.person,
-                            color: Colors.cyan,
-                            size: 25,
-                          ),
-                        ],
+                            const Icon(
+                              Icons.person,
+                              color: Colors.cyan,
+                              size: 25,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  if(widget.role != "nutritionist")  const Divider(
-                    height: 15,
-                    thickness: 1,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const ChangePassPage()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Change Password",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.cyan,
-                            size: 16,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // if (widget.role != "nutritionist")
+                  //   const Divider(
+                  //     height: 15,
+                  //     thickness: 1,
+                  //   ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.of(context).push(MaterialPageRoute(
+                  //         builder: (BuildContext context) =>
+                  //             const ChangePassPage()));
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Text(
+                  //           "Change Password",
+                  //           style: TextStyle(
+                  //             fontSize: 18,
+                  //             fontWeight: FontWeight.w500,
+                  //             color: Colors.grey[600],
+                  //           ),
+                  //         ),
+                  //         const Icon(
+                  //           Icons.arrow_forward_ios,
+                  //           color: Colors.cyan,
+                  //           size: 16,
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   const Divider(
                     height: 15,
                     thickness: 1,

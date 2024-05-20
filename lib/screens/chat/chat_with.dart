@@ -11,35 +11,29 @@ class ChatWith extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        backgroundColor: FitnessAppTheme.cyan,
+        elevation: 3,
+        centerTitle: true,
+        title: const Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Chats',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(Icons.arrow_back),
-                  ),
-                  const Text(
-                    'Chats',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 4, 250, 250),
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Divider(),
-              ),
               Expanded(
                   child: StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -79,35 +73,36 @@ class ChatWith extends StatelessWidget {
                               uid: chats[index]['uid'],
                               email: ''));
                         },
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            radius: 20,
-                            backgroundColor:
-                                FitnessAppTheme.cyan.withOpacity(.2),
-                            child: const Center(
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                radius: 20,
+                                backgroundColor:
+                                    FitnessAppTheme.cyan.withOpacity(.2),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.chat,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              title: Text(
+                                chats[index]['name'] != null
+                                    ? chats[index]['name'].toString()
+                                    : "No name",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                chats[index]['lastMsg'].toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
-                          ),
-                          title: Text(
-                            chats[index]['name'] != null
-                                ? chats[index]['name'].toString()
-                                : "No name",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text(
-                            chats[index]['lastMsg'].toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          trailing: const Icon(
-                            Icons.more_vert_rounded,
-                            color: Colors.black,
                           ),
                         ),
                       );

@@ -41,6 +41,7 @@ class _AddNewFoodPageState extends State<AddNewFoodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         title: const Text("Add New Food"),
         backgroundColor: Colors.cyan,
         elevation: 1,

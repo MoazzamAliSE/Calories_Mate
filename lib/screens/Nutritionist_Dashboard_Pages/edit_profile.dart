@@ -368,9 +368,8 @@ class _NutritionistProfileState extends State<NutritionistProfile> {
                             },
                             style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.cyan),
-                                shape: MaterialStateProperty.all<
+                                    WidgetStateProperty.all<Color>(Colors.cyan),
+                                shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:
@@ -378,7 +377,8 @@ class _NutritionistProfileState extends State<NutritionistProfile> {
                                         side: const BorderSide(
                                             color: Colors.cyan)))),
                             child: Text("Update Profile".toUpperCase(),
-                                style: const TextStyle(fontSize: 14))),
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.white))),
                       ),
                     ),
                     const SizedBox(height: 20),

@@ -1,4 +1,3 @@
-
 import 'package:calories_mate/screens/chat/chat_screen.dart';
 import 'package:calories_mate/screens/patient_dashboard/fitness_app_theme.dart';
 import 'package:calories_mate/screens/patient_dashboard/nutritionist_appointment/components/schedule_card.dart';
@@ -31,7 +30,7 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
-    cardContext=context;
+    cardContext = context;
     return Scaffold(
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 60),
@@ -75,18 +74,19 @@ class _DetailScreenState extends State<DetailScreen> {
                             onPressed: () async {
                               Navigator.pop(context);
                               try {
-                                final key=DateTime.now().microsecondsSinceEpoch.toString();
+                                final key = DateTime.now()
+                                    .microsecondsSinceEpoch
+                                    .toString();
                                 await FirebaseFirestore.instance
                                     .collection('userdata')
                                     .doc(widget._uid)
                                     .collection('appointments')
                                     .doc(
-                                      // FirebaseAuth.instance.currentUser!.uid,
-                                  key
-                                    )
+                                        // FirebaseAuth.instance.currentUser!.uid,
+                                        key)
                                     .set({
-                                  'key' : key,
-                                  'status' : 'pending',
+                                  'key': key,
+                                  'status': 'pending',
                                   'name': userName,
                                   'email': userEmail,
                                   'uid': FirebaseAuth.instance.currentUser!.uid,
@@ -100,12 +100,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                     .collection('userdata')
                                     .doc(FirebaseAuth.instance.currentUser!.uid)
                                     .collection('appointments')
-                                    .doc(
-                                     key
-                                    )
+                                    .doc(key)
                                     .set({
-                                  'key' : key,
-                                  'status' : 'pending',
+                                  'key': key,
+                                  'status': 'pending',
                                   'name': widget._name,
                                   'email': '',
                                   'uid': widget._uid,
@@ -236,10 +234,10 @@ class _DetailScreenState extends State<DetailScreen> {
                         height: 18,
                       ),
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/3dots.svg',
-                      height: 18,
-                    ),
+                    // SvgPicture.asset(
+                    //   'assets/icons/3dots.svg',
+                    //   height: 18,
+                    // ),
                   ],
                 ),
               ),
@@ -349,7 +347,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           for (int i = 0; i < 7; i++)
                             ScheduleCard(
                               title: 'Consultation',
-                              description: '9am - 11am',
+                              description: '9am - 6pm',
                               date: DateTime.now().add(Duration(
                                   days: i)), // Get date for next 7 days
                               bgColor: i % 2 == 0

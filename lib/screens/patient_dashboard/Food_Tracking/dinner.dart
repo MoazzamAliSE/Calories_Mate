@@ -29,6 +29,7 @@ class _DinnerState extends State<Dinner> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          foregroundColor: Colors.white,
           title: Text(widget.callingText),
           backgroundColor: Colors.cyan,
           elevation: 1,

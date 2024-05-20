@@ -28,6 +28,7 @@ class ScheduleCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: ListTile(
           leading: Container(
+            width: 120,
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
             ),
